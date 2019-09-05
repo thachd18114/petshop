@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.layouts.master');
 });
 Route::get('/admin', function (){
     return view('backend.layout.master');
@@ -35,7 +35,6 @@ Route::get('/admin/edit_giong/{id}', 'GiongController@edit');
 Route::post('/admin/update_giong/{id}','GiongController@update');
 Route::get('/admin/delete_giong/{id}','GiongController@delete');
 //------------------------------------------//
-
-Route::get('/admin/thucung', function (){
-    return view('backend.thucung.index');
-});
+Route::get('/admin/list_thucung', 'ThuCungController@index');
+Route::get('/admin/thucung', function (){return view('backend.thucung.index');})->name('thucung');
+//------------------------------------------//

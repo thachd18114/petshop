@@ -32,8 +32,8 @@
                     <span> &nbsp; Giống</span>
                 </a>
             </li>
-            <li class="treeview">
-                <a href="#">
+            <li class="">
+                <a href="{{ route('thucung')}}">
                     <i class="fa fa-dove"></i>
                     <span>Thú cưng</span>
                 </a>

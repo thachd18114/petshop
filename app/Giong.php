@@ -16,4 +16,7 @@ class Giong extends Model
     public function LoaiThuCung() {
         return $this->belongsTo('App\LoaiThuCung', 'ltc_id', 'ltc_id');
     }
+    public function ThuCung() {
+        return $this->hasMany('App\ThuCung', 'tc_id', 'tc_id');
+    }
 }

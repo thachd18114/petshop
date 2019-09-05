@@ -18,8 +18,10 @@
 {{--    <link rel="stylesheet" type="text/css" href="{{ asset('css/angular-datatables.min.css') }}">--}}
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('themes/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
-
+    <!-- selected2 -->
     <link rel="stylesheet" href="{{asset('themes/adminlte/bower_components/select2/dist/css/select2.min.css')}}">
+    <!-- icheck -->
+    <link rel="stylesheet" href="{{asset('themes/adminlte/plugins/iCheck/all.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('themes/adminlte/css/AdminLTE.min.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -35,7 +37,7 @@
     <link rel="stylesheet" href="{{asset('themes/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset('themes/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-
+@yield('custom-css')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -126,14 +128,20 @@
 <script src="{{ asset('app/lib/angular.min.js') }}"></script>
 {{--<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>--}}
 <script src="{{ asset('js/angular-datatables.min.js') }}"></script>
+<script src="{{asset('themes/adminlte/plugins/iCheck/icheck.min.js')}}"></script>
 
 <script src="{{ asset('vendor/bootstrap-sweetalert/dist/sweetalert.min.js') }}"></script>
 <script src="{{ asset('app/app.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('themes/adminlte/js/demo.js')}}"></script>
+<script src="{{asset('themes/adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
 @yield('custom-js')
 <script>
     $(function () {
+        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+            checkboxClass: 'icheckbox_minimal-blue',
+            radioClass   : 'iradio_minimal-blue'
+        })
         $('.select2').select2()
         $('#example1').DataTable()
         $('#example2').DataTable({
@@ -143,8 +151,26 @@
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false
-        })
+        });
+        CKEDITOR.replace('editor1')
+        //bootstrap WYSIHTML5 - text editor
+        $('.textarea').wysihtml5()
     })
+    $(document).ready(function() {
+        $("#ha_ten").fileinput({
+            // showPreview: false,
+            // showUpload: false,
+            // elErrorContainer: '#kartik-file-errors',
+            theme: 'fas',
+            showUpload: false,
+            showCaption: false,
+            browseClass: "btn btn-primary",
+            fileType: "any",
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            overwriteInitial: false,
+            allowedFileExtensions: ["jpg", "gif", "png", "txt"],
+        });
+    });
 </script>
 </body>
 </html>
