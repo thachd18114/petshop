@@ -64,13 +64,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tc_ten" class="col-sm-2 control-label">Thuộc giống </label>
+                                        <label for="g_id" class="col-sm-2 control-label">Thuộc giống </label>
                                         <div class="col-sm-10">
-                                            <select class="form-control select2" style="width: 100%"  ng-model="Giong.ltc_id">
-                                                <option value="0" ng-value="0">Chọn loại thú cưng</option>
-                                                <option   value="" ng-value="">1</option>
-                                                <option   value="" ng-value="">1</option>
-                                                <option   value="" ng-value="">1</option>
+                                            <select class="form-control select2" style="width: 100%"  ng-model="ThuCung.g_id">
+                                                <option value="0" ng-value="0">Chọn giống</option>
+                                                <option ng-repeat="g in listgiong " value="<% g.g_id %>" ng-value="<% g.g_id %>"><% g.g_ten %></option>
                                             </select>
                                         </div>
                                     </div>
@@ -81,47 +79,41 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tc_ten" class="col-sm-2 control-label">Giới tính </label>
+                                        <label for="tc_gioiTinh" class="col-sm-2 control-label">Giới tính </label>
                                         <div class="col-sm-10">
-                                            <label>
-                                                <input type="radio" name="tc_gioiTinh" class="minimal" checked>
-                                                &nbsp;&nbsp;<i class="fas fa-mars" style="color: #0b3e6f; font-size:medium" ></i>
-                                            </label>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <label>
-                                                <input type="radio" name="tc_gioiTinh" class="minimal">
-                                                &nbsp;&nbsp;<i class="fas fa-venus-double" style="color: #6c1646;font-size:medium"></i>
+                                            <label ng-repeat="item in array_gt">
+                                                <input type="radio" style="width: 20px; background-color: crimson" name="tc_gioiTinh" ng-value="item.value"  ng-model="ThuCung.tc_gioiTinh"  class="minimal"><% item.name %>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tc_ten" class="col-sm-2 control-label">Cân nặng</label>
+                                        <label for="tc_canNang" class="col-sm-2 control-label">Cân nặng</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="tc_ten" name="tc_ten" placeholder="Tên thú cưng" ng-model="ThuCung.tc_ten">
+                                            <input type="number"  class="form-control" id="tc_canNang" name="tc_canNang" placeholder="Cân nặng" ng-model="ThuCung.tc_canNang">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tc_ten" class="col-sm-2 control-label">Màu sắc</label>
+                                        <label for="tc_mauSac" class="col-sm-2 control-label">Màu sắc</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="tc_ten" name="tc_ten" placeholder="Tên thú cưng" ng-model="ThuCung.tc_ten">
+                                            <input type="text"  class="form-control" id="tc_mauSac" name="tc_mauSac" placeholder="Nhập màu" ng-model="ThuCung.tc_mauSac">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tc_ten" class="col-sm-2 control-label">Giá bán</label>
+                                        <label for="tc_giaBan" class="col-sm-2 control-label">Giá bán</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="tc_ten" name="tc_ten" placeholder="Tên thú cưng" ng-model="ThuCung.tc_ten">
+                                            <input type="text"  class="form-control" id="tc_giaBan" name="tc_giaBan" placeholder="Nhập giá" ng-model="ThuCung.tc_giaBan">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label">Tiêm chủng</label>
                                         <div class="col-sm-10">
                                             <label>
-                                                <input type="radio"  name="tc_tinhTrangTiemChung" class="minimal" checked>
+                                                <input type="radio"  name="tc_tinhTrangTiemChung"  ng-value="1" ng-model="ThuCung.tc_tinhTrangTiemChung" class="">
                                                 &nbsp;&nbsp;Đã tiêm chủng
                                             </label>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <label>
-                                                <input type="radio" name="tc_tinhTrangTiemChung" class="minimal">
+                                                <input type="radio" name="tc_tinhTrangTiemChung"  ng-value="2" ng-model="ThuCung.tc_tinhTrangTiemChung"  class="" >
                                                 &nbsp;&nbsp;Chưa tiêm chủng
                                             </label>
                                         </div>
@@ -134,9 +126,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tc_ten" class="col-sm-2 control-label">Mô tả</label>
+                                        <label for="tc_moTa" class="col-sm-2 control-label">Mô tả</label>
                                         <div class="col-sm-10">
-                                             <textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>
+                                             <textarea id="editor1" name="tc_moTa" rows="10" cols="80" ng-model="ThuCung.tc_moTa"></textarea>
                                         </div>
                                     </div>
 

@@ -44,7 +44,14 @@
     }
     .mtext-106 {
         font-family: "Times New Roman";
-        font-weight: bold;
+        color: #666666;
+        /*font-weight: bold;*/
+    }
+    #addtocard .bg1 {
+        background-color: #ff4a16;
+    }
+    #addtocard .bg1:hover {
+        background-color: rgba(255, 100, 23, 0.88);
     }
 </style>
 <body class="animsition">

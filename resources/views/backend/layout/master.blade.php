@@ -152,9 +152,6 @@
             'info'        : true,
             'autoWidth'   : false
         });
-        CKEDITOR.replace('editor1')
-        //bootstrap WYSIHTML5 - text editor
-        $('.textarea').wysihtml5()
     })
     $(document).ready(function() {
         $("#ha_ten").fileinput({
@@ -171,6 +168,13 @@
             allowedFileExtensions: ["jpg", "gif", "png", "txt"],
         });
     });
+</script>
+<script>
+    $(document).ready(function () {
+        CKEDITOR.replace('editor1')
+        $('.textarea').wysihtml5()
+    });
+
 </script>
 </body>
 </html>

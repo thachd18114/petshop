@@ -33,23 +33,18 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li class="{{ Request::is('') ? 'active-menu' : '' }}">
-                            <a href="">Home</a>
+                            <a href="">Trang chủ</a>
                         </li>
                         <li>
-                            <a href="product.html">Shop</a>
+                            <a href="product.html">Thú cưng</a>
                         </li>
                         <li class="label1" data-label1="hot">
-                            <a href="shoping-cart.html">Features</a>
-                        </li>
-                        <li>
-                            <a href="blog.html">Blog</a>
+                            <a href="shoping-cart.html">Liên hệ</a>
                         </li>
                         <li class="{{ Request::is('gioi-thieu') ? 'active-menu' : '' }}">
-                            <a href="">About</a>
+                            <a href="">Giới thiệu</a>
                         </li>
-                        <li class="{{ Request::is('lien-he') ? 'active-menu' : '' }}">
-                            <a href="">Contact</a>
-                        </li>
+
                     </ul>
                 </div>
                 <!-- Icon header -->
@@ -60,9 +55,7 @@
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
-                    <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-                        <i class="zmdi zmdi-favorite-outline"></i>
-                    </a>
+
                 </div>
             </nav>
         </div>
