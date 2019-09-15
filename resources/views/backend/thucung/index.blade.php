@@ -36,7 +36,14 @@
                 <tbody>
                 <tr ng-repeat="tc in memberList">
                     <td><% tc.tc_id %> </td>
-                    <td><% ltc.tc_ten %></td>
+                    <td><% tc.tc_ten %></td>
+                    <td><% tc.tc_tuoi %></td>
+                    <td><% tc.tc_gioiTinh %></td>
+                    <td><% tc.tc_canNang %></td>
+                    <td><% tc.tc_trangThaiTiemChung %></td>
+                    <td><% tc.tc_trangThai %></td>
+
+
                     <td style="text-align: center">
                         <button class="btn btn-social-icon btn bg-purple" style="width: 22px; height: 22px;" ng-click="modal('edit',tc.tc_id)" ><i class="fas fa-edit" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
                         <button class="btn btn-social-icon btn-danger" style="width: 22px; height: 22px;" ng-click="delConfirm(tc.tc_id)" ><i class="fas fa-trash-alt" style="font-size: 12px;margin-top: -6px"></i></button>
@@ -55,7 +62,8 @@
                             <h4 class="modal-title"><% modalTitle %></h4>
                         </div>
                         <div class="modal-body">
-                            <form name="frmThuCung" class="form-horizontal">
+                            <form name="frmThuCung" id="frmThuCung" class="form-horizontal" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <div class="container-fluid">
                                     <div class="form-group">
                                         <label for="tc_ten" class="col-sm-2 control-label">Tên </label>
@@ -81,8 +89,15 @@
                                     <div class="form-group">
                                         <label for="tc_gioiTinh" class="col-sm-2 control-label">Giới tính </label>
                                         <div class="col-sm-10">
-                                            <label ng-repeat="item in array_gt">
-                                                <input type="radio" style="width: 20px; background-color: crimson" name="tc_gioiTinh" ng-value="item.value"  ng-model="ThuCung.tc_gioiTinh"  class="minimal"><% item.name %>
+                                                <label>
+                                                    <input  type="radio"  name="tc_gioiTinh"  ng-value="1" ng-model="ThuCung.tc_gioiTinh" class="">
+                                                    &nbsp;&nbsp;Đực
+                                                </label>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <label>
+                                                    <input  type="radio" name="tc_gioiTinh"  ng-value="2" ng-model="ThuCung.tc_gioiTinh"  class="" >
+                                                    &nbsp;&nbsp;Cái
+                                                </label>
                                             </label>
                                         </div>
                                     </div>
@@ -108,12 +123,12 @@
                                         <label for="" class="col-sm-2 control-label">Tiêm chủng</label>
                                         <div class="col-sm-10">
                                             <label>
-                                                <input type="radio"  name="tc_tinhTrangTiemChung"  ng-value="1" ng-model="ThuCung.tc_tinhTrangTiemChung" class="">
+                                                <input type="radio"  name="tc_trangThaiTiemChung"  ng-value="1" ng-model="ThuCung.tc_trangThaiTiemChung" class="">
                                                 &nbsp;&nbsp;Đã tiêm chủng
                                             </label>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <label>
-                                                <input type="radio" name="tc_tinhTrangTiemChung"  ng-value="2" ng-model="ThuCung.tc_tinhTrangTiemChung"  class="" >
+                                                <input type="radio" name="tc_trangThaiTiemChung"  ng-value="2" ng-model="ThuCung.tc_trangThaiTiemChung"  class="" >
                                                 &nbsp;&nbsp;Chưa tiêm chủng
                                             </label>
                                         </div>
@@ -122,30 +137,32 @@
                                     <div class="form-group">
                                         <label for="ha_ten" class="col-sm-2 control-label">Hình ảnh</label>
                                         <div class="col-sm-10">
-                                            <input id="ha_ten" type="file" name="ha_ten[]" multiple>
+                                            <input id="ha_ten" type="file" name="ha_ten[]" ng-model="ThuCung.ha_ten" multiple >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="tc_moTa" class="col-sm-2 control-label">Mô tả</label>
                                         <div class="col-sm-10">
-                                             <textarea id="editor1" name="tc_moTa" rows="10" cols="80" ng-model="ThuCung.tc_moTa"></textarea>
+{{--                                             <textarea id="editor1"  name="tc_moTa" rows="10" cols="80" ng-model="ThuCung.tc_moTa"></textarea>--}}
+                                            <textarea ckeditor="options" name="tc_moTa" ng-model="ThuCung.tc_moTa"></textarea>
                                         </div>
                                     </div>
 
-                                </div>
-                            </form>
-                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" ng-click="save(state,id)"><% modalButton %></button>
+                            <button type="submit" class="btn btn-primary"  ng-click="save(state,id)"><% modalButton %></button>
                         </div>
-                    </div>
+                                </div>
+                        </form>
+
                     <!-- /.modal-content -->
                 </div>
                 <!-- /.modal-dialog -->
             </div>
         </div>
         <!-- /.box-body -->
+    </div>
+        </div>
     </div>
 @endsection
 @section('custom-css')
@@ -156,4 +173,7 @@
 @section('custom-js')
     <script src="{{ asset('vendor/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
     <script src="{{ asset('app/controller/ThuCungController.js') }}"></script>
+    <script>
+
+    </script>
 @endsection

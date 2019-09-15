@@ -38,7 +38,11 @@ Route::get('/admin/delete_giong/{id}','GiongController@delete');
 Route::get('/admin/list_thucung', 'ThuCungController@index');
 Route::get('/admin/thucung', function (){return view('backend.thucung.index');})->name('thucung');
 Route::post('/admin/createthucung','ThuCungController@store');
+Route::post('/admin/createthucung/hinhanh','ThuCungController@store_hinhanh');
 Route::get('/admin/edit_thucung/{id}', 'ThuCungController@edit');
+Route::post('/admin/update_thucung/{id}','ThuCungController@update');
+Route::post('/admin/update_thucung/hinhanh/{id}','ThuCungController@update_hinhanh');
+Route::get('/admin/delete_thucung/{id}','ThuCungController@delete');
 //------------------------------------------/
 Route::get('/thucung', function (){
     return view('frontend.pages.product');

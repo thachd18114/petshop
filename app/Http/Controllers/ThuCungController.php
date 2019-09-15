@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\HinhAnh;
 use App\ThuCung;
+use App\Giong;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Storage;
 
 class ThuCungController extends Controller
 {
@@ -14,34 +17,133 @@ class ThuCungController extends Controller
     }
     public function store(Request $request)
     {
-
         $tc = new ThuCung();
         $tc->tc_ten = $request->tc_ten;
         $tc->tc_giaBan = $request->tc_giaBan;
         $tc->tc_tuoi = $request->tc_tuoi;
         $tc->tc_canNang = $request->tc_canNang;
-//        $tc->tc_gioiTinh = $request->tc_gioiTinh;
+        $tc->tc_gioiTinh = $request->tc_gioiTinh;
         $tc->tc_gioiTinh = $request->tc_gioiTinh;
         $tc->tc_moTa = $request->tc_moTa;
         $tc->tc_mauSac = $request->tc_mauSac;
         $tc->tc_trangThaiTiemChung = $request->tc_trangThaiTiemChung;
-        $tc->tc_trangThai = $request->tc_trangThai;
+        $tc->tc_trangThai = 1;
         $tc->g_id = $request->g_id;
-       // $tc->save();
+        $tc->save();
 
-//        if($request->hasFile('ha_ten')) {
-//            $files = $request->ha_ten;
-//            // duyệt từng ảnh và thực hiện lưu
-//            foreach ($request->ha_ten as $index => $file) {
+//        foreach ($request->ha_ten as $index => $file) {
+////            $file->storeAs('public/photos', $file);
+//            // Tạo đối tưọng HinhAnh
 //
-//                $file->storeAs('public/photos', $file->getClientOriginalName());
-//                // Tạo đối tưọng HinhAnh
-//                $hinhAnh = new HinhAnh();
-//                $hinhAnh->sp_ma = $sp->sp_ma;
-//                $hinhAnh->ha_stt = ($index + 1);
-//                $hinhAnh->ha_ten = $file->getClientOriginalName();
-//                $hinhAnh->save();
-//            }
+//            $hinhAnh = new HinhAnh();
+//            $hinhAnh->tc_id = $tc->tc_id;
+//            $hinhAnh->ha_id = ($index + 1);
+//            $hinhAnh->ha_ten = $file;
+//            $hinhAnh->save();
 //        }
+
+    }
+    public function store_hinhanh (Request $request) {
+        $id = ThuCung::all()->max('tc_id');
+        if($request->hasFile('ha_ten')) {
+            // $files = $request->ha_ten;
+            // duyệt từng ảnh và thực hiện lưu
+            foreach ($request->ha_ten as $index => $file) {
+                $name = $id.'_'.$index.'_'.$file->getClientOriginalName();
+                $file->storeAs('public/photos', $name);
+                // Tạo đối tưọng HinhAnh
+                $hinhAnh = new HinhAnh();
+                $hinhAnh->tc_id = $id;
+                $hinhAnh->ha_id = ($index + 1);
+                $hinhAnh->ha_ten = $name;
+                $hinhAnh->save();
+            }
+            return response(["error"=>false, "message"=>compact('hinhAnh')], 200);
+
+        }
+    }
+
+//    public function store(Request $request)
+//    {
+//        $tc = new ThuCung();
+//        $tc->tc_ten = $request->tc_ten;
+//        $tc->tc_giaBan = $request->tc_giaBan;
+//        $tc->tc_tuoi = $request->tc_tuoi;
+//        $tc->tc_canNang = $request->tc_canNang;
+//        $tc->tc_gioiTinh = $request->tc_gioiTinh;
+//        $tc->tc_gioiTinh = $request->tc_gioiTinh;
+//        $tc->tc_moTa = $request->input('tc_moTa');
+//        $tc->tc_mauSac = $request->tc_mauSac;
+//        $tc->tc_trangThaiTiemChung = $request->tc_trangThaiTiemChung;
+//        $tc->tc_trangThai = 1;
+//        $tc->g_id = $request->g_id;
+//
+//        $tc->save();
+//
+//        if($request->hasFile('ha_ten')) {
+//            foreach ($request->ha_ten as $index => $file) {
+//                $file->storeAs('public/photos', $file->getClientOriginalName());
+//                $hinhAnh = new HinhAnh();
+//                $hinhAnh->tc_id = $tc->tc_id;
+//                $hinhAnh->ha_id = ($index + 1);
+//                $hinhAnh->ha_ten = $file;
+//                $hinhAnh->save();
+//                // Tạo đối tưọng HinhAnh
+//            }
+//            return response(["error"=>false, "message"=>compact('file')], 200);
+//
+//        }
+//
+//    }
+
+    public function edit($id){
+        $thucung  = ThuCung::where('tc_id',$id)->first();
+        return response()->json($thucung);
+    }
+
+    public function update(Request $request,$id){
+        $tc = ThuCung::where('tc_id',$id)->first();
+        $tc->tc_ten = $request->tc_ten;
+        $tc->tc_giaBan = $request->tc_giaBan;
+        $tc->tc_tuoi = $request->tc_tuoi;
+        $tc->tc_canNang = $request->tc_canNang;
+        $tc->tc_gioiTinh = $request->tc_gioiTinh;
+        $tc->tc_gioiTinh = $request->tc_gioiTinh;
+        $tc->tc_moTa = $request->tc_moTa;
+        $tc->tc_mauSac = $request->tc_mauSac;
+        $tc->tc_trangThaiTiemChung = $request->tc_trangThaiTiemChung;
+        $tc->tc_trangThai = 1;
+        $tc->g_id = $request->g_id;
+        $tc->save();
+
+    }
+    public function update_hinhanh (Request $request,$id){
+
+        if($request->hasFile('ha_ten')) {
+            $ha1 = HinhAnh::where('tc_id',$id)->get();
+            $ha = HinhAnh::where('tc_id',$id)->delete();
+            foreach($ha1 as $hinhanh)
+            {
+                // Xóa hình cũ để tránh rác
+               Storage::delete('public/photos/' . $hinhanh->ha_ten);
+            }
+            foreach ($request->ha_ten as $index => $file) {
+                $name = $id.'_'.$index.'_'.$file->getClientOriginalName();
+                $file->storeAs('public/photos', $name);
+                // Tạo đối tưọng HinhAnh
+                $hinhAnh = new HinhAnh();
+                $hinhAnh->tc_id = $id;
+                $hinhAnh->ha_id = ($index + 1);
+                $hinhAnh->ha_ten = $name;
+                $hinhAnh->save();
+            }
+            return response(["error"=>false, "message"=>compact('hinhanh')], 200);
+        }
+
+    }
+
+    public function delete($id){
+        $thucung = ThuCung::findOrfail($id);
+        $thucung->delete();
     }
 }

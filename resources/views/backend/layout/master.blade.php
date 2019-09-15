@@ -135,45 +135,28 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('themes/adminlte/js/demo.js')}}"></script>
 <script src="{{asset('themes/adminlte/bower_components/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('vendor/angular-ckeditor/angular-ckeditor.min.js')}}"></script>
+<script src='https://rawgit.com/ghostbar/angular-file-model/master/angular-file-model.js'></script>
 @yield('custom-js')
 <script>
-    $(function () {
-        $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-            checkboxClass: 'icheckbox_minimal-blue',
-            radioClass   : 'iradio_minimal-blue'
-        })
-        $('.select2').select2()
-        $('#example1').DataTable()
-        $('#example2').DataTable({
-            'paging'      : true,
-            'lengthChange': false,
-            'searching'   : false,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false
-        });
-    })
+
     $(document).ready(function() {
-        $("#ha_ten").fileinput({
-            // showPreview: false,
-            // showUpload: false,
-            // elErrorContainer: '#kartik-file-errors',
-            theme: 'fas',
-            showUpload: false,
-            showCaption: false,
-            browseClass: "btn btn-primary",
-            fileType: "any",
-            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-            overwriteInitial: false,
-            allowedFileExtensions: ["jpg", "gif", "png", "txt"],
-        });
+        $(function () {
+            $('.select2').select2()
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : false,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            });
+        })
     });
 </script>
 <script>
-    $(document).ready(function () {
-        CKEDITOR.replace('editor1')
-        $('.textarea').wysihtml5()
-    });
+
 
 </script>
 </body>

@@ -51,7 +51,7 @@ b.controller('GiongController', function ($scope,$http,MainURL,DTOptionsBuilder,
                 }).then(function(){
                     swal({ title : "",text :"Thêm thành công!",type: "success", },function(isConfirm){
                         $("#Modal").modal("hide");
-                        $scope.refreshData();;
+                        $scope.refreshData();
                     });
                 }).catch(function(){
                     swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
