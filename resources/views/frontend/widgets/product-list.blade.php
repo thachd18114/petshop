@@ -13,17 +13,44 @@
                     Tất cả thú cưng
                 </button>
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-                    Chó
-                </button>
+                @foreach($loaithucung as $loaithucung)
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".loai-{{$loaithucung->ltc_id}}">
+                        {{ $loaithucung->ltc_ten }}
+                    </button>
+                @endforeach
+{{--                <ul class="main-menu">--}}
+{{--                    <li>--}}
+{{--                        <a href="{{ route('frontend.product') }}">Thú cưng</a>--}}
+{{--                                    <ul class="sub-menu">--}}
+{{--                                        <li><a href="index.html">Cho</a></li>--}}
+{{--                                        <li><a href="home-02.html">Meo</a></li>--}}
+{{--                                        <li><a href="home-02.html">Meo</a></li>--}}
+{{--                                        <li><a href="home-03.html">Homepage 3</a></li>--}}
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-                    Mèo
-                </button>
+{{--                                    </ul>--}}
+{{--                    </li>--}}
+{{--                    <li>--}}
+{{--                        <a href="{{ route('frontend.product') }}">Thú cưng</a>--}}
+{{--                        <ul class="sub-menu">--}}
+{{--                            <li><a href="index.html">Cho</a></li>--}}
+{{--                            <li><a href="home-02.html">Meo</a></li>--}}
+{{--                            <li><a href="home-02.html">Meo</a></li>--}}
+{{--                           --}}
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-                    Chim
-                </button>
+{{--                        </ul>--}}
+{{--                    </li>--}}
+{{--                    <li>--}}
+{{--                        <a href="{{ route('frontend.product') }}">Thú cưng</a>--}}
+{{--                        <ul class="sub-menu">--}}
+{{--                            <li><a href="index.html">Cho</a></li>--}}
+{{--                            <li><a href="home-02.html">Meo</a></li>--}}
+{{--                          --}}
+{{--                            <li><a href="home-03.html">Homepage 3</a></li>--}}
+
+{{--                        </ul>--}}
+{{--                    </li>--}}
+
+{{--                </ul>--}}
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -191,8 +218,9 @@
         </div>
 
         <div class="row isotope-grid">
-            <?php for ($i = 0; $i < 15; $i++) {?>
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+
+            @foreach($data as $index=>$sp)
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item loai-{{$sp->ltc_id}}">
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
@@ -203,18 +231,18 @@
                         </div>
                         <div class="block2-txt flex-w flex-t p-t-14">
                             <div class="block2-txt-child1 flex-col-l ">
-                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    <h4 id="tensp" >Mango</h4>
+                                <a href="{{ route('frontend.productDetail',$sp->tc_id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                    <h4 id="tensp" >{{ $sp->tc_ten }}</h4>
                                 </a>
                                 <span class="stext-105 cl3" style="color: #e10c00; font-weight: bold">
-                                    19 000 000 VNĐ
+                                    {{ $sp->tc_giaBan }} <sup>đ</sup>
                             </span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-            <?php } ?>
+            @endforeach
 
 
 

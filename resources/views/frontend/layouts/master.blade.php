@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="petApp">
 <head>
     <title>@yield('title')</title>
     <meta charset="UTF-8">
@@ -99,5 +99,18 @@
 <script src="{{ asset('themes/cozastore/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <!--===============================================================================================-->
 <script src="{{ asset('themes/cozastore/js/main.js') }}"></script>
+<script src="{{ asset('app/lib/angular.min.js') }}"></script>
+<!-- Include thư viện quản lý Cart - AngularJS -->
+<script src="{{ asset('vendor/ngCart/dist/ngCart.js') }}"></script>
+<script>
+    // Khởi tạo ứng dụng AngularJS, sử dụng plugin ngCart
+    // Do Laravel và AngularJS đều sử dụng dấu `Double bracket` để render dữ liệu
+    // => để tránh bị xung đột cú pháp, ta sẽ đổi cú pháp render dữ liệu của AngularJS thành <% %>
+    var app = angular.module('petApp', ['ngCart'],
+        function($interpolateProvider) {
+            $interpolateProvider.startSymbol('<%');
+            $interpolateProvider.endSymbol('%>');
+        });
+</script>
 </body>
 </html>

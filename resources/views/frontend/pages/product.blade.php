@@ -9,7 +9,7 @@
 @endsection
 {{-- Thay thế nội dung vào Placeholder `main-content` của view `frontend.layouts.master` --}}
 @section('main-content')
-    @include('frontend.widgets.product-list')
+    @include('frontend.widgets.product-list',[$data = $danhsachthucung])
 @endsection
 {{-- Thay thế nội dung vào Placeholder `custom-scripts` của view `frontend.layouts.master` --}}
 @section('custom-scripts')

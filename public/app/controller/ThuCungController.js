@@ -16,6 +16,16 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
         $http.get(MainURL + 'list_thucung').then(function(response){
             $scope.memberList = response.data;
             $scope.isLoading = false;
+            $scope.tt = '';
+            angular.forEach($scope.memberList, function(value, key){
+                if (value.tc_trangThai === 1){
+                    value.tc_trangThai = 'roi'
+                    console.log($scope.tt);
+                }
+                else{
+                    value.tc_trangThai = 'chuaw'
+                console.log($scope.tt);}
+            });
         });
     };
     $scope.refreshData();
@@ -41,10 +51,10 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
                     theme: 'fas',
                     showUpload: false,
                     browseClass: "btn btn-primary",
-                    fileType: "any",
+                     fileType: "any",
                     autoOrientImage: false,
                     // previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                    // overwriteInitial: false,
+                     overwriteInitial: false,
                     // allowedFileExtensions: ["jpg", "gif", "png", "txt"],
                 });
 
@@ -69,7 +79,13 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
         }
         $("#Modal").modal('show');
     }
+    $scope.detailmd= function (id) {
+        $http.get(MainURL + 'detail_thucung/'+id).then(function(response){
+            $scope.detail = response.data;
+        });
 
+        $("#Modal-detal").modal('show');
+    }
     $scope.save = function (state,id){
         $scope.FileDetails= function () {
             var  name= [];
@@ -84,6 +100,7 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
         }
         $scope.name = $scope.FileDetails();
         $scope.ThuCung['ha_ten']= $scope.name;
+         // $scope.ThuCung['tc_moTa'] = $sce.trustAsHtml($scope.ThuCung['tc_moTa']);
         console.log($scope.ThuCung);
 
         switch(state){
@@ -194,7 +211,6 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
         }
 
     });
-
 
     $scope.delConfirm = function(id) {
         swal({

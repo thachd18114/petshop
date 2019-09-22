@@ -7,7 +7,7 @@
 @section('custom-css')
 @endsection
 @section('main-content')
-    @include('frontend.widgets.product-info')
+    @include('frontend.widgets.product-info', ['tc' => $tc, 'hinhanhlienquan' => $danhsachhinhanhlienquan])
 @endsection
 @section('custom-scripts')
 @endsection

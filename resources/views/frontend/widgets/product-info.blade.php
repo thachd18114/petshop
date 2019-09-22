@@ -28,35 +28,19 @@
                         <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                         <div class="slick3 gallery-lb">
-                            <div class="item-slick3" data-thumb="{{ asset('themes/cozastore/images/spcho4.png')}}">
-                                <div class="wrap-pic-w pos-relative">
-                                    <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
+                            @foreach($danhsachhinhanhlienquan as $hinhanh)
+                                <div class="item-slick3" data-thumb="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}">
+                                    <div class="wrap-pic-w pos-relative">
+                                        <img src="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}" alt="IMG-PRODUCT">
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('themes/cozastore/images/spcho4.png')}}">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
 
-                            <div class="item-slick3" data-thumb="{{ asset('themes/cozastore/images/spcho4.png')}}">
-                                <div class="wrap-pic-w pos-relative">
-                                    <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('themes/cozastore/images/spcho4.png')}}">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="item-slick3" data-thumb="{{ asset('themes/cozastore/images/spcho4.png')}}">
-                                <div class="wrap-pic-w pos-relative">
-                                    <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
-
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('themes/cozastore/images/spcho4.png')}}">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,9 +49,10 @@
             <div class="col-md-6 col-lg-5 p-b-30">
                 <div class=" p-t-5 p-lr-0-lg">
                     <h4 class="mtext-105 cl2 js-name-detail p-b-14" style="font-weight: bold;font-family: 'Times New Roman'">
-                        Rolls-Roys - Golden Retriever
-                        <hr>
+                       {{$tc->tc_ten}}
+
                     </h4>
+                    <hr>
                     <div class="container" >
                         <div class="flex-w flex-r-m p-b-10" >
                             <div class="size-203" >
@@ -77,7 +62,7 @@
                             </div>
                             <div class="size-204 respon6-next"style="padding-left: 100px">
                                 <span class="mtext-106 cl2 product_price" style="color: #d0011b; font-size: 1.875rem;font-weight: bold" >
-                                       19.000.000<sup>đ</sup>
+                                       {{$tc->tc_giaBan}}<sup>đ</sup>
                                 </span>
                             </div>
                         </div>
@@ -88,7 +73,9 @@
                                 </span>
 
                             </div>
-                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">Alaska</div>
+                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">
+                                {{$tc->g_ten}}
+                            </div>
                         </div>
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203">
@@ -96,7 +83,14 @@
                                        Giới tính
                                 </span>
                             </div>
-                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">Đực</div>
+                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">
+                                @if($tc->tc_gioiTinh == 1)
+                                        {{'Đực'}}
+                                @else
+                                {{'Cái'}}
+
+                                    @endif
+                            </div>
                         </div>
                         <div class="flex-w flex-r-m p-b-10 ">
                             <div class="size-203">
@@ -104,7 +98,10 @@
                                        Màu
                                 </span>
                             </div>
-                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">Vàng và trắng</div>
+                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">
+                                {{$tc->tc_mauSac}}
+
+                            </div>
                         </div>
                         <div class="flex-w flex-r-m p-b-10 ">
                             <div class="size-203">
@@ -112,7 +109,10 @@
                                        Tuổi
                                 </span>
                             </div>
-                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">8 tháng</div>
+                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">
+                                {{$tc->tc_tuoi}}
+
+                            </div>
                         </div>
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203">
@@ -128,7 +128,10 @@
                                        Cân nặng
                                 </span>
                             </div>
-                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">12 kg</div>
+                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">
+                                {{$tc->tc_canNang}}
+
+                            </div>
                         </div>
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203">
@@ -136,16 +139,22 @@
                                        Tiêm chủng
                                 </span>
                             </div>
-                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">Đã tiêm chủng</div>
+                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">
+                                @if($tc->tc_trangThaiTiemChung == 1)
+                                    {{'Đã Tiêm Chủng'}}
+                                @else
+                                    {{'Chưa Tiêm Chủng'}}
+
+                                @endif
+
+                            </div>
                         </div>
                     </div>
 
                     <!--  -->
                     <div class="flex-w flex-r-m p-b-10 p-t-33" id="addtocard">
                         <div class="size-204 flex-w flex-m respon6-next">
-                            <button class="flex-c-m cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" style="font-family: 'Times New Roman'">
-                                Thêm Vào Giỏ Hàng
-                            </button>
+                                <ngcart-addtocart class="js-addcart-detail" template-url="{{ asset('vendor/ngCart/template/ngCart/addtocart.html') }}" id="{{ $tc->tc_id }}" name="{{ $tc->tc_ten }}" price="{{ $tc->tc_giaBan }}"   }">Thêm vào giỏ hàng</ngcart-addtocart>
                         </div>
                     </div>
                 </div>
@@ -172,7 +181,7 @@
                     <div class="tab-pane fade show active" id="description" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
                             <p class="stext-102 cl6">
-                                Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat, purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+                                {!! $tc->tc_moTa !!}
                             </p>
                         </div>
                     </div>

@@ -15,6 +15,7 @@ class ThuCungController extends Controller
         $ds_thucung = ThuCung::all();
         return response()->json($ds_thucung);
     }
+
     public function store(Request $request)
     {
         $tc = new ThuCung();
@@ -95,7 +96,11 @@ class ThuCungController extends Controller
 //        }
 //
 //    }
-
+public  function thucung_detail( Request $request, $id) {
+    $detail = ThuCung::join('giong', 'giong.g_id', '=', 'thucung.g_id')
+      ->where('tc_id', $id)->first();
+    return response()->json($detail);
+}
     public function edit($id){
         $thucung  = ThuCung::where('tc_id',$id)->first();
         return response()->json($thucung);

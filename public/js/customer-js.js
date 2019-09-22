@@ -29,7 +29,7 @@ $('.js-addwish-detail').each(function(){
 $('.js-addcart-detail').each(function(){
     var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
     $(this).on('click', function(){
-        swal(nameProduct, "is added to cart !", "success");
+        swal(nameProduct, "Đã được thêm vào giỏ hàng !", "success");
     });
 });
 $('.gallery-lb').each(function() { // the containers for all your galleries

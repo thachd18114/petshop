@@ -27,7 +27,7 @@
                     <th>Cân nặng</th>
                     <th>Trạng Thái Tiêm Chủng</th>
                     <th>Trạng Thái</th>
-                    <th style="text-align: center;width: 10%">
+                    <th style="text-align: center;width: 12%">
                         <button class="btn btn-social-icon btn bg-orange" style="width: 22px; height: 22px;" name="btnReLoad" id="btnReLoad" ng-click="refreshData()"><i class="fas fa-sync-alt" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
                         <button class="btn btn-social-icon btn bg-olive" style="width: 22px; height: 22px;" name="btnAdd" id="btnAdd"   ng-click="modal('create')" > <i class="fas fa-plus" style="font-size: 12px;margin-top: -6px"></i></button>
                     </th>
@@ -45,8 +45,10 @@
 
 
                     <td style="text-align: center">
+                        <button class="btn btn-social-icon btn bg-orange" style="width: 22px; height: 22px;" ng-click="detailmd(tc.tc_id)" ><i class="fas fa-info" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
                         <button class="btn btn-social-icon btn bg-purple" style="width: 22px; height: 22px;" ng-click="modal('edit',tc.tc_id)" ><i class="fas fa-edit" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
                         <button class="btn btn-social-icon btn-danger" style="width: 22px; height: 22px;" ng-click="delConfirm(tc.tc_id)" ><i class="fas fa-trash-alt" style="font-size: 12px;margin-top: -6px"></i></button>
+
                     </td>
 
                 </tr>
@@ -162,6 +164,103 @@
         </div>
         <!-- /.box-body -->
     </div>
+            <div class="modal fade" id="Modal-detal" >
+                <div class="modal-dialog">
+                    <div class="modal-content" id="modal-content" >
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Chi tiết thú cưng</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                               <table class="table">
+                                   <tr>
+                                       <th style="width: 15%">ID</th>
+                                       <td><% detail.tc_id%></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Tên</th>
+                                       <td><% detail.tc_ten%></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Giá</th>
+                                       <td><% detail.tc_giaBan%></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Tuổi</th>
+                                       <td><% detail.tc_tuoi%></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Ngày sinh</th>
+                                       <td>11-11-1192</td>
+                                   </tr>
+                                   <tr>
+                                       <th>Giới tính</th>
+                                       <td><% detail.tc_gioiTinh%></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Cân nặng</th>
+                                       <td><% detail.tc_canNang%></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Màu sắc</th>
+                                       <td><% detail.tc_mauSac%></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Gióng</th>
+                                       <td><% detail.g_ten%></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Trạng Thái tiêm chủng</th>
+                                       <td><% detail.tc_trangThaiTiemChung%></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Trạng Thái</th>
+                                       <td><% detail.tc_trangThai%></td>
+                                   </tr>
+                                   <tr>
+                                       <th>Mô tả</th>
+                                       <td ng-bind-html="" >{!!"<%  %>" !!}</td>
+                                   </tr>
+                                   <tr>
+                                       <th>Hình ảnh</th>
+                                       <td>
+                                           <div class="container-fluid">
+                                               <div class="col-xs-3">
+                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">
+                                               </div>
+                                               <div class="col-xs-3">
+                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">
+
+                                               </div>
+                                               <div class="col-xs-3">
+                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">
+
+                                               </div>
+                                               <div class="col-xs-3">
+                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">
+                                               </div>
+
+                                           </div>
+                                       </td>
+                                   </tr>
+
+
+
+                               </table>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+{{--                            <button type="submit" class="btn btn-primary"  ng-click="save(state,id)">Đồng ý</button>--}}
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
         </div>
     </div>
 @endsection
@@ -173,7 +272,5 @@
 @section('custom-js')
     <script src="{{ asset('vendor/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
     <script src="{{ asset('app/controller/ThuCungController.js') }}"></script>
-    <script>
-
-    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
 @endsection

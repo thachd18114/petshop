@@ -39,17 +39,18 @@ Route::get('/admin/list_thucung', 'ThuCungController@index');
 Route::get('/admin/thucung', function (){return view('backend.thucung.index');})->name('thucung');
 Route::post('/admin/createthucung','ThuCungController@store');
 Route::post('/admin/createthucung/hinhanh','ThuCungController@store_hinhanh');
+Route::get('/admin/detail_thucung/{id}', 'ThuCungController@thucung_detail');
 Route::get('/admin/edit_thucung/{id}', 'ThuCungController@edit');
 Route::post('/admin/update_thucung/{id}','ThuCungController@update');
 Route::post('/admin/update_thucung/hinhanh/{id}','ThuCungController@update_hinhanh');
 Route::get('/admin/delete_thucung/{id}','ThuCungController@delete');
 //------------------------------------------/
-Route::get('/thucung', function (){
-    return view('frontend.pages.product');
-});
-Route::get('/chitietthucung', function (){
-    return view('frontend.pages.product-detail');
-});
+Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
+Route::get('/thu-cung', 'Frontend\FrontendController@product')->name('frontend.product');
+Route::get('/thu-cung/{id}', 'Frontend\FrontendController@productDetail')->name('frontend.productDetail');
+
+
+Route::get('/gio-hang', 'Frontend\FrontendController@cart')->name('frontend.cart');
 Route::get('/lienhe', function (){
     return view('frontend.pages.contact');
 });

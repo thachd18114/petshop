@@ -33,10 +33,17 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li class="{{ Request::is('') ? 'active-menu' : '' }}">
-                            <a href="">Trang chủ</a>
+                            <a href="{{ route('frontend.home') }}">Trang chủ</a>
                         </li>
                         <li>
-                            <a href="product.html">Thú cưng</a>
+                            <a href="{{ route('frontend.product') }}">Thú cưng</a>
+{{--                            <ul class="sub-menu">--}}
+{{--                                <li><a href="index.html">Cho</a></li>--}}
+{{--                                <li><a href="home-02.html">Meo</a></li>--}}
+{{--                                <li><a href="home-02.html">Meo</a></li>--}}
+{{--                                <li><a href="home-03.html">Homepage 3</a></li>--}}
+
+{{--                            </ul>--}}
                         </li>
                         <li class="label1" data-label1="hot">
                             <a href="shoping-cart.html">Liên hệ</a>
@@ -52,9 +59,7 @@
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                         <i class="zmdi zmdi-search"></i>
                     </div>
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-                        <i class="zmdi zmdi-shopping-cart"></i>
-                    </div>
+                    <ngcart-summary class="js-show-cart" template-url="{{ asset('vendor/ngCart/template/ngCart/summary.html') }}"></ngcart-summary>
 
                 </div>
             </nav>
