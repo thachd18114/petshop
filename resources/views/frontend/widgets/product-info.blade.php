@@ -29,7 +29,17 @@
 
                         <div class="slick3 gallery-lb">
                             @foreach($danhsachhinhanhlienquan as $hinhanh)
-                                <div class="item-slick3" data-thumb="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}">
+                                @if(substr($hinhanh->ha_ten, strlen($hinhanh->ha_ten)- 3) == 'mp4')
+                                    <div class="item-slick3" data-thumb="{{ asset('img/film-and-vid.jpg') }}">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <video controls="controls" preload="metadata" style="max-width: 500px; margin-top: 70px">
+                                                <source src="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}" type="video/mp4">
+                                            </video>
+                                        </div>
+                                @else
+
+                                    <div class="item-slick3" data-thumb="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}">
+
                                     <div class="wrap-pic-w pos-relative">
                                         <img src="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}" alt="IMG-PRODUCT">
 
@@ -37,6 +47,7 @@
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
+                                        @endif
                                 </div>
                             @endforeach
 
@@ -154,7 +165,7 @@
                     <!--  -->
                     <div class="flex-w flex-r-m p-b-10 p-t-33" id="addtocard">
                         <div class="size-204 flex-w flex-m respon6-next">
-                                <ngcart-addtocart class="js-addcart-detail" template-url="{{ asset('vendor/ngCart/template/ngCart/addtocart.html') }}" id="{{ $tc->tc_id }}" name="{{ $tc->tc_ten }}" price="{{ $tc->tc_giaBan }}"   }">Thêm vào giỏ hàng</ngcart-addtocart>
+                                <ngcart-addtocart class="js-addcart-detail" template-url="{{ asset('vendor/ngCart/template/ngCart/addtocart.html') }}" id="{{ $tc->tc_id }}" name="{{ $tc->tc_ten }}" price="{{ $tc->tc_giaBan }}" quantity="1" data="{ sp_hinh_url: '{{ asset("storage/photos/" . $tc->ha_ten) }}'}">Thêm vào giỏ hàng</ngcart-addtocart>
                         </div>
                     </div>
                 </div>

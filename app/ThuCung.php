@@ -12,6 +12,7 @@ class ThuCung extends Model
     protected $guarded = ['tc_id'];
 
     protected $primaryKey = 'tc_id';
+    protected $dateFormat   = 'Y-m-d H:i:s';
 
     public function Giong() {
         return $this->belongsTo('App\Giong', 'g_id', 'g_id');

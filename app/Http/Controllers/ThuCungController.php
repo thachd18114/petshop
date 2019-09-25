@@ -24,12 +24,13 @@ class ThuCungController extends Controller
         $tc->tc_tuoi = $request->tc_tuoi;
         $tc->tc_canNang = $request->tc_canNang;
         $tc->tc_gioiTinh = $request->tc_gioiTinh;
-        $tc->tc_gioiTinh = $request->tc_gioiTinh;
+        $tc->tc_ngaySinh = $request->tc_ngaySinh;
         $tc->tc_moTa = $request->tc_moTa;
         $tc->tc_mauSac = $request->tc_mauSac;
         $tc->tc_trangThaiTiemChung = $request->tc_trangThaiTiemChung;
         $tc->tc_trangThai = 1;
         $tc->g_id = $request->g_id;
+        $tc->ng_id = 1;
         $tc->save();
 
 //        foreach ($request->ha_ten as $index => $file) {
@@ -111,6 +112,7 @@ public  function thucung_detail( Request $request, $id) {
         $tc->tc_ten = $request->tc_ten;
         $tc->tc_giaBan = $request->tc_giaBan;
         $tc->tc_tuoi = $request->tc_tuoi;
+        $tc->tc_ngaySinh = $request->tc_ngaySinh;
         $tc->tc_canNang = $request->tc_canNang;
         $tc->tc_gioiTinh = $request->tc_gioiTinh;
         $tc->tc_gioiTinh = $request->tc_gioiTinh;
@@ -119,6 +121,7 @@ public  function thucung_detail( Request $request, $id) {
         $tc->tc_trangThaiTiemChung = $request->tc_trangThaiTiemChung;
         $tc->tc_trangThai = 1;
         $tc->g_id = $request->g_id;
+        $tc->ng_id = 1;
         $tc->save();
 
     }
@@ -126,12 +129,13 @@ public  function thucung_detail( Request $request, $id) {
 
         if($request->hasFile('ha_ten')) {
             $ha1 = HinhAnh::where('tc_id',$id)->get();
-            $ha = HinhAnh::where('tc_id',$id)->delete();
+
             foreach($ha1 as $hinhanh)
             {
                 // Xóa hình cũ để tránh rác
                Storage::delete('public/photos/' . $hinhanh->ha_ten);
             }
+            $ha = HinhAnh::where('tc_id',$id)->delete();
             foreach ($request->ha_ten as $index => $file) {
                 $name = $id.'_'.$index.'_'.$file->getClientOriginalName();
                 $file->storeAs('public/photos', $name);

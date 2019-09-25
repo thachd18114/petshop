@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\DonHang;
 use App\Giong;
 use App\HinhAnh;
+use App\HinhThucThanhToan;
+use App\KhachHang;
 use App\LoaiThuCung;
 use App\ThuCung;
 use Illuminate\Http\Request;
@@ -35,7 +38,8 @@ class FrontendController extends Controller
 
     public function productDetail(Request $request, $id)
     {
-        $thucung = ThuCung::join('giong', 'giong.g_id', '=', 'thucung.g_id')->where('tc_id', $id)->first();
+        $thucung = DB::table('thucung')->join('giong','giong.g_id','=', 'thucung.g_id')
+            ->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')->where('hinhanh.ha_id' ,'=', '1')->where('thucung.tc_id', $id)->first();
         // Query Lấy các hình ảnh liên quan của các Sản phẩm đã được lọc
         $danhsachhinhanhlienquan = DB::table('hinhanh')
             ->where('tc_id', $id)
@@ -51,16 +55,29 @@ class FrontendController extends Controller
     public function cart(Request $request)
     {
 
-//        $danhsachphuongthucthanhtoan = Thanhtoan::all();
+       $hinhthucthanhtoan = HinhThucThanhToan::all();
+        return view('frontend.pages.shopping-cart')
+            ->with('hinhthucthanhtoan',$hinhthucthanhtoan);
 
-        return view('frontend.pages.shopping-cart');
+    }
+    public function order(Request $request)
+    {
+            $donhang = new Donhang();
+            $donhang->kh_id = 1;
+            $donhang->dh_nguoiNhan = $request->donhang['dh_nguoiNhan'];
+            $donhang->dh_diaChi = $request->donhang['dh_diaChi'];
+            $donhang->dh_dienThoai = $request->donhang['dh_dienThoai'];
+            $donhang->httt_id = $request->donhang['httt_id'];
+            $donhang->save();
 
+        return response(["error"=>false, "message"=>compact('donhang')], 200);
     }
 
         private function searchThuCung(Request $request)
     {
         $query = DB::table('thucung')->join('giong','giong.g_id','=', 'thucung.g_id')
             ->join('loaithucung','loaithucung.ltc_id','=', 'giong.ltc_id')
+            ->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')->where('hinhanh.ha_id' ,'=', '1')
             ->select('*');
         // Kiểm tra điều kiện `searchByLoaiMa`
         $searchByGiongMa = $request->query('searchByGiongMa');

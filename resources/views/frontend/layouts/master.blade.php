@@ -33,6 +33,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/cozastore/css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/cozastore/css/main.css') }}">
+@yield('custom-css')
     <!--===============================================================================================-->
 </head>
 <style>
@@ -102,15 +103,7 @@
 <script src="{{ asset('app/lib/angular.min.js') }}"></script>
 <!-- Include thư viện quản lý Cart - AngularJS -->
 <script src="{{ asset('vendor/ngCart/dist/ngCart.js') }}"></script>
-<script>
-    // Khởi tạo ứng dụng AngularJS, sử dụng plugin ngCart
-    // Do Laravel và AngularJS đều sử dụng dấu `Double bracket` để render dữ liệu
-    // => để tránh bị xung đột cú pháp, ta sẽ đổi cú pháp render dữ liệu của AngularJS thành <% %>
-    var app = angular.module('petApp', ['ngCart'],
-        function($interpolateProvider) {
-            $interpolateProvider.startSymbol('<%');
-            $interpolateProvider.endSymbol('%>');
-        });
-</script>
+<script src="{{asset('app/app.js')}}"></script>
+@yield('custom-scripts')
 </body>
 </html>

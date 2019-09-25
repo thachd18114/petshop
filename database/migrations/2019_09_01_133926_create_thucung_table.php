@@ -19,15 +19,19 @@ class CreateThucungTable extends Migration
             $table->string('tc_ten',50);
             $table->decimal('tc_giaBan', 10,0);
             $table->string('tc_tuoi', 50);
+            $table->dateTime('tc_ngaySinh')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->unsignedTinyInteger('tc_gioiTinh')->default('1');
-            $table->float('tc_canNang');
+            $table->string('tc_canNang', 20);
             $table->text('tc_moTa');
             $table->string('tc_mauSac', 20);
             $table->unsignedTinyInteger('tc_trangThaiTiemChung');
             $table->unsignedTinyInteger('tc_trangThai');
             $table->unsignedInteger('g_id');
+            $table->unsignedInteger('ng_id');
 
             $table->foreign('g_id')->references('g_id')->on('giong')
+                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ng_id')->references('ng_id')->on('nguongoc')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }

@@ -11,9 +11,15 @@
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
                         Help & FAQs
                     </a>
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        My Account
+                    @if(session('tenDangNhap'))
+                    <a href="{{route('dangnhap')}}" class="flex-c-m trans-04 p-lr-25">
+                        Log in
                     </a>
+                    @else
+                        <a href="{{route('dangnhap')}}" class="flex-c-m trans-04 p-lr-25">
+                            My acout
+                        </a>
+                    @endif
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
                         EN
                     </a>

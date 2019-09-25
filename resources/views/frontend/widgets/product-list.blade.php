@@ -224,7 +224,12 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
+                            @if(substr($sp->ha_ten, strlen($sp->ha_ten)- 3) == 'mp4')
+                                <img src="{{ asset('img/film-and-vid.jpg') }}" alt="IMG-PRODUCT">
+                            @else
+
+                            <img src="{{ asset('storage/photos/' . $sp->ha_ten) }}" alt="IMG-PRODUCT">
+                        @endif
                             <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                 Chi tiết
                             </a>

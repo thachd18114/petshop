@@ -85,7 +85,13 @@
                                     <div class="form-group">
                                         <label for="tc_tuoi" class="col-sm-2 control-label">Tuổi</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="tc_tuoi" name="tc_tuoi" placeholder="Tên thú cưng" ng-model="ThuCung.tc_tuoi">
+                                            <input type="text"  class="form-control" id="tc_tuoi" name="tc_tuoi" placeholder="Tuổi" ng-model="ThuCung.tc_tuoi">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tc_ngaySinh" class="col-sm-2 control-label">Ngày sinh</label>
+                                        <div class="col-sm-10">
+                                            <input type="text"  class="form-control" id="tc_ngaySinh" name="tc_ngaySinh" placeholder="Ngày sinh" ng-model="ThuCung.tc_ngaySinh">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -106,7 +112,7 @@
                                     <div class="form-group">
                                         <label for="tc_canNang" class="col-sm-2 control-label">Cân nặng</label>
                                         <div class="col-sm-10">
-                                            <input type="number"  class="form-control" id="tc_canNang" name="tc_canNang" placeholder="Cân nặng" ng-model="ThuCung.tc_canNang">
+                                            <input type="text"  class="form-control" id="tc_canNang" name="tc_canNang" placeholder="Cân nặng" ng-model="ThuCung.tc_canNang">
                                         </div>
                                     </div>
                                     <div class="form-group">

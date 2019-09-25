@@ -20,6 +20,11 @@ Route::get('/admin', function (){
 Route::get('/admin/dangnhap', function (){
     return view('backend.dangnhap');
 });
+Route::get('/dangnhap','DangNhapController@index')->name('dangnhap');
+Route::post('/dangnhap/check','DangNhapController@check')->name('dangnhap.check');
+
+Route::get('/dangky','DangKyController@index')->name('dangky');
+Route::post('/dangky/create','DangKyController@store')->name('dangky.store');
 //----------------------------------//
 Route::get('/admin/list_loaithucung', 'LoaiThuCungController@index');
 Route::get('/admin/loaithucung', function (){return view('backend.loaithucung.index');})->name('loaithucung');
@@ -51,6 +56,10 @@ Route::get('/thu-cung/{id}', 'Frontend\FrontendController@productDetail')->name(
 
 
 Route::get('/gio-hang', 'Frontend\FrontendController@cart')->name('frontend.cart');
+
+Route::post('/dat-hang', 'Frontend\FrontendController@order')->name('frontend.order');
+
+
 Route::get('/lienhe', function (){
     return view('frontend.pages.contact');
 });

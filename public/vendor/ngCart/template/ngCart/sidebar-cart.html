@@ -33,7 +33,7 @@
         Shipping: <% ngCart.getShipping() | currency %>
     </div>
     <div class="header-cart-total w-full p-tb-40">
-        Tổng thành tiền: <% ngCart.totalCost() | currency %>
+        Tổng thành tiền: <% ngCart.totalCost() %>
     </div>
 
     <div class="header-cart-buttons flex-w w-full">
@@ -41,7 +41,7 @@
             Xem giỏ hàng
         </a>
 
-        <a href="public/gio-hang" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+        <a href="/petshop/public/gio-hang" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
             Thanh toán
         </a>
     </div>
