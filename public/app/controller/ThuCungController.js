@@ -6,25 +6,43 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
     };
     $scope.isLoaded = true;
     $scope.dataTitle = "Thú Cưng";
+
     $scope.giong = function(){
         $http.get(MainURL + 'list_giong').then(function(response){
             $scope.listgiong = response.data;
         });
     };
+
+    $scope.nguogoc = function(){
+        $http.get(MainURL + 'list_nguongoc').then(function(response){
+            $scope.listnguongoc = response.data;
+        });
+    };
+
     $scope.refreshData = function(){
         $scope.isLoading = true;
         $http.get(MainURL + 'list_thucung').then(function(response){
             $scope.memberList = response.data;
             $scope.isLoading = false;
-            $scope.tt = '';
             angular.forEach($scope.memberList, function(value, key){
-                if (value.tc_trangThai === 1){
-                    value.tc_trangThai = 'roi'
-                    console.log($scope.tt);
+                if (value.tc_trangThaiTiemChung === 1){
+                    value.tc_trangThaiTiemChung = 'Đã tiêm chủng';
                 }
                 else{
-                    value.tc_trangThai = 'chuaw'
-                console.log($scope.tt);}
+                    value.tc_trangThaiTiemChung = 'Chưa tiêm chủng';
+                }
+                if (value.tc_trangThai === 1){
+                    value.tc_trangThai = 'Chưa bán';
+                }
+                else {
+                    value.tc_trangThai = 'Đã bán';
+                }
+                if (value.tc_gioiTinh === 1){
+                    value.tc_gioiTinh = 'Đực';
+                }
+                else {
+                    value.tc_gioiTinh = 'Cái';
+                }
             });
         });
     };
@@ -32,6 +50,7 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
 
     $scope.modal = function (state, id) {
         $scope.giong();
+        $scope.nguogoc();
         $scope.state = state;
         switch(state){
             case 'create':
@@ -43,6 +62,7 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
                     tc_canNang : "",
                     tc_moTa : "",
                     tc_mauSac : "",
+                    ng_id: 0,
                     tc_giaBan : "",
                     tc_trangThai : "",
                     g_id : 0,

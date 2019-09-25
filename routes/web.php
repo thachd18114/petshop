@@ -39,7 +39,25 @@ Route::post('/admin/creategiong','GiongController@store');
 Route::get('/admin/edit_giong/{id}', 'GiongController@edit');
 Route::post('/admin/update_giong/{id}','GiongController@update');
 Route::get('/admin/delete_giong/{id}','GiongController@delete');
-//------------------------------------------//
+
+//-----------------------------------Nguồn gốc----------------------------------//
+
+Route::get('/admin/list_nguongoc', 'NguonGocController@index');
+Route::get('/admin/nguongoc', function (){return view('backend.nguongoc.index');})->name('nguongoc');
+Route::post('/admin/createnguongoc','NguonGocController@store');
+Route::get('/admin/edit_nguongoc/{id}', 'NguonGocController@edit');
+Route::post('/admin/update_nguongoc/{id}','NguonGocController@update');
+Route::get('/admin/delete_nguongoc/{id}','NguonGocController@delete');
+//-------------------------Hinh thuc thanh toan------------------------------//
+
+Route::get('/admin/list_hinhthucthanhtoan', 'HinhThucThanhToanController@index');
+Route::get('/admin/hinhthucthanhtoan', function (){return view('backend.hinhthucthanhtoan.index');})->name('hinhthucthanhtoan');
+Route::post('/admin/createhinhthucthanhtoan','HinhThucThanhToanController@store');
+Route::get('/admin/edit_hinhthucthanhtoan/{id}', 'HinhThucThanhToanController@edit');
+Route::post('/admin/update_hinhthucthanhtoan/{id}','HinhThucThanhToanController@update');
+Route::get('/admin/delete_hinhthucthanhtoan/{id}','HinhThucThanhToanController@delete');
+//--------------------------------------Thú cưng------------------------------//
+
 Route::get('/admin/list_thucung', 'ThuCungController@index');
 Route::get('/admin/thucung', function (){return view('backend.thucung.index');})->name('thucung');
 Route::post('/admin/createthucung','ThuCungController@store');
@@ -49,7 +67,17 @@ Route::get('/admin/edit_thucung/{id}', 'ThuCungController@edit');
 Route::post('/admin/update_thucung/{id}','ThuCungController@update');
 Route::post('/admin/update_thucung/hinhanh/{id}','ThuCungController@update_hinhanh');
 Route::get('/admin/delete_thucung/{id}','ThuCungController@delete');
-//------------------------------------------/
+
+//-----------------------------------Đơn Hàng----------------------------//
+
+Route::get('/admin/list_donhang', 'DonHangController@index');
+Route::get('/admin/donhang', function (){return view('backend.donhang.index');})->name('donhang');
+Route::post('/admin/createdonhang','DonHangController@store');
+Route::get('/admin/edit_donhang/{id}', 'DonHangController@edit');
+Route::post('/admin/update_donhang/{id}','DonHangController@update');
+Route::get('/admin/delete_donhang/{id}','DonHangController@delete');
+
+//--------------------------------------------------------------------//
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
 Route::get('/thu-cung', 'Frontend\FrontendController@product')->name('frontend.product');
 Route::get('/thu-cung/{id}', 'Frontend\FrontendController@productDetail')->name('frontend.productDetail');

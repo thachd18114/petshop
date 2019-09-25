@@ -32,34 +32,40 @@
                     <span> &nbsp; Giống</span>
                 </a>
             </li>
-            <li class="">
+            <li class="@yield('nguongoc') ">
+                <a href="{{route('nguongoc')}}">
+                    <i class="fas fa-chess-rook"></i>
+                    <span> &nbsp; Nguồn gốc</span>
+                </a>
+            </li>
+            <li class="@yield('thucung')">
                 <a href="{{ route('thucung')}}">
                     <i class="fa fa-dove"></i>
                     <span>Thú cưng</span>
+                </a>
+            </li>
+            <li class="@yield('donhang')">
+                <a href="#">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>&nbsp; Đơn hàng</span>
+                </a>
+            </li>
+            <li class="@yield('khachhang')">
+                <a href="#">
+                    <i class="fas fa-address-card"></i>
+                    <span>&nbsp; Khách hàng</span>
+                </a>
+            </li>
+            <li class="@yield('hinhthucthanhtoan')">
+                <a href="{{ route('hinhthucthanhtoan')}}">
+                    <i class="far fa-credit-card"></i>
+                    <span>&nbsp;Hình thức thanh toán</span>
                 </a>
             </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fas fa-industry"></i>
                     <span>&nbsp; Nhà cung cấp</span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <span>&nbsp; Đơn hàng</span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fas fa-address-card"></i>
-                    <span>&nbsp; Khách hàng</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="far fa-credit-card"></i>
-                    <span>&nbsp;Hình thức thanh toán</span>
                 </a>
             </li>
             <li>

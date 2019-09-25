@@ -12,7 +12,7 @@ use Storage;
 class ThuCungController extends Controller
 {
     public function index () {
-        $ds_thucung = ThuCung::all();
+        $ds_thucung = ThuCung::join('nguongoc', 'nguongoc.ng_id', '=', 'thucung.ng_id')->get();
         return response()->json($ds_thucung);
     }
 
@@ -30,7 +30,7 @@ class ThuCungController extends Controller
         $tc->tc_trangThaiTiemChung = $request->tc_trangThaiTiemChung;
         $tc->tc_trangThai = 1;
         $tc->g_id = $request->g_id;
-        $tc->ng_id = 1;
+        $tc->ng_id = $request->ng_id;
         $tc->save();
 
 //        foreach ($request->ha_ten as $index => $file) {

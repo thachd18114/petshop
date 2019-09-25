@@ -25,6 +25,7 @@
                     <th>Tuổi</th>
                     <th>Giới tính</th>
                     <th>Cân nặng</th>
+                    <th>Nguồn gốc</th>
                     <th>Trạng Thái Tiêm Chủng</th>
                     <th>Trạng Thái</th>
                     <th style="text-align: center;width: 12%">
@@ -40,6 +41,7 @@
                     <td><% tc.tc_tuoi %></td>
                     <td><% tc.tc_gioiTinh %></td>
                     <td><% tc.tc_canNang %></td>
+                    <td><% tc.ng_ten %></td>
                     <td><% tc.tc_trangThaiTiemChung %></td>
                     <td><% tc.tc_trangThai %></td>
 
@@ -122,11 +124,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="ng_id" class="col-sm-2 control-label">Nguồn gốc </label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control select2" style="width: 100%"  ng-model="ThuCung.ng_id">
+                                                <option value="0" ng-value="0">Chọn nguồn gốc</option>
+                                                <option ng-repeat="ng in listnguongoc " value="<% ng.ng_id %>" ng-value="<% ng.ng_id %>"><% ng.ng_ten %></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="tc_giaBan" class="col-sm-2 control-label">Giá bán</label>
                                         <div class="col-sm-10">
                                             <input type="text"  class="form-control" id="tc_giaBan" name="tc_giaBan" placeholder="Nhập giá" ng-model="ThuCung.tc_giaBan">
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label">Tiêm chủng</label>
                                         <div class="col-sm-10">
