@@ -59,12 +59,43 @@
                             <h4 class="modal-title"><% modalTitle %></h4>
                         </div>
                         <div class="modal-body">
-                            <form name="frmLoaiThuCung" class="form-horizontal">
+                            <form name="frmDonHang" class="form-horizontal">
                                 <div class="container-fluid">
                                     <div class="form-group">
-                                        <label for="ltc_ten" class="col-sm-2 control-label">Tên loại</label>
+                                        <label for="dh_nguoiNhan" class="col-sm-2 control-label">Người nhận</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="ltc_ten" name="ltc_ten" placeholder="Tên loại thú cưng" ng-model="LoaiThuCung.ltc_ten">
+                                            <input type="text"  class="form-control" id="dh_nguoiNhan" name="dh_nguoiNhan" placeholder="Người nhận" ng-model="DonHang.dh_nguoiNhan">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dh_diaChi" class="col-sm-2 control-label">Địa chỉ</label>
+                                        <div class="col-sm-10">
+                                            <input type="text"  class="form-control" id="dh_diaChi" name="dh_diaChi" placeholder="Địa chỉ" ng-model="DonHang.dh_diaChi">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dh_dienThoai" class="col-sm-2 control-label">Điện thoại</label>
+                                        <div class="col-sm-10">
+                                            <input type="text"  class="form-control" id="dh_dienThoai" name="dh_dienThoai" placeholder="Điện thoại" ng-model="DonHang.dh_dienThoai">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="g_id" class="col-sm-2 control-label">Hình thức thanh toán</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control select2" style="width: 100%"  ng-model="DonHang.httt_id">
+                                                <option value="0" ng-value="0">Chọn cách thanh toán</option>
+                                                <option ng-repeat="tt in listhttt " value="<% tt.httt_id %>" ng-value="<% tt.httt_id %>"><% tt.httt_ten %></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="g_id" class="col-sm-2 control-label">Khách hàng </label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control select2" style="width: 100%"  ng-model="DonHang.kh_id">
+                                                <option value="0" ng-value="0">Chọn giống</option>
+                                                <option ng-repeat="kh in listkhachhang " value="<% kh.kh_id %>" ng-value="<% kh.kh_id %>"><% kh.kh_hoTen %></option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -85,5 +116,5 @@
     </div>
 @endsection
 @section('custom-js')
-    <script src="{{ asset('app/controller/LoaiThuCungController.js') }}"></script>
+    <script src="{{ asset('app/controller/DonHangController.js') }}"></script>
 @endsection

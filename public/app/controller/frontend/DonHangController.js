@@ -10,7 +10,7 @@ app.controller('DonHangController', function($scope, $http,MainURL, ngCart) {
                 "httt_id": $scope.orderForm.httt_id.$viewValue,
             };
 
-
+             var dataCart = ngCart.getCart();
 
             var dataInputOrderForm = {
                 "donhang": dataInputOrderForm_DatHang,
@@ -23,6 +23,7 @@ app.controller('DonHangController', function($scope, $http,MainURL, ngCart) {
                 method: "POST",
                 data: JSON.stringify(dataInputOrderForm)
             }).then(function successCallback(response) {
+                $scope.ngCart.empty();
                 swal('Đơn hàng hoàn tất!', 'Xin cám ơn Quý khách!', 'success');
                 // if (response.data.redirectUrl) {
                 //     location.href = response.data.redirectUrl;

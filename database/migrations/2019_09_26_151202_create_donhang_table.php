@@ -21,9 +21,12 @@ class CreateDonhangTable extends Migration
             $table->string('dh_diaChi', 100);
             $table->string('dh_dienThoai', 100);
             $table->unsignedInteger('httt_id');
+            $table->unsignedInteger('ttdh_id');
 
             $table->foreign('kh_id')->references('kh_id')->on('khachhang')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('httt_id')->references('httt_id')->on('hinhthucthanhtoan')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('ttdh_id')->references('ttdh_id')->on('trangthaidonhang')->onDelete('CASCADE')->onUpdate('CASCADE');
+
         });
     }
 

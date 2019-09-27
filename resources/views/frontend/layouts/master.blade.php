@@ -55,7 +55,7 @@
         background-color: rgba(255, 100, 23, 0.88);
     }
 </style>
-<body class="animsition">
+<body class="animsition" >
 
 <!-- Header -->
 @include('frontend.layouts.partials.header')
@@ -105,5 +105,26 @@
 <script src="{{ asset('vendor/ngCart/dist/ngCart.js') }}"></script>
 <script src="{{asset('app/app.js')}}"></script>
 @yield('custom-scripts')
+@section('custom-scripts')
+    <script>
+        app.controller ('summary', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
+            ngCart.setShipping(0);
+
+            angular.forEach(ngCart.getCart().items, function(value, key) {
+                angular.forEach(ngCart.getCart().items, function (value, key) {
+                    $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
+                        $scope.thucung = response.data;
+                        if($scope.thucung){
+                            value.setPrice($scope.thucung.tc_giaBan);
+                            value.setName($scope.thucung.tc_ten);
+                            // value.setData($scope.thucung.tc_giaBan);
+                        }
+                    });
+                });
+                // console.log();
+            });
+        }]);
+    </script>
+@endsection
 </body>
 </html>

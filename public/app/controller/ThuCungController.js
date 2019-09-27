@@ -63,8 +63,11 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
                     tc_moTa : "",
                     tc_mauSac : "",
                     ng_id: 0,
+                    tc_gioiTinh : 1,
+                    tc_trangThaiTiemChung : 1,
                     tc_giaBan : "",
-                    tc_trangThai : "",
+                    tc_ngaySinh : "",
+                    tc_trangThai : 1,
                     g_id : 0,
                 }
                 $("#ha_ten").fileinput({
@@ -120,7 +123,8 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
         }
         $scope.name = $scope.FileDetails();
         $scope.ThuCung['ha_ten']= $scope.name;
-         // $scope.ThuCung['tc_moTa'] = $sce.trustAsHtml($scope.ThuCung['tc_moTa']);
+         $scope.ThuCung['tc_ngaySinh'] = $("#tc_ngaySinh").val();
+        //   $scope.ThuCung['tc_moTa'] = $sce.trustAsHtml($scope.ThuCung['tc_moTa']);
         console.log($scope.ThuCung);
 
         switch(state){
@@ -166,7 +170,6 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
         }
     };
     $("#frmThuCung").on("submit", function(event){
-        event.preventDefault();
         switch($scope.state){
             case "create":
                 $.ajax({

@@ -10,7 +10,7 @@
 @endsection
 {{-- Thay thế nội dung vào Placeholder `main-content` của view `frontend.layouts.master` --}}
 @section('main-content')
-    <div class="container" style="text-align: center">
+    <div class="container" style="text-align: center" ng-controller="dangnhap">
         <div class="col-md-5" style="margin: auto;">
             <section class="login_content">
                 <h1 style="padding: 25px 0">Đăng nhập</h1>
@@ -48,4 +48,25 @@
 @endsection
 {{-- Thay thế nội dung vào Placeholder `custom-scripts` của view `frontend.layouts.master` --}}
 @section('custom-scripts')
+    <script>
+        app.controller ('dangnhap', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
+            ngCart.setShipping(0);
+
+            angular.forEach(ngCart.getCart().items, function(value, key) {
+                angular.forEach(ngCart.getCart().items, function (value, key) {
+                    $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
+                        $scope.thucung = response.data;
+                        if($scope.thucung.length >0 || $scope.thucung.tc_trangThai ===1){
+                            value.setPrice($scope.thucung.tc_giaBan);
+                            value.setName($scope.thucung.tc_ten);
+                            // value.setData($scope.thucung.tc_giaBan);
+                        }else {
+                            ngCart.removeItemById(value.getId());
+                        }
+                    });
+                });
+                // console.log();
+            });
+        }]);
+    </script>
 @endsection

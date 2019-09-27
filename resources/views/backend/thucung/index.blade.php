@@ -93,7 +93,7 @@
                                     <div class="form-group">
                                         <label for="tc_ngaySinh" class="col-sm-2 control-label">Ngày sinh</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="tc_ngaySinh" name="tc_ngaySinh" placeholder="Ngày sinh" ng-model="ThuCung.tc_ngaySinh">
+                                            <input type="date"  class="form-control" id="tc_ngaySinh" name="tc_ngaySinh" placeholder="Ngày sinh" ng-model="ThuCung.tc_ngaySinh">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -108,7 +108,6 @@
                                                     <input  type="radio" name="tc_gioiTinh"  ng-value="2" ng-model="ThuCung.tc_gioiTinh"  class="" >
                                                     &nbsp;&nbsp;Cái
                                                 </label>
-                                            </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -143,7 +142,7 @@
                                         <label for="" class="col-sm-2 control-label">Tiêm chủng</label>
                                         <div class="col-sm-10">
                                             <label>
-                                                <input type="radio"  name="tc_trangThaiTiemChung"  ng-value="1" ng-model="ThuCung.tc_trangThaiTiemChung" class="">
+                                                <input type="radio"  name="tc_trangThaiTiemChung"  ng-value="1" ng-model="ThuCung.tc_trangThaiTiemChung">
                                                 &nbsp;&nbsp;Đã tiêm chủng
                                             </label>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -167,6 +166,20 @@
                                             <textarea ckeditor="options" name="tc_moTa" ng-model="ThuCung.tc_moTa"></textarea>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="tc_trangThai" class="col-sm-2 control-label">Trạng thái </label>
+                                        <div class="col-sm-10">
+                                            <label>
+                                                <input  type="radio"  name="tc_trangThai"  ng-value="1" ng-model="ThuCung.tc_trangThai" >
+                                                &nbsp;&nbsp;Chưa bán
+                                            </label>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <label>
+                                                <input  type="radio" name="tc_trangThai"  ng-value="2" ng-model="ThuCung.tc_trangThai"  class="" >
+                                                &nbsp;&nbsp;Đã bán
+                                            </label>
+                                        </div>
+                                    </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
@@ -182,103 +195,103 @@
         </div>
         <!-- /.box-body -->
     </div>
-            <div class="modal fade" id="Modal-detal" >
-                <div class="modal-dialog">
-                    <div class="modal-content" id="modal-content" >
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Chi tiết thú cưng</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                               <table class="table">
-                                   <tr>
-                                       <th style="width: 15%">ID</th>
-                                       <td><% detail.tc_id%></td>
-                                   </tr>
-                                   <tr>
-                                       <th>Tên</th>
-                                       <td><% detail.tc_ten%></td>
-                                   </tr>
-                                   <tr>
-                                       <th>Giá</th>
-                                       <td><% detail.tc_giaBan%></td>
-                                   </tr>
-                                   <tr>
-                                       <th>Tuổi</th>
-                                       <td><% detail.tc_tuoi%></td>
-                                   </tr>
-                                   <tr>
-                                       <th>Ngày sinh</th>
-                                       <td>11-11-1192</td>
-                                   </tr>
-                                   <tr>
-                                       <th>Giới tính</th>
-                                       <td><% detail.tc_gioiTinh%></td>
-                                   </tr>
-                                   <tr>
-                                       <th>Cân nặng</th>
-                                       <td><% detail.tc_canNang%></td>
-                                   </tr>
-                                   <tr>
-                                       <th>Màu sắc</th>
-                                       <td><% detail.tc_mauSac%></td>
-                                   </tr>
-                                   <tr>
-                                       <th>Gióng</th>
-                                       <td><% detail.g_ten%></td>
-                                   </tr>
-                                   <tr>
-                                       <th>Trạng Thái tiêm chủng</th>
-                                       <td><% detail.tc_trangThaiTiemChung%></td>
-                                   </tr>
-                                   <tr>
-                                       <th>Trạng Thái</th>
-                                       <td><% detail.tc_trangThai%></td>
-                                   </tr>
-                                   <tr>
-                                       <th>Mô tả</th>
-                                       <td ng-bind-html="" >{!!"<%  %>" !!}</td>
-                                   </tr>
-                                   <tr>
-                                       <th>Hình ảnh</th>
-                                       <td>
-                                           <div class="container-fluid">
-                                               <div class="col-xs-3">
-                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">
-                                               </div>
-                                               <div class="col-xs-3">
-                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">
+{{--            <div class="modal fade" id="Modal-detal" >--}}
+{{--                <div class="modal-dialog">--}}
+{{--                    <div class="modal-content" id="modal-content" >--}}
+{{--                        <div class="modal-header">--}}
+{{--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                                <span aria-hidden="true">&times;</span></button>--}}
+{{--                            <h4 class="modal-title">Chi tiết thú cưng</h4>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-body">--}}
+{{--                            <div class="container-fluid">--}}
+{{--                               <table class="table">--}}
+{{--                                   <tr>--}}
+{{--                                       <th style="width: 15%">ID</th>--}}
+{{--                                       <td><% detail.tc_id%></td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Tên</th>--}}
+{{--                                       <td><% detail.tc_ten%></td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Giá</th>--}}
+{{--                                       <td><% detail.tc_giaBan%></td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Tuổi</th>--}}
+{{--                                       <td><% detail.tc_tuoi%></td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Ngày sinh</th>--}}
+{{--                                       <td>11-11-1192</td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Giới tính</th>--}}
+{{--                                       <td><% detail.tc_gioiTinh%></td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Cân nặng</th>--}}
+{{--                                       <td><% detail.tc_canNang%></td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Màu sắc</th>--}}
+{{--                                       <td><% detail.tc_mauSac%></td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Gióng</th>--}}
+{{--                                       <td><% detail.g_ten%></td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Trạng Thái tiêm chủng</th>--}}
+{{--                                       <td><% detail.tc_trangThaiTiemChung%></td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Trạng Thái</th>--}}
+{{--                                       <td><% detail.tc_trangThai%></td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Mô tả</th>--}}
+{{--                                       <td ng-bind-html="" >{!!"<%  %>" !!}</td>--}}
+{{--                                   </tr>--}}
+{{--                                   <tr>--}}
+{{--                                       <th>Hình ảnh</th>--}}
+{{--                                       <td>--}}
+{{--                                           <div class="container-fluid">--}}
+{{--                                               <div class="col-xs-3">--}}
+{{--                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">--}}
+{{--                                               </div>--}}
+{{--                                               <div class="col-xs-3">--}}
+{{--                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">--}}
 
-                                               </div>
-                                               <div class="col-xs-3">
-                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">
+{{--                                               </div>--}}
+{{--                                               <div class="col-xs-3">--}}
+{{--                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">--}}
 
-                                               </div>
-                                               <div class="col-xs-3">
-                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">
-                                               </div>
+{{--                                               </div>--}}
+{{--                                               <div class="col-xs-3">--}}
+{{--                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">--}}
+{{--                                               </div>--}}
 
-                                           </div>
-                                       </td>
-                                   </tr>
+{{--                                           </div>--}}
+{{--                                       </td>--}}
+{{--                                   </tr>--}}
 
 
 
-                               </table>
+{{--                               </table>--}}
 
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-footer">--}}
+{{--                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>--}}
 {{--                            <button type="submit" class="btn btn-primary"  ng-click="save(state,id)">Đồng ý</button>--}}
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
+{{--                        </div>--}}
+{{--                        <!-- /.modal-dialog -->--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <!-- /.box-body -->--}}
+{{--            </div>--}}
         </div>
     </div>
 @endsection

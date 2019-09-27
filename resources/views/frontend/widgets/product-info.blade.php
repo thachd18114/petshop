@@ -15,7 +15,7 @@
 			</span>
     </div>
 </div>
-<div class="container">
+<div class="container" ng-controller="customs">
     <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
         <button class="how-pos3 hov3 trans-04 js-hide-modal1">
             <img src="{{ asset('themes/cozastore/images/icons/icon-close.png')}}" alt="CLOSE">
@@ -67,13 +67,13 @@
                     <div class="container" >
                         <div class="flex-w flex-r-m p-b-10" >
                             <div class="size-203" >
-                                 <span class="mtext-106 cl2 product_price" style="" >
+                                 <span class="mtext-106 cl2 product_price" style="" id="gia" >
                                        Giá
                                 </span>
                             </div>
                             <div class="size-204 respon6-next"style="padding-left: 100px">
                                 <span class="mtext-106 cl2 product_price" style="color: #d0011b; font-size: 1.875rem;font-weight: bold" >
-                                       {{$tc->tc_giaBan}}<sup>đ</sup>
+                                       $ {{$tc->tc_giaBan}}
                                 </span>
                             </div>
                         </div>
@@ -467,3 +467,28 @@
         </div>
     </section>
 </div>
+</div>
+@section('custom-scripts')
+    <script>
+        app.controller ('customs', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
+            ngCart.setShipping(0);
+
+            angular.forEach(ngCart.getCart().items, function(value, key) {
+                angular.forEach(ngCart.getCart().items, function (value, key) {
+                    $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
+                        $scope.thucung = response.data;
+                        if($scope.thucung.length >0 || $scope.thucung.tc_trangThai ===1){
+                            value.setPrice($scope.thucung.tc_giaBan);
+                            value.setName($scope.thucung.tc_ten);
+                            // value.setData($scope.thucung.tc_giaBan);
+                        }
+                        else {
+                            ngCart.removeItemById(value.getId());
+                        }
+                    });
+                });
+                // console.log();
+            });
+        }]);
+    </script>
+    @endsection

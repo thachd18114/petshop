@@ -77,6 +77,15 @@ Route::get('/admin/edit_donhang/{id}', 'DonHangController@edit');
 Route::post('/admin/update_donhang/{id}','DonHangController@update');
 Route::get('/admin/delete_donhang/{id}','DonHangController@delete');
 
+//------------------------------Khách Hàng--------------------------------------//
+
+Route::get('/admin/list_khachhang', 'KhachHangController@index');
+Route::get('/admin/khachhang', function (){return view('backend.khachhang.index');})->name('khachhang');
+Route::post('/admin/createkhachhang','KhachHangController@store');
+Route::get('/admin/edit_khachhang/{id}', 'KhachHangController@edit');
+Route::post('/admin/update_khachhang/{id}','KhachHangController@update');
+Route::get('/admin/delete_khachhang/{id}','KhachHangController@delete');
+
 //--------------------------------------------------------------------//
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
 Route::get('/thu-cung', 'Frontend\FrontendController@product')->name('frontend.product');
@@ -87,6 +96,7 @@ Route::get('/gio-hang', 'Frontend\FrontendController@cart')->name('frontend.cart
 
 Route::post('/dat-hang', 'Frontend\FrontendController@order')->name('frontend.order');
 
+Route::get('/chooes-checkout', 'Frontend\FrontendController@choosecheckout')->name('frontend.choosecheckout');
 
 Route::get('/lienhe', function (){
     return view('frontend.pages.contact');

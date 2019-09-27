@@ -10,4 +10,5 @@
     @include('frontend.widgets.product-info', ['tc' => $tc, 'hinhanhlienquan' => $danhsachhinhanhlienquan])
 @endsection
 @section('custom-scripts')
+
 @endsection

@@ -7,7 +7,7 @@
             </h3>
         </div>
 
-        <div class="flex-w flex-sb-m p-b-52">
+        <div class="flex-w flex-sb-m p-b-52" ng-controller="summary">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
                     Tất cả thú cưng
@@ -18,39 +18,6 @@
                         {{ $loaithucung->ltc_ten }}
                     </button>
                 @endforeach
-{{--                <ul class="main-menu">--}}
-{{--                    <li>--}}
-{{--                        <a href="{{ route('frontend.product') }}">Thú cưng</a>--}}
-{{--                                    <ul class="sub-menu">--}}
-{{--                                        <li><a href="index.html">Cho</a></li>--}}
-{{--                                        <li><a href="home-02.html">Meo</a></li>--}}
-{{--                                        <li><a href="home-02.html">Meo</a></li>--}}
-{{--                                        <li><a href="home-03.html">Homepage 3</a></li>--}}
-
-{{--                                    </ul>--}}
-{{--                    </li>--}}
-{{--                    <li>--}}
-{{--                        <a href="{{ route('frontend.product') }}">Thú cưng</a>--}}
-{{--                        <ul class="sub-menu">--}}
-{{--                            <li><a href="index.html">Cho</a></li>--}}
-{{--                            <li><a href="home-02.html">Meo</a></li>--}}
-{{--                            <li><a href="home-02.html">Meo</a></li>--}}
-{{--                           --}}
-
-{{--                        </ul>--}}
-{{--                    </li>--}}
-{{--                    <li>--}}
-{{--                        <a href="{{ route('frontend.product') }}">Thú cưng</a>--}}
-{{--                        <ul class="sub-menu">--}}
-{{--                            <li><a href="index.html">Cho</a></li>--}}
-{{--                            <li><a href="home-02.html">Meo</a></li>--}}
-{{--                          --}}
-{{--                            <li><a href="home-03.html">Homepage 3</a></li>--}}
-
-{{--                        </ul>--}}
-{{--                    </li>--}}
-
-{{--                </ul>--}}
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -239,8 +206,8 @@
                                 <a href="{{ route('frontend.productDetail',$sp->tc_id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                     <h4 id="tensp" >{{ $sp->tc_ten }}</h4>
                                 </a>
-                                <span class="stext-105 cl3" style="color: #e10c00; font-weight: bold">
-                                    {{ $sp->tc_giaBan }} <sup>đ</sup>
+                                <span class="stext-105 cl3" style="color: #e10c00; font-weight: bold; font-size: large">
+                                    $ {{ $sp->tc_giaBan }}
                             </span>
                             </div>
                         </div>
@@ -261,4 +228,30 @@
     </div>
     </div>
 </section>
+@section('custom-scripts')
+    <script>
+        app.controller ('summary', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
+            ngCart.setShipping(0);
+
+            angular.forEach(ngCart.getCart().items, function(value, key) {
+                angular.forEach(ngCart.getCart().items, function (value, key) {
+                    $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
+                        $scope.thucung = response.data;
+                        if($scope.thucung.length >0 || $scope.thucung.tc_trangThai === 1){
+                            console.log($scope.thucung);
+                            value.setPrice($scope.thucung.tc_giaBan);
+                            value.setName($scope.thucung.tc_ten);
+                             // value.setData($scope.thucung.tc_giaBan);
+                        }
+                        else {
+                            ngCart.removeItemById(value.getId());
+                        }
+                    });
+                });
+                // console.log();
+            });
+        }]);
+    </script>
+@endsection
+
 

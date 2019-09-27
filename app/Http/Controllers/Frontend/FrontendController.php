@@ -12,6 +12,8 @@ use App\ThuCung;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Session;
+
 class FrontendController extends Controller
 {
     public function index(Request $request)
@@ -54,22 +56,35 @@ class FrontendController extends Controller
 
     public function cart(Request $request)
     {
-
-       $hinhthucthanhtoan = HinhThucThanhToan::all();
-        return view('frontend.pages.shopping-cart')
-            ->with('hinhthucthanhtoan',$hinhthucthanhtoan);
+        return view('frontend.pages.shopping-cart');
+    }
+    public function choosecheckout() {
+        $httt = HinhThucThanhToan::all();
+        if(Session::has('tenDangNhap')){
+            return view('frontend.pages.choose-checkout')->with('hinhthucthanhtoan', $httt);
+        }
+        else {
+            return view('frontend.pages.dangnhap');
+        }
 
     }
     public function order(Request $request)
     {
+        if (Session::has('tenDangNhap')) {
+            $taikhoan = Session::get('tenDangNhap');
+            $kh = KhachHang::where('kh_taiKhoan',$taikhoan)->first();
             $donhang = new Donhang();
-            $donhang->kh_id = 1;
+            $donhang->kh_id = $kh->kh_id;
             $donhang->dh_nguoiNhan = $request->donhang['dh_nguoiNhan'];
             $donhang->dh_diaChi = $request->donhang['dh_diaChi'];
             $donhang->dh_dienThoai = $request->donhang['dh_dienThoai'];
             $donhang->httt_id = $request->donhang['httt_id'];
+            $donhang->ttdh_id = 1;
             $donhang->save();
-
+        }
+        else {
+            return view('frontend.pages.dangnhap');
+        }
         return response(["error"=>false, "message"=>compact('donhang')], 200);
     }
 

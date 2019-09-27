@@ -45,13 +45,13 @@
                 </a>
             </li>
             <li class="@yield('donhang')">
-                <a href="#">
+                <a href="{{route('donhang')}}">
                     <i class="fas fa-file-invoice-dollar"></i>
                     <span>&nbsp; Đơn hàng</span>
                 </a>
             </li>
             <li class="@yield('khachhang')">
-                <a href="#">
+                <a href="{{route('khachhang')}}">
                     <i class="fas fa-address-card"></i>
                     <span>&nbsp; Khách hàng</span>
                 </a>

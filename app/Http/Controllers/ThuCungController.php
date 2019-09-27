@@ -31,7 +31,7 @@ class ThuCungController extends Controller
         $tc->tc_trangThai = 1;
         $tc->g_id = $request->g_id;
         $tc->ng_id = $request->ng_id;
-        $tc->save();
+       $tc->save();
 
 //        foreach ($request->ha_ten as $index => $file) {
 ////            $file->storeAs('public/photos', $file);
@@ -51,7 +51,7 @@ class ThuCungController extends Controller
             // $files = $request->ha_ten;
             // duyệt từng ảnh và thực hiện lưu
             foreach ($request->ha_ten as $index => $file) {
-                $name = $id.'_'.$index.'_'.$file->getClientOriginalName();
+                $name = $id . '_' . $index . '_' . $file->getClientOriginalName();
                 $file->storeAs('public/photos', $name);
                 // Tạo đối tưọng HinhAnh
                 $hinhAnh = new HinhAnh();
@@ -60,8 +60,7 @@ class ThuCungController extends Controller
                 $hinhAnh->ha_ten = $name;
                 $hinhAnh->save();
             }
-            return response(["error"=>false, "message"=>compact('hinhAnh')], 200);
-
+            return response(["error" => false, "message" => compact('hinhAnh')], 200);
         }
     }
 
@@ -115,13 +114,12 @@ public  function thucung_detail( Request $request, $id) {
         $tc->tc_ngaySinh = $request->tc_ngaySinh;
         $tc->tc_canNang = $request->tc_canNang;
         $tc->tc_gioiTinh = $request->tc_gioiTinh;
-        $tc->tc_gioiTinh = $request->tc_gioiTinh;
         $tc->tc_moTa = $request->tc_moTa;
         $tc->tc_mauSac = $request->tc_mauSac;
         $tc->tc_trangThaiTiemChung = $request->tc_trangThaiTiemChung;
-        $tc->tc_trangThai = 1;
+        $tc->tc_trangThai = $request->tc_trangThai;
         $tc->g_id = $request->g_id;
-        $tc->ng_id = 1;
+        $tc->ng_id = $request->ng_id;
         $tc->save();
 
     }

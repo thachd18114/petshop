@@ -12,14 +12,18 @@ class DonHangController extends Controller
         return response()->json($ds_donhang);
     }
     public function store(Request $request){
-        $ds_donhang = new DonHang();
-        $ds_donhang->dh_ten = $request->dh_ten;
-        $ds_donhang->save();
+        $donhang = new DonHang();
+        $donhang->dh_nguoiNhan = $request->dh_nguoiNhan;
+        $donhang->dh_diaChi = $request->dh_diaChi;
+        $donhang->dh_dienThoai = $request->dh_dienThoai;
+        $donhang->kh_id = $request->kh_id;
+        $donhang->httt_id = $request->httt_id;
+        $donhang->save();
     }
 
     public function edit($id){
-        $ds_donhang  = DonHang::where('dh_id',$id)->first();
-        return response()->json($ds_donhang);
+        $donhang  = DonHang::where('dh_id',$id)->first();
+        return response()->json($donhang);
     }
 
     public function update(Request $request,$id){
@@ -27,7 +31,11 @@ class DonHangController extends Controller
 
         if($donhang)
         {
-            $donhang->dh_ten = $request->dh_ten;
+            $donhang->dh_nguoiNhan = $request->dh_nguoiNhan;
+            $donhang->dh_diaChi = $request->dh_diaChi;
+            $donhang->dh_dienThoai = $request->dh_dienThoai;
+            $donhang->kh_id = $request->kh_id;
+            $donhang->httt_id = $request->httt_id;
             $donhang->save();
         }
         else
