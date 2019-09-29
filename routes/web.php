@@ -24,7 +24,11 @@ Route::get('/dangnhap','DangNhapController@index')->name('dangnhap');
 Route::post('/dangnhap/check','DangNhapController@check')->name('dangnhap.check');
 
 Route::get('/dangky','DangKyController@index')->name('dangky');
+Route::post('/checkUser','DangKyController@checkUser')->name('checkUser');
 Route::post('/dangky/create','DangKyController@store')->name('dangky.store');
+
+Route::get('/dangxuat','DangXuatController@index')->name('logout');
+
 //----------------------------------//
 Route::get('/admin/list_loaithucung', 'LoaiThuCungController@index');
 Route::get('/admin/loaithucung', function (){return view('backend.loaithucung.index');})->name('loaithucung');
@@ -69,9 +73,9 @@ Route::post('/admin/update_thucung/hinhanh/{id}','ThuCungController@update_hinha
 Route::get('/admin/delete_thucung/{id}','ThuCungController@delete');
 
 //-----------------------------------Đơn Hàng----------------------------//
-
 Route::get('/admin/list_donhang', 'DonHangController@index');
 Route::get('/admin/donhang', function (){return view('backend.donhang.index');})->name('donhang');
+Route::get('/admin/chitietdonhang', function (){ return view('backend.donhang.chitietdonhang');});
 Route::post('/admin/createdonhang','DonHangController@store');
 Route::get('/admin/edit_donhang/{id}', 'DonHangController@edit');
 Route::post('/admin/update_donhang/{id}','DonHangController@update');
@@ -86,7 +90,9 @@ Route::get('/admin/edit_khachhang/{id}', 'KhachHangController@edit');
 Route::post('/admin/update_khachhang/{id}','KhachHangController@update');
 Route::get('/admin/delete_khachhang/{id}','KhachHangController@delete');
 
-//--------------------------------------------------------------------//
+//-------------------------------Frontend-------------------------------------//
+
+
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
 Route::get('/thu-cung', 'Frontend\FrontendController@product')->name('frontend.product');
 Route::get('/thu-cung/{id}', 'Frontend\FrontendController@productDetail')->name('frontend.productDetail');

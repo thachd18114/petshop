@@ -35,7 +35,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit"  class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer mb-4"  ng-disabled="orderForm.$invalid && ngCart.getTotalItems() === 0">
+                        <button type="submit" ng-click="modal()"  class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer mb-4" id="modalcheckout"  ng-disabled="orderForm.$invalid && ngCart.getTotalItems() === 0">
                             Thanh toán
                         </button>
                     </div>
@@ -44,15 +44,38 @@
             </form>
         </div>
         </div>
+        <div id="myModal" class="modal fade" role="dialog" style="margin-top: 150px">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content" >
+                    <div class="modal-header">
+                        <div >Thanh toán bằng PayPal <% $scope.tien %></div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+{{--                        <label>Thanh toán bằng PayPal:</label>--}}
+                        <div class="m-t-20" style="text-align: center" id="paypal-button"></div>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 @endsection
 {{-- Thay thế nội dung vào Placeholder `custom-scripts` của view `frontend.layouts.master` --}}
 @section('custom-scripts')
-    <script src="{{ asset('app/controller/frontend/DonHangController.js') }}"></script>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+{{--    <script src="{{ asset('app/controller/frontend/DonHangController.js') }}"></script>--}}
     <script>
-        app.controller ('cart', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
+        app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
             ngCart.setShipping(0);
-
+            $scope.modal = function() {
+                $("#myModal").modal('show');
+            };
             angular.forEach(ngCart.getCart().items, function(value, key) {
                 angular.forEach(ngCart.getCart().items, function (value, key) {
                     $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
@@ -68,6 +91,81 @@
                 });
                 // console.log();
             });
+            var tien = ngCart.totalCost();
+            var dataCart = ngCart.getCart();
+            paypal.Button.render({
+                env: 'sandbox',
+                style: {
+                    color:  'gold',
+                    shape:  'pill',
+                    label:  'pay',
+                    height: 40
+                },
+                funding: {
+                    allowed: [
+                        paypal.FUNDING.CARD,
+                        paypal.FUNDING.CREDIT
+                    ],
+                    disallowed: []
+                },
+
+                client: {
+                    sandbox: 'Ab8TrmGWdj0gBEMT-ScrcED4uZFwv9pbesmu2lex5ey3isdJzOFIrqwuxJh99yLB2EivWaa1y0lMzC6Y',
+                    production: ''
+                },
+
+
+                // Set up a payment
+                payment: function(data, actions) {
+
+                    return actions.payment.create({
+                        transactions: [{
+                            amount: {
+                                total: tien,
+                                currency: 'USD',
+                                details: {
+                                    subtotal: tien,
+                                }
+                            },
+                            description: 'The payment transaction description.',
+                            custom: '90048630024435',
+                            payment_options: {
+                                allowed_payment_method: 'INSTANT_FUNDING_SOURCE'
+                            },
+                            soft_descriptor: 'ECHI5786786',
+                            item_list: {
+                                items: [
+                                    {
+                                        name: 'banhbo',
+                                        quantity: '1',
+                                        price: tien,
+                                        // tax: '0.01',
+                                        // sku: '1',
+                                        currency: 'USD'
+                                    },
+                                ],
+                            },
+
+
+
+                        }],
+                        note_to_payer: 'Contact us for any questions on your order.'
+                    });
+                },
+
+
+
+
+                onAuthorize: function (data, actions) {
+                    return actions.payment.execute()
+                        .then(function () {
+                            window.alert('Thank you for your purchase!');
+
+
+                        });
+                }
+            }, '#paypal-button');
+           alert(tien);
         }]);
     </script>
 @endsection

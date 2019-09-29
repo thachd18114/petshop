@@ -20,6 +20,8 @@ class CreateDonhangTable extends Migration
             $table->string('dh_nguoiNhan', 100);
             $table->string('dh_diaChi', 100);
             $table->string('dh_dienThoai', 100);
+            $table->timestamp('dh_ngayTao')->default(DB::raw('CURRENT_TIMESTAMP'));
+
             $table->unsignedInteger('httt_id');
             $table->unsignedInteger('ttdh_id');
 

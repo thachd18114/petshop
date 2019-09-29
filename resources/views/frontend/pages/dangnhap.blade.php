@@ -14,7 +14,7 @@
         <div class="col-md-5" style="margin: auto;">
             <section class="login_content">
                 <h1 style="padding: 25px 0">Đăng nhập</h1>
-                <form method="post" action="{{ route('dangnhap.check') }}">
+                <form method="post" name="frmdanhnhap" action="{{ route('dangnhap.check') }}">
                     {{ csrf_field() }}
                     <div style="padding: 15px 0">
                         <input type="text" name="kh_taiKhoan" class="form-control" placeholder="Username" required="" />
@@ -22,6 +22,11 @@
                     <div>
                         <input type="password"  name="kh_matKhau" class="form-control" placeholder="Password" required="" />
                     </div>
+                    @if(session()->has('error'))
+                        <div style="color: red; padding-top: 15px">
+                            {{ session()->get('error') }}
+                        </div>
+                    @endif
                     <div style="padding: 10px">
                         <button class="btn btn-danger">Đăng nhập</button>
 
@@ -48,6 +53,7 @@
 @endsection
 {{-- Thay thế nội dung vào Placeholder `custom-scripts` của view `frontend.layouts.master` --}}
 @section('custom-scripts')
+
     <script>
         app.controller ('dangnhap', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
             ngCart.setShipping(0);
@@ -69,4 +75,5 @@
             });
         }]);
     </script>
+
 @endsection

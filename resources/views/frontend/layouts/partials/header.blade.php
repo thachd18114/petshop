@@ -12,8 +12,13 @@
                         Help & FAQs
                     </a>
                     @if(session('tenDangNhap'))
-                    <a href="{{route('dangnhap')}}" class="flex-c-m trans-04 p-lr-25">
-                        Trang cá nhân
+                        <a href="{{route('dangnhap')}}" class="flex-c-m trans-04 p-lr-25" data-toggle="dropdown">Trang cá nhân
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" style="z-index: 9999; padding-left: 10px">
+                            <li><a href="#" style=" padding-bottom: 5px; font-size: 14px;">Quản lý tài khoản</a></li>
+                            <li><a href="#" style=" padding-bottom: 5px;font-size: 14px">Đơn hàng</a></li>
+                            <li><a href="{{route('logout')}}"  style=" padding-bottom: 5px;font-size: 14px">Đăng xuất</a></li>
+                        </ul>
                     </a>
                     @else
                         <a href="{{route('dangnhap')}}" class="flex-c-m trans-04 p-lr-25">

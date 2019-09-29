@@ -30,6 +30,7 @@
                     <th style="text-align: center;width: 15%">
                         <button class="btn btn-social-icon btn bg-orange" style="width: 22px; height: 22px;" name="btnReLoad" id="btnReLoad" ng-click="refreshData()"><i class="fas fa-sync-alt" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
                         <button class="btn btn-social-icon btn bg-olive" style="width: 22px; height: 22px;" name="btnAdd" id="btnAdd"   ng-click="modal('create')" > <i class="fas fa-plus" style="font-size: 12px;margin-top: -6px"></i></button>
+
                     </th>
                 </tr>
                 </thead>
@@ -44,6 +45,8 @@
                     <td style="text-align: center">
                         <button class="btn btn-social-icon btn bg-purple" style="width: 22px; height: 22px;" ng-click="modal('edit',dh.dh_id)" ><i class="fas fa-edit" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
                         <button class="btn btn-social-icon btn-danger" style="width: 22px; height: 22px;" ng-click="delConfirm(dh.dh_id)" ><i class="fas fa-trash-alt" style="font-size: 12px;margin-top: -6px"></i></button>
+                        <button class="btn btn-social-icon btn bg-orange" style="width: 22px; height: 22px;" ><i class="fas fa-info" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
+
                     </td>
 
                 </tr>

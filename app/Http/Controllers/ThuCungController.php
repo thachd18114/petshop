@@ -1,21 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\HinhAnh;
 use App\ThuCung;
 use App\Giong;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Storage;
-
 class ThuCungController extends Controller
 {
     public function index () {
         $ds_thucung = ThuCung::join('nguongoc', 'nguongoc.ng_id', '=', 'thucung.ng_id')->get();
         return response()->json($ds_thucung);
     }
-
     public function store(Request $request)
     {
         $tc = new ThuCung();
@@ -31,8 +27,7 @@ class ThuCungController extends Controller
         $tc->tc_trangThai = 1;
         $tc->g_id = $request->g_id;
         $tc->ng_id = $request->ng_id;
-       $tc->save();
-
+        $tc->save();
 //        foreach ($request->ha_ten as $index => $file) {
 ////            $file->storeAs('public/photos', $file);
 //            // Tạo đối tưọng HinhAnh
@@ -43,7 +38,6 @@ class ThuCungController extends Controller
 //            $hinhAnh->ha_ten = $file;
 //            $hinhAnh->save();
 //        }
-
     }
     public function store_hinhanh (Request $request) {
         $id = ThuCung::all()->max('tc_id');
@@ -63,7 +57,6 @@ class ThuCungController extends Controller
             return response(["error" => false, "message" => compact('hinhAnh')], 200);
         }
     }
-
 //    public function store(Request $request)
 //    {
 //        $tc = new ThuCung();
@@ -96,16 +89,15 @@ class ThuCungController extends Controller
 //        }
 //
 //    }
-public  function thucung_detail( Request $request, $id) {
-    $detail = ThuCung::join('giong', 'giong.g_id', '=', 'thucung.g_id')
-      ->where('tc_id', $id)->first();
-    return response()->json($detail);
-}
+    public  function thucung_detail( Request $request, $id) {
+        $detail = ThuCung::join('giong', 'giong.g_id', '=', 'thucung.g_id')
+            ->where('tc_id', $id)->first();
+        return response()->json($detail);
+    }
     public function edit($id){
         $thucung  = ThuCung::where('tc_id',$id)->first();
         return response()->json($thucung);
     }
-
     public function update(Request $request,$id){
         $tc = ThuCung::where('tc_id',$id)->first();
         $tc->tc_ten = $request->tc_ten;
@@ -121,17 +113,14 @@ public  function thucung_detail( Request $request, $id) {
         $tc->g_id = $request->g_id;
         $tc->ng_id = $request->ng_id;
         $tc->save();
-
     }
     public function update_hinhanh (Request $request,$id){
-
         if($request->hasFile('ha_ten')) {
             $ha1 = HinhAnh::where('tc_id',$id)->get();
-
             foreach($ha1 as $hinhanh)
             {
                 // Xóa hình cũ để tránh rác
-               Storage::delete('public/photos/' . $hinhanh->ha_ten);
+                Storage::delete('public/photos/' . $hinhanh->ha_ten);
             }
             $ha = HinhAnh::where('tc_id',$id)->delete();
             foreach ($request->ha_ten as $index => $file) {
@@ -146,9 +135,7 @@ public  function thucung_detail( Request $request, $id) {
             }
             return response(["error"=>false, "message"=>compact('hinhanh')], 200);
         }
-
     }
-
     public function delete($id){
         $thucung = ThuCung::findOrfail($id);
         $thucung->delete();

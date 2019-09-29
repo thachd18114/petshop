@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TrangThaiDonHang extends Controller
+class TrangThaiDonHangController extends Controller
 {
     //
 }
