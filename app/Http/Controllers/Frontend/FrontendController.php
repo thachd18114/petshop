@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\ChiTietDonHang;
 use App\DonHang;
 use App\Giong;
 use App\HinhAnh;
@@ -81,6 +82,26 @@ class FrontendController extends Controller
             $donhang->httt_id = $request->donhang['httt_id'];
             $donhang->ttdh_id = 1;
             $donhang->save();
+
+            foreach($request->giohang['items'] as $sp)
+            {
+                $chitietdonhang = new ChiTietDonHang();
+                $chitietdonhang->dh_id = $donhang->dh_id;
+                $chitietdonhang->tc_id = $sp['_id'];
+                $chitietdonhang->save();
+
+                $thucung = ThuCung::find($sp['_id']);
+                if($thucung->tc_trangThai == 2){
+                    response('error', 'san pham co the da duoc mua');
+                }
+                else{
+                    $thucung ->tc_trangThai = 2;
+                }
+
+        }
+
+
+
         }
         else {
             return view('frontend.pages.dangnhap');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ChiTietDonHang;
 use App\DonHang;
 use Illuminate\Http\Request;
 
@@ -10,6 +11,12 @@ class DonHangController extends Controller
     public function index () {
         $ds_donhang = DonHang::all();
         return response()->json($ds_donhang);
+    }
+    public function chitietdonhang ($id)
+    {
+        $chitiet = ChiTietDonHang::join('thucung', 'thucung.tc_id', '=', 'chitietdonhang.tc_id')
+            ->join('giong', 'giong.g_id', '=', 'thucung.g_id')->select('giong.g_ten','thucung.tc_id', 'thucung.tc_ten', 'thucung.tc_giaBan', 'thucung.g_id')->where('chitietdonhang.dh_id', $id)->get();
+        return response()->json($chitiet);
     }
     public function store(Request $request){
         $donhang = new DonHang();

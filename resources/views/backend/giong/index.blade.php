@@ -56,7 +56,9 @@
                                     <div class="form-group">
                                         <label for="g_ten" class="col-sm-2 control-label">Tên loại</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="g_ten" name="g_ten" placeholder="Tên loại giống" ng-model="Giong.g_ten">
+                                            <input type="text"  class="form-control" id="g_ten" name="g_ten" placeholder="Tên loại giống" ng-model="Giong.g_ten" ng-required="true">
+                                            <span class="error" ng-show="frmGiong.g_ten.$error.required">Vui lòng nhập giống!</span>
+
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -66,6 +68,7 @@
                                                 <option value="0" ng-value="0">Chọn loại thú cưng</option>
                                                 <option ng-repeat="ltc in listloaithucung " value="<% ltc.ltc_id %>" ng-value="<% ltc.ltc_id %>"><% ltc.ltc_ten %></option>
                                             </select>
+                                            <span class="error" ng-if="Giong.ltc_id == 0">Bạn chưa chọn loại thú cưng!</span>
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +76,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" ng-click="save(state,id)"><% modalButton %></button>
+                            <button type="button" class="btn btn-primary" ng-disabled="frmGiong.$invalid" ng-click="save(state,id)"><% modalButton %></button>
                         </div>
                     </div>
                     <!-- /.modal-content -->

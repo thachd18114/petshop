@@ -12,6 +12,9 @@
 @section('loaithucung')
     active
 @endsection
+@section('custom-css')
+
+@endsection
 @section('content')
 
 
@@ -56,7 +59,8 @@
                                 <div class="form-group">
                                     <label for="ltc_ten" class="col-sm-2 control-label">Tên loại</label>
                                     <div class="col-sm-10">
-                                        <input type="text"  class="form-control" id="ltc_ten" name="ltc_ten" placeholder="Tên loại thú cưng" ng-model="LoaiThuCung.ltc_ten">
+                                        <input type="text"  class="form-control" id="ltc_ten" name="ltc_ten" placeholder="Tên loại thú cưng" ng-model="LoaiThuCung.ltc_ten" ng-required="true">
+                                        <span class="error" ng-show="frmLoaiThuCung.ltc_ten.$error.required">Vui lòng nhập loại thú cưng!</span>
                                     </div>
                                 </div>
 
@@ -65,7 +69,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" ng-click="save(state,id)"><% modalButton %></button>
+                        <button type="button" class="btn btn-primary"  ng-disabled="frmLoaiThuCung.$invalid" ng-click="save(state,id)"><% modalButton %></button>
                     </div>
                 </div>
                 <!-- /.modal-content -->

@@ -75,7 +75,7 @@ Route::get('/admin/delete_thucung/{id}','ThuCungController@delete');
 //-----------------------------------Đơn Hàng----------------------------//
 Route::get('/admin/list_donhang', 'DonHangController@index');
 Route::get('/admin/donhang', function (){return view('backend.donhang.index');})->name('donhang');
-Route::get('/admin/chitietdonhang', function (){ return view('backend.donhang.chitietdonhang');});
+Route::get('/admin/chitietdonhang/{id}', 'DonHangController@chitietdonhang')->name('chitietdonhang');
 Route::post('/admin/createdonhang','DonHangController@store');
 Route::get('/admin/edit_donhang/{id}', 'DonHangController@edit');
 Route::post('/admin/update_donhang/{id}','DonHangController@update');

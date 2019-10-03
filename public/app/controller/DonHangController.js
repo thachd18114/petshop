@@ -7,11 +7,24 @@ b.controller('DonHangController', function ($scope,$http,MainURL,DTOptionsBuilde
             $scope.listhttt = response.data;
         });
     };
+
     $scope.khachhang = function(){
         $http.get(MainURL + 'list_khachhang').then(function(response){
             $scope.listkhachhang = response.data;
         });
     };
+
+    $scope.ctdonhang = function(id){
+        $http.get(MainURL + 'edit_donhang/'+id).then(function(response){
+            $scope.donhang = response.data;
+        });
+    };
+    $scope.ctkhachhang = function(id){
+        $http.get(MainURL + 'edit_khachhang/'+id).then(function(response){
+            $scope.khachhang1 = response.data;
+        });
+    };
+
     $scope.refreshData = function(){
         $scope.isLoading = true;
         $http.get(MainURL + 'list_donhang').then(function(response){
@@ -20,6 +33,19 @@ b.controller('DonHangController', function ($scope,$http,MainURL,DTOptionsBuilde
         });
     };
     $scope.refreshData();
+
+    $scope.detail = function(id, kh){
+        $scope.ctdonhang(id);
+        $scope.ctkhachhang(kh);
+        $scope.modalTitle = "Chi tiết đơn hàng ";
+        $http.get(MainURL + 'chitietdonhang/'+id).then(function(response){
+            $scope.chitiet = response.data;
+            $scope.isLoading = false;
+        });
+        $("#Modal1").modal('show');
+    }
+
+
     $scope.modal = function (state, id) {
         $scope.hinhthucthanhtoan();
         $scope.khachhang();

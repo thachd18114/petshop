@@ -24,7 +24,7 @@ class ThuCungController extends Controller
         $tc->tc_moTa = $request->tc_moTa;
         $tc->tc_mauSac = $request->tc_mauSac;
         $tc->tc_trangThaiTiemChung = $request->tc_trangThaiTiemChung;
-        $tc->tc_trangThai = 1;
+        $tc->tc_trangThai = $request->tc_trangThai;
         $tc->g_id = $request->g_id;
         $tc->ng_id = $request->ng_id;
         $tc->save();

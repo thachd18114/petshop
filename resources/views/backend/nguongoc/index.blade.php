@@ -51,12 +51,13 @@
                             <h4 class="modal-title"><% modalTitle %></h4>
                         </div>
                         <div class="modal-body">
-                            <form name="frmLoaiThuCung" class="form-horizontal">
+                            <form name="frmNguonGoc" class="form-horizontal">
                                 <div class="container-fluid">
                                     <div class="form-group">
-                                        <label for="ng_ten" class="col-sm-2 control-label">Tên loại</label>
+                                        <label for="ng_ten" class="col-sm-2 control-label">Nguồn gốc</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="ng_ten" name="ltc_ten" placeholder="Tên loại thú cưng" ng-model="NguonGoc.ng_ten">
+                                            <input type="text"  class="form-control" id="ng_ten" name="ng_ten"  placeholder="Nguồn gốc" ng-model="NguonGoc.ng_ten" ng-required="true">
+                                            <span class="error" ng-show="frmNguonGoc.ng_ten.$error.required">Vui lòng nhập nguồn gốc!</span>
                                         </div>
                                     </div>
 
@@ -65,7 +66,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" ng-click="save(state,id)"><% modalButton %></button>
+                            <button type="button" class="btn btn-primary" ng-disabled="frmNguonGoc.$invalid" ng-click="save(state,id)"><% modalButton %></button>
                         </div>
                     </div>
                     <!-- /.modal-content -->

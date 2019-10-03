@@ -303,5 +303,5 @@
 @section('custom-js')
     <script src="{{ asset('vendor/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
     <script src="{{ asset('app/controller/ThuCungController.js') }}"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
+{{--    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>--}}
 @endsection

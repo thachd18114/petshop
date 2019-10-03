@@ -92,7 +92,15 @@
                 // console.log();
             });
             var tien = ngCart.totalCost();
-            var dataCart = ngCart.getCart();
+            var dataCart = ngCart.getCart().items;
+            var diachi = $('#dh_diaChi').val();
+            var nguoinhan = $('#dh_nguoiNhan').val();
+            var dienthoai = $('#dh_dienThoai').val();
+            var item = [];
+            angular.forEach(dataCart, function(value){
+               var newArr = {'name' : value.getName(), 'price' : value.getPrice(),'quality' : value.getQuantity(), 'tax' : 0}
+                   item.push(newArr);
+            });
             paypal.Button.render({
                 env: 'sandbox',
                 style: {
@@ -132,22 +140,18 @@
                             payment_options: {
                                 allowed_payment_method: 'INSTANT_FUNDING_SOURCE'
                             },
-                            soft_descriptor: 'ECHI5786786',
+                            //soft_descriptor: 'ECHI5786786',
                             item_list: {
                                 items: [
                                     {
-                                        name: 'banhbo',
+                                        name: 'Thanh toán Paypal từ PETSHOP',
                                         quantity: '1',
                                         price: tien,
-                                        // tax: '0.01',
-                                        // sku: '1',
                                         currency: 'USD'
                                     },
                                 ],
-                            },
 
-
-
+                            }
                         }],
                         note_to_payer: 'Contact us for any questions on your order.'
                     });
@@ -159,13 +163,42 @@
                 onAuthorize: function (data, actions) {
                     return actions.payment.execute()
                         .then(function () {
-                            window.alert('Thank you for your purchase!');
+                            $scope.ngCart = ngCart;
+                            var dataInputOrderForm_DatHang = {
 
+                                "dh_nguoiNhan": $scope.orderForm.dh_nguoiNhan.$viewValue,
+                                "dh_diaChi": $scope.orderForm.dh_diaChi.$viewValue,
+                                "dh_dienThoai": $scope.orderForm.dh_dienThoai.$viewValue,
+                                "httt_id": $scope.orderForm.httt_id.$viewValue,
+                            };
 
+                            var dataCart = ngCart.getCart();
+
+                            var dataInputOrderForm = {
+                                "donhang": dataInputOrderForm_DatHang,
+                                "giohang": dataCart,
+                                // "_token": "{{ csrf_token() }}",
+                            };
+
+                            $http({
+                                url: MainURL + 'dat-hang',
+                                method: "POST",
+                                data: JSON.stringify(dataInputOrderForm)
+                            }).then(function successCallback(response) {
+                                $scope.ngCart.empty();
+                                swal('Đơn hàng hoàn tất!', 'Xin cám ơn Quý khách!', 'success');
+                                // if (response.data.redirectUrl) {
+                                //     location.href = response.data.redirectUrl;
+                                // }
+                            }, function errorCallback(response) {
+                                swal('Có lỗi trong quá trình thực hiện Đơn hàng!', 'Vui lòng thử lại sau vài phút.', 'error');
+                                window.location.reload();
+                                console.log(response);
+                            });
                         });
                 }
             }, '#paypal-button');
-           alert(tien);
+            console.log(item);
         }]);
     </script>
 @endsection
