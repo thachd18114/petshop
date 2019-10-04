@@ -2,7 +2,7 @@
 @extends('frontend.layouts.master')
 {{-- Thay thế nội dung vào Placeholder `title` của view `frontend.layouts.master` --}}
 @section('title')
-    Đăng nhập
+    Đăng Ký
 @endsection
 {{-- Thay thế nội dung vào Placeholder `custom-css` của view `frontend.layouts.master` --}}
 @section('custom-css')
@@ -24,11 +24,6 @@
                     <div style="padding-bottom: 15px">
                         <input type="text" name="kh_taiKhoan" id="kh_taiKhoan" class="form-control" placeholder="Tên đăng nhập"  />
                     </div>
-                    @if(session()->has('error'))
-                        <div style="color: red; padding-top: 15px">
-                            {{ session()->get('error') }}
-                        </div>
-                    @endif
                     <div style="padding-bottom: 15px">
                         <input type="password"  name="kh_matKhau" id="kh_matKhau" class="form-control" placeholder="Mật khẩu"  />
                     </div>
@@ -109,6 +104,7 @@
                     kh_taiKhoan:{
                         required: true,
                         maxlength: 16,
+                        remote: "http://localhost/petshop/public/checkUser"
                     },
                     kh_matKhau:{
                         required: true
@@ -144,7 +140,7 @@
                     kh_taiKhoan:{
                         required: 'Vui lòng nhập tên đăng nhập',
                         maxlength: 'Vượt 16 ký tự cho phép',
-                        remote: jQuery.validator.format("Tên đăng nhập đã tồn tại!")
+                        remote: "Tên đăng nhập đã tồn tại!"
                     },
                     kh_matKhau:{
                         required: 'Vui lòng nhập mật khẩu'

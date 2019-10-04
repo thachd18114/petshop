@@ -1,4 +1,4 @@
-b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilder, DTColumnBuilder) {
+b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptionsBuilder, DTColumnBuilder) {
     $scope.options = {
         language: 'en',
         allowedContent: true,
@@ -47,7 +47,6 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
         });
     };
     $scope.refreshData();
-
     $scope.modal = function (state, id) {
         $scope.giong();
         $scope.nguogoc();
@@ -72,6 +71,7 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
                 }
                 $("#ha_ten").fileinput({
                     theme: 'fas',
+                   // minFileCount: 1,
                     showUpload: false,
                     browseClass: "btn btn-primary",
                      fileType: "any",
@@ -84,31 +84,31 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
                 break;
             case 'edit':
                 $scope.id = id;
-                $("#ha_ten").fileinput({
-                    theme: 'fas',
-                    showUpload: false,
-                    browseClass: "btn btn-primary",
-                    fileType: "any",
-                    autoOrientImage: false,
-                    // previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                    // overwriteInitial: false,
-                    // allowedFileExtensions: ["jpg", "gif", "png", "txt"],
-                });
                 $scope.modalTitle = "Cập nhật " + $scope.dataTitle;
                 $scope.modalButton = "Cập nhật";
                 $http.get(MainURL + 'edit_thucung/'+id).then(function(response){
                     $scope.ThuCung = response.data;
+                    $scope.ThuCung['tc_ngaySinh'] = new Date( $scope.ThuCung['tc_ngaySinh']);
+                    // $scope.ThuCung['tc_ngaySinh'] = $filter('date')($scope.ThuCung['tc_ngaySinh'], "dd/MM/yyyy");
+                    $('#tc_ngaySinh').val($scope.ThuCung['tc_ngaySinh']);
+                    console.log($scope.ThuCung['tc_ngaySinh']);
+                    $("#ha_ten").fileinput({
+                        theme: 'fas',
+                        showUpload: false,
+                        browseClass: "btn btn-primary",
+                        fileType: "any",
+                        autoOrientImage: false,
+                        initialPreviewAsData: true,
+                    });
                 });
         }
         $("#Modal").modal('show');
     }
-    $scope.detailmd= function (id) {
-        $http.get(MainURL + 'detail_thucung/'+id).then(function(response){
-            $scope.detail = response.data;
-        });
+    // $scope.hinhanh_thucung = function (id){
+    //     $http.get(MainURL + 'hinhanh_thucung/'+id).then(function(response){
+    //         $scope.ha = response.data;
+    //     });    }
 
-        $("#Modal-detal").modal('show');
-    }
     $scope.save = function (state,id){
         $scope.FileDetails= function () {
             var  name= [];
@@ -123,29 +123,34 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
         }
         $scope.name = $scope.FileDetails();
         $scope.ThuCung['ha_ten']= $scope.name;
-         $scope.ThuCung['tc_ngaySinh'] = $("#tc_ngaySinh").val();
-        //   $scope.ThuCung['tc_moTa'] = $sce.trustAsHtml($scope.ThuCung['tc_moTa']);
-        console.log($scope.ThuCung);
+        // var ngaySinh = new Date($scope.ThuCung.tc_ngaySinh+ "T05:00:00.000Z");
+        $scope.ThuCung['tc_ngaySinh'] = new Date( $scope.ThuCung['tc_ngaySinh']);
+        $scope.ThuCung['tc_ngaySinh'] = $filter('date')($scope.ThuCung['tc_ngaySinh'], "yyyy/MM/dd");
+        console.log($scope.ThuCung['tc_ngaySinh']);
 
         switch(state){
             case 'create':
-                var url = MainURL + "createthucung";
-                var data = $.param($scope.ThuCung);
-                $http({
-                    method : "POST",
-                    url : url,
-                    data : data,
-                    headers : {'Content-type':'application/x-www-form-urlencoded'}
-                }).then(function(){
-                    swal({ title : "",text :"Thêm thành công!",type: "success", },function(isConfirm){
-                        $("#Modal").modal("hide");
-                        $scope.refreshData();
+                if($("#ha_ten").val() != "") {
+                    var url = MainURL + "createthucung";
+                    var data = $.param($scope.ThuCung);
+                    $http({
+                        method: "POST",
+                        url: url,
+                        data: data,
+                        headers: {'Content-type': 'application/x-www-form-urlencoded'}
+                    }).then(function () {
+                        swal({title: "", text: "Thêm thành công!", type: "success",}, function (isConfirm) {
+                            $("#ha_ten").fileinput('clear');
+                            $("#Modal").modal("hide");
+                            $scope.refreshData();
+                        });
+                    }).catch(function () {
+                        swal({title: "", text: "Có lỗi xảy ra!", type: "error",}, function (isConfirm) {
+                            $("#ha_ten").fileinput('clear');
+                            $("#Modal").modal("hide");
+                        });
                     });
-                }).catch(function(){
-                    swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
-                        $("#Modal").modal("hide");
-                    });
-                });
+                }
                 break;
             case 'edit' :
                 var url = MainURL + 'update_thucung/' + id;
@@ -157,11 +162,13 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
                     headers : {'Content-type':'application/x-www-form-urlencoded'}
                 }).then(function(){
                     swal({ title : "",text :"Cập nhật thành công!",type: "success", },function(isConfirm){
+                        $("#ha_ten").fileinput('clear');
                         $("#Modal").modal("hide");
                         $scope.refreshData();
                     });
                 }).catch(function(){
                     swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
+                        $("#ha_ten").fileinput('clear');
                         $("#Modal").modal("hide");
                     });
                 });
@@ -172,33 +179,37 @@ b.controller('ThuCungController', function ($scope,$http,MainURL,DTOptionsBuilde
     $("#frmThuCung").on("submit", function(event){
         switch($scope.state){
             case "create":
-                $.ajax({
-                    url: MainURL + 'createthucung/hinhanh',
-                    method: "POST",
-                    data:new FormData(this),
-                    dataType: 'JSON',
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    success: function(response)
-                    {
-                        console.log(response.message);
-                        swal({ title : "",text :"Thêm thành công!",type: "success", },function(isConfirm){
-                            $("#Modal").modal("hide");
-                            $scope.refreshData();
-                            $("#ha_ten").fileinput('clear');
-                        });
 
-                    },
-                    error: function(response)
-                    {
-                        console.log(response)
-                        swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
-                            $("#Modal").modal("hide");
-                            $("#ha_ten").fileinput('clear');
-                        });
-                    }
-                })
+                if($("#ha_ten").val() != ""){
+                    $.ajax({
+                        url: MainURL + 'createthucung/hinhanh',
+                        method: "POST",
+                        data:new FormData(this),
+                        dataType: 'JSON',
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function(response)
+                        {
+                            console.log(response.message);
+                            swal({ title : "",text :"Thêm thành công!",type: "success", },function(isConfirm){
+                                $("#Modal").modal("hide");
+                                $scope.refreshData();
+                                $("#ha_ten").fileinput('clear');
+                            });
+
+                        },
+                        error: function(response)
+                        {
+                            console.log(response)
+                            swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
+                                $("#Modal").modal("hide");
+                                // $("#ha_ten").fileinput('clear');
+                            });
+                        }
+                    })
+                }
+
                 break;
             case "edit":
                 console.log($scope.id);

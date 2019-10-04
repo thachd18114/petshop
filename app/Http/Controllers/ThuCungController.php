@@ -3,15 +3,18 @@ namespace App\Http\Controllers;
 use App\HinhAnh;
 use App\ThuCung;
 use App\Giong;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Storage;
 class ThuCungController extends Controller
 {
     public function index () {
-        $ds_thucung = ThuCung::join('nguongoc', 'nguongoc.ng_id', '=', 'thucung.ng_id')->get();
+        $ds_thucung = ThuCung::join('nguongoc', 'nguongoc.ng_id', '=', 'thucung.ng_id')
+            ->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')->where('hinhanh.ha_id' ,'=', '1')->get();
         return response()->json($ds_thucung);
     }
+
     public function store(Request $request)
     {
         $tc = new ThuCung();
@@ -89,11 +92,12 @@ class ThuCungController extends Controller
 //        }
 //
 //    }
-    public  function thucung_detail( Request $request, $id) {
-        $detail = ThuCung::join('giong', 'giong.g_id', '=', 'thucung.g_id')
-            ->where('tc_id', $id)->first();
-        return response()->json($detail);
-    }
+//    public  function hinhanh_thucung( Request $request, $id) {
+//        $hinhanh = DB::table('thucung')->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')
+//            ->where('hinhanh.ha_id' ,'=', '1')
+//            ->where('thucung.tc_id', $id)->first();
+//        return response()->json($$hinhanh);
+//    }
     public function edit($id){
         $thucung  = ThuCung::where('tc_id',$id)->first();
         return response()->json($thucung);

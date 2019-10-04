@@ -23,12 +23,13 @@ class DangKyController extends Controller
         return redirect()->route('dangnhap');
     }
     public function checkUser(Request $request){
-        $tk = KhachHang::where('kh_taiKhoan',$request->kh_taiKhoan)->first();
-        if($tk != null){
-            return 'false';
+        $data = $request->all();
+        $tk = KhachHang::where('kh_taiKhoan',$data['kh_taiKhoan'])->count();
+        if($tk > 0){
+           echo 'false';
         }
         else{
-            return 'true';
+            echo 'true';
         }
     }
 }

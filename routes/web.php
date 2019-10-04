@@ -24,7 +24,7 @@ Route::get('/dangnhap','DangNhapController@index')->name('dangnhap');
 Route::post('/dangnhap/check','DangNhapController@check')->name('dangnhap.check');
 
 Route::get('/dangky','DangKyController@index')->name('dangky');
-Route::post('/checkUser','DangKyController@checkUser')->name('checkUser');
+Route::match(['GET', 'POST'],'/checkUser','DangKyController@checkUser')->name('checkUser');
 Route::post('/dangky/create','DangKyController@store')->name('dangky.store');
 
 Route::get('/dangxuat','DangXuatController@index')->name('logout');
@@ -68,9 +68,12 @@ Route::post('/admin/createthucung','ThuCungController@store');
 Route::post('/admin/createthucung/hinhanh','ThuCungController@store_hinhanh');
 Route::get('/admin/detail_thucung/{id}', 'ThuCungController@thucung_detail');
 Route::get('/admin/edit_thucung/{id}', 'ThuCungController@edit');
+Route::get('/admin/edit_thucung/{id}', 'ThuCungController@edit');
 Route::post('/admin/update_thucung/{id}','ThuCungController@update');
 Route::post('/admin/update_thucung/hinhanh/{id}','ThuCungController@update_hinhanh');
 Route::get('/admin/delete_thucung/{id}','ThuCungController@delete');
+Route::get('/admin/hinhanh_thucung/{id}','ThuCungController@hinhanh_thucung');
+
 
 //-----------------------------------Đơn Hàng----------------------------//
 Route::get('/admin/list_donhang', 'DonHangController@index');
@@ -103,6 +106,8 @@ Route::get('/gio-hang', 'Frontend\FrontendController@cart')->name('frontend.cart
 Route::post('/dat-hang', 'Frontend\FrontendController@order')->name('frontend.order');
 
 Route::get('/chooes-checkout', 'Frontend\FrontendController@choosecheckout')->name('frontend.choosecheckout');
+
+Route::get('/account-info', 'Frontend\FrontendController@account')->name('frontend.account');
 
 Route::get('/lienhe', function (){
     return view('frontend.pages.contact');

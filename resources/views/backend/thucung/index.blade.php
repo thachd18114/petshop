@@ -28,6 +28,7 @@
                     <th>Nguồn gốc</th>
                     <th>Trạng Thái Tiêm Chủng</th>
                     <th>Trạng Thái</th>
+                    <th width="16%"></th>
                     <th style="text-align: center;width: 12%">
                         <button class="btn btn-social-icon btn bg-orange" style="width: 22px; height: 22px;" name="btnReLoad" id="btnReLoad" ng-click="refreshData()"><i class="fas fa-sync-alt" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
                         <button class="btn btn-social-icon btn bg-olive" style="width: 22px; height: 22px;" name="btnAdd" id="btnAdd"   ng-click="modal('create')" > <i class="fas fa-plus" style="font-size: 12px;margin-top: -6px"></i></button>
@@ -44,10 +45,11 @@
                     <td><% tc.ng_ten %></td>
                     <td><% tc.tc_trangThaiTiemChung %></td>
                     <td><% tc.tc_trangThai %></td>
-
+                    <td> <img src="{{ asset('storage/photos') }}/<% tc.ha_ten %>" alt="IMG-PRODUCT" width="150px" height="100px"></td>
 
                     <td style="text-align: center">
-                        <button class="btn btn-social-icon btn bg-orange" style="width: 22px; height: 22px;" ng-click="detailmd(tc.tc_id)" ><i class="fas fa-info" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
+{{--                        <button class="btn btn-xs btn-primary btn-detail" ng-click="showDetails('details',tc.tc_id)"><i class="fa fa-eye" aria-hidden="true"></i></button>--}}
+
                         <button class="btn btn-social-icon btn bg-purple" style="width: 22px; height: 22px;" ng-click="modal('edit',tc.tc_id)" ><i class="fas fa-edit" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
                         <button class="btn btn-social-icon btn-danger" style="width: 22px; height: 22px;" ng-click="delConfirm(tc.tc_id)" ><i class="fas fa-trash-alt" style="font-size: 12px;margin-top: -6px"></i></button>
 
@@ -66,13 +68,14 @@
                             <h4 class="modal-title"><% modalTitle %></h4>
                         </div>
                         <div class="modal-body">
-                            <form name="frmThuCung" id="frmThuCung" class="form-horizontal" enctype="multipart/form-data">
+                            <form name="frmThuCung" id="frmThuCung" class="form-horizontal" enctype="multipart/form-data" novalidate>
                                 {{ csrf_field() }}
                                 <div class="container-fluid">
                                     <div class="form-group">
                                         <label for="tc_ten" class="col-sm-2 control-label">Tên </label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="tc_ten" name="tc_ten" placeholder="Tên thú cưng" ng-model="ThuCung.tc_ten">
+                                            <input type="text"  class="form-control" id="tc_ten" name="tc_ten" placeholder="Tên thú cưng" ng-model="ThuCung.tc_ten" ng-required="true">
+                                            <span class="error" ng-show="frmThuCung.tc_ten.$error.required">Vui lòng nhập tên thú cưng!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -82,18 +85,21 @@
                                                 <option value="0" ng-value="0">Chọn giống</option>
                                                 <option ng-repeat="g in listgiong " value="<% g.g_id %>" ng-value="<% g.g_id %>"><% g.g_ten %></option>
                                             </select>
+                                            <span class="error" ng-if="ThuCung.g_id == 0">Bạn chưa chọn giống!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="tc_tuoi" class="col-sm-2 control-label">Tuổi</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="tc_tuoi" name="tc_tuoi" placeholder="Tuổi" ng-model="ThuCung.tc_tuoi">
+                                            <input type="text"  class="form-control" id="tc_tuoi" name="tc_tuoi" placeholder="Tuổi" ng-model="ThuCung.tc_tuoi" ng-required="true">
+                                            <span class="error" ng-show="frmThuCung.tc_tuoi.$error.required">Vui lòng nhập tuổi thú cưng!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="tc_ngaySinh" class="col-sm-2 control-label">Ngày sinh</label>
                                         <div class="col-sm-10">
-                                            <input type="date"  class="form-control" id="tc_ngaySinh" name="tc_ngaySinh" placeholder="Ngày sinh" ng-model="ThuCung.tc_ngaySinh">
+                                            <input type="date"  class="form-control"  id="tc_ngaySinh" name="tc_ngaySinh" ng-model="ThuCung.tc_ngaySinh" ng-required="true">
+                                            <span class="error" ng-show="frmThuCung.tc_ngaySinh.$error.required">Vui lòng nhập ngày sinh thú cưng!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -113,13 +119,15 @@
                                     <div class="form-group">
                                         <label for="tc_canNang" class="col-sm-2 control-label">Cân nặng</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="tc_canNang" name="tc_canNang" placeholder="Cân nặng" ng-model="ThuCung.tc_canNang">
+                                            <input type="text"  class="form-control" id="tc_canNang" name="tc_canNang" placeholder="Cân nặng" ng-model="ThuCung.tc_canNang" ng-required="true">
+                                            <span class="error" ng-show="frmThuCung.tc_canNang.$error.required">Vui lòng nhập cân nặng thú cưng!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="tc_mauSac" class="col-sm-2 control-label">Màu sắc</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="tc_mauSac" name="tc_mauSac" placeholder="Nhập màu" ng-model="ThuCung.tc_mauSac">
+                                            <input type="text"  class="form-control" id="tc_mauSac" name="tc_mauSac" placeholder="Nhập màu" ng-model="ThuCung.tc_mauSac" ng-required="true">
+                                            <span class="error" ng-show="frmThuCung.tc_mauSac.$error.required">Vui lòng nhập màu của thú cưng!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -129,12 +137,14 @@
                                                 <option value="0" ng-value="0">Chọn nguồn gốc</option>
                                                 <option ng-repeat="ng in listnguongoc " value="<% ng.ng_id %>" ng-value="<% ng.ng_id %>"><% ng.ng_ten %></option>
                                             </select>
+                                            <span class="error" ng-if="ThuCung.ng_id == 0">Bạn chưa chọn nguồn gốc!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="tc_giaBan" class="col-sm-2 control-label">Giá bán</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="tc_giaBan" name="tc_giaBan" placeholder="Nhập giá" ng-model="ThuCung.tc_giaBan">
+                                            <input type="text"  class="form-control" id="tc_giaBan" name="tc_giaBan" placeholder="Nhập giá" ng-model="ThuCung.tc_giaBan" ng-required="true">
+                                            <span class="error" ng-show="frmThuCung.tc_giaBan.$error.required">Vui lòng nhập giá của thú cưng!</span>
                                         </div>
                                     </div>
 
@@ -157,13 +167,14 @@
                                         <label for="ha_ten" class="col-sm-2 control-label">Hình ảnh</label>
                                         <div class="col-sm-10">
                                             <input id="ha_ten" type="file" name="ha_ten[]" ng-model="ThuCung.ha_ten" multiple >
+{{--                                            <span class="error" ng-show="frmThuCung.ha_ten.$error.required">Vui lòng thêm hình ảnh!</span>--}}
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="tc_moTa" class="col-sm-2 control-label">Mô tả</label>
                                         <div class="col-sm-10">
-{{--                                             <textarea id="editor1"  name="tc_moTa" rows="10" cols="80" ng-model="ThuCung.tc_moTa"></textarea>--}}
-                                            <textarea ckeditor="options" name="tc_moTa" ng-model="ThuCung.tc_moTa"></textarea>
+                                            <textarea ckeditor="options" name="tc_moTa" ng-model="ThuCung.tc_moTa"  ng-required="true"></textarea>
+                                            <span class="error" ng-show="frmThuCung.tc_moTa.$error.required">Vui lòng nhập mô tả!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -183,7 +194,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary"  ng-click="save(state,id)"><% modalButton %></button>
+                            <button type="submit" class="btn btn-primary" ng-disabled="frmThuCung.$invalid"   ng-click="save(state,id)"><% modalButton %></button>
                         </div>
                                 </div>
                         </form>
@@ -193,105 +204,7 @@
                 <!-- /.modal-dialog -->
             </div>
         </div>
-        <!-- /.box-body -->
-    </div>
-{{--            <div class="modal fade" id="Modal-detal" >--}}
-{{--                <div class="modal-dialog">--}}
-{{--                    <div class="modal-content" id="modal-content" >--}}
-{{--                        <div class="modal-header">--}}
-{{--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                                <span aria-hidden="true">&times;</span></button>--}}
-{{--                            <h4 class="modal-title">Chi tiết thú cưng</h4>--}}
-{{--                        </div>--}}
-{{--                        <div class="modal-body">--}}
-{{--                            <div class="container-fluid">--}}
-{{--                               <table class="table">--}}
-{{--                                   <tr>--}}
-{{--                                       <th style="width: 15%">ID</th>--}}
-{{--                                       <td><% detail.tc_id%></td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Tên</th>--}}
-{{--                                       <td><% detail.tc_ten%></td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Giá</th>--}}
-{{--                                       <td><% detail.tc_giaBan%></td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Tuổi</th>--}}
-{{--                                       <td><% detail.tc_tuoi%></td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Ngày sinh</th>--}}
-{{--                                       <td>11-11-1192</td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Giới tính</th>--}}
-{{--                                       <td><% detail.tc_gioiTinh%></td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Cân nặng</th>--}}
-{{--                                       <td><% detail.tc_canNang%></td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Màu sắc</th>--}}
-{{--                                       <td><% detail.tc_mauSac%></td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Gióng</th>--}}
-{{--                                       <td><% detail.g_ten%></td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Trạng Thái tiêm chủng</th>--}}
-{{--                                       <td><% detail.tc_trangThaiTiemChung%></td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Trạng Thái</th>--}}
-{{--                                       <td><% detail.tc_trangThai%></td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Mô tả</th>--}}
-{{--                                       <td ng-bind-html="" >{!!"<%  %>" !!}</td>--}}
-{{--                                   </tr>--}}
-{{--                                   <tr>--}}
-{{--                                       <th>Hình ảnh</th>--}}
-{{--                                       <td>--}}
-{{--                                           <div class="container-fluid">--}}
-{{--                                               <div class="col-xs-3">--}}
-{{--                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">--}}
-{{--                                               </div>--}}
-{{--                                               <div class="col-xs-3">--}}
-{{--                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">--}}
-
-{{--                                               </div>--}}
-{{--                                               <div class="col-xs-3">--}}
-{{--                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">--}}
-
-{{--                                               </div>--}}
-{{--                                               <div class="col-xs-3">--}}
-{{--                                                   <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" width="80%" height="80%" alt="IMG-PRODUCT">--}}
-{{--                                               </div>--}}
-
-{{--                                           </div>--}}
-{{--                                       </td>--}}
-{{--                                   </tr>--}}
-
-
-
-{{--                               </table>--}}
-
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="modal-footer">--}}
-{{--                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>--}}
-{{--                            <button type="submit" class="btn btn-primary"  ng-click="save(state,id)">Đồng ý</button>--}}
-{{--                        </div>--}}
-{{--                        <!-- /.modal-dialog -->--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <!-- /.box-body -->--}}
-{{--            </div>--}}
+            </div>
         </div>
     </div>
 @endsection
@@ -303,5 +216,5 @@
 @section('custom-js')
     <script src="{{ asset('vendor/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
     <script src="{{ asset('app/controller/ThuCungController.js') }}"></script>
-{{--    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>--}}
+
 @endsection

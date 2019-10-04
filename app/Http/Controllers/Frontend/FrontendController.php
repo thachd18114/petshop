@@ -30,12 +30,8 @@ class FrontendController extends Controller
     public function  product (Request $request) {
         $danhsachthucung = $this->searchThuCung($request);
         $loaithucung = LoaiThuCung::all();
-        $danhsachhinhanh = DB::table('hinhanh')
-            ->whereIn('tc_id', $danhsachthucung->pluck('tc_id')->toArray())
-            ->get();
         return view('frontend.pages.product')
             ->with('danhsachthucung', $danhsachthucung)
-            ->with('danhsachhinhanh', $danhsachhinhanh)
             ->with('loaithucung', $loaithucung);
     }
 
@@ -123,4 +119,10 @@ class FrontendController extends Controller
         $data = $query->get();
         return $data;
     }
+
+    public function account() {
+     //  $tk= KhachHang::all();
+       return view('frontend.pages.account');
+    }
+
 }
