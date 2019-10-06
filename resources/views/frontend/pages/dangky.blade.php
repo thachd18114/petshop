@@ -34,7 +34,13 @@
                         <input type="text"  name="kh_hoTen" class="form-control" placeholder="Họ và tên"  />
                     </div>
                     <div style="padding-bottom: 15px">
-                        <input type="text"  name="kh_ngaySinh" class="form-control" placeholder="Ngày sinh"  />
+                        <input type="date"  name="kh_ngaySinh" class="form-control" placeholder="Ngày sinh"  />
+                    </div>
+                    <div style="padding-bottom: 15px">
+                       <select class="form-control" name="kh_gioiTinh">
+                           <option value="1" select="true">Nam</option>
+                           <option value="2" >Nữ</option>
+                       </select>
                     </div>
                     <div style="padding-bottom: 15px">
                         <input type="text"  name="kh_email" class="form-control" placeholder="Email"  />

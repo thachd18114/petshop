@@ -74,7 +74,45 @@
         app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
             ngCart.setShipping(0);
             $scope.modal = function() {
-                $("#myModal").modal('show');
+                if($('#httt_id').val() == '2') {
+                        // debugger;
+                    $scope.ngCart = ngCart;
+                    var dataInputOrderForm_DatHang = {
+
+                        "dh_nguoiNhan": $scope.orderForm.dh_nguoiNhan.$viewValue,
+                        "dh_diaChi": $scope.orderForm.dh_diaChi.$viewValue,
+                        "dh_dienThoai": $scope.orderForm.dh_dienThoai.$viewValue,
+                        "httt_id": $scope.orderForm.httt_id.$viewValue,
+                    };
+
+                    var dataCart = ngCart.getCart();
+
+                    var dataInputOrderForm = {
+                        "donhang": dataInputOrderForm_DatHang,
+                        "giohang": dataCart,
+                        // "_token": "{{ csrf_token() }}",
+                    };
+
+                    $http({
+                        url: MainURL + 'dat-hang',
+                        method: "POST",
+                        data: JSON.stringify(dataInputOrderForm)
+                    }).then(function successCallback(response) {
+                        $scope.ngCart.empty();
+                        swal('Đơn hàng hoàn tất!', 'Xin cám ơn Quý khách!', 'success');
+                        // if (response.data.redirectUrl) {
+                        //     location.href = response.data.redirectUrl;
+                        // }
+                    }, function errorCallback(response) {
+                        swal('Có lỗi trong quá trình thực hiện Đơn hàng!', 'Vui lòng thử lại sau vài phút.', 'error');
+                        window.location.reload();
+                        console.log(response);
+                    });
+                }
+                else {
+                    $("#myModal").modal('show');
+                }
+
             };
             angular.forEach(ngCart.getCart().items, function(value, key) {
                 angular.forEach(ngCart.getCart().items, function (value, key) {

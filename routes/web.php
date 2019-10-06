@@ -109,6 +109,8 @@ Route::get('/chooes-checkout', 'Frontend\FrontendController@choosecheckout')->na
 
 Route::get('/account-info', 'Frontend\FrontendController@account')->name('frontend.account');
 
+Route::post('/update-account', 'Frontend\FrontendController@update_acount')->name('frontend.update_acount');
+
 Route::get('/lienhe', function (){
     return view('frontend.pages.contact');
 });

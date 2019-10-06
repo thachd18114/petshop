@@ -42,19 +42,19 @@ $('.gallery-lb').each(function() { // the containers for all your galleries
         mainClass: 'mfp-fade'
     });
 });
-$('.js-pscroll').each(function(){
-    $(this).css('position','relative');
-    $(this).css('overflow','hidden');
-    var ps = new PerfectScrollbar(this, {
-        wheelSpeed: 1,
-        scrollingThreshold: 1000,
-        wheelPropagation: false,
-    });
-
-    $(window).on('resize', function(){
-        ps.update();
-    })
-});
+// $('.js-pscroll').each(function(){
+//     $(this).css('position','relative');
+//     $(this).css('overflow','hidden');
+//     var ps = new PerfectScrollbar(this, {
+//         wheelSpeed: 1,
+//         scrollingThreshold: 1000,
+//         wheelPropagation: false,
+//     });
+//
+//     $(window).on('resize', function(){
+//         ps.update();
+//     })
+// });
 $('.parallax100').parallax100();
 $(".js-select2").each(function(){
     $(this).select2({

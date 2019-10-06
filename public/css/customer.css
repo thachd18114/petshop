@@ -6,3 +6,47 @@
     width: 800px;
     margin-left: -100px;
 }
+.top-bar {
+    background-color: #f74877;
+}
+.right-top-bar a {
+    color: white;
+}
+.right-top-bar a:hover {
+    color: #910843;
+}
+
+#dropdown-menu {
+    z-index: 9999;
+    padding-left: 10px;
+}
+#dropdown-menu li a {
+      padding-bottom: 5px;
+      font-size: 14px;
+      color: #f74877 ;
+  }
+#dropdown-menu li a:hover {
+    color: #0b93d5;
+;
+}
+
+
+
+
+#tensp {
+    color: #333;
+}
+#tensp:hover {
+    color: #288ad6;
+}
+.mtext-106 {
+    font-family: "Times New Roman";
+    color: #666666;
+    /*font-weight: bold;*/
+}
+#addtocard .bg1 {
+    background-color: #f74877 ;
+}
+#addtocard .bg1:hover {
+    background-color: rgba(191, 7, 88, 0.88);
+}

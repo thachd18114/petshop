@@ -33,28 +33,10 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/cozastore/css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/cozastore/css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/customer.css') }}">
 @yield('custom-css')
     <!--===============================================================================================-->
 </head>
-<style>
-    #tensp {
-        color: #333;
-    }
-    #tensp:hover {
-        color: #288ad6;
-    }
-    .mtext-106 {
-        font-family: "Times New Roman";
-        color: #666666;
-        /*font-weight: bold;*/
-    }
-    #addtocard .bg1 {
-        background-color: #ff4a16;
-    }
-    #addtocard .bg1:hover {
-        background-color: rgba(255, 100, 23, 0.88);
-    }
-</style>
 <body class="animsition" >
 
 <!-- Header -->

@@ -13,7 +13,7 @@ class DangKyController extends Controller
     public function store (Request $request) {
         $kh = new KhachHang();
         $kh->kh_taiKhoan = $request->kh_taiKhoan;
-        $kh->kh_matKhau = $request->kh_matKhau;
+        $kh->kh_matKhau = md5($request->kh_matKhau);
         $kh->kh_hoTen = $request->kh_hoTen;
         $kh->kh_ngaySinh = $request->kh_ngaySinh;
         $kh->kh_email = $request->kh_email;

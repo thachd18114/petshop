@@ -261,207 +261,37 @@
             <!-- Slide2 -->
             <div class="wrap-slick2">
                 <div class="slick2">
+                    @foreach($lienquan as $lq)
                     <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-pic hov-img0">
-                                <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
+                                @if(substr($lq->ha_ten, strlen($lq->ha_ten)- 3) == 'mp4')
+                                    <img src="{{ asset('img/film-and-vid.jpg') }}" alt="IMG-PRODUCT">
+                                @else
 
-                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Quick View
+                                    <img src="{{ asset('storage/photos/' . $lq->ha_ten) }}" alt="IMG-PRODUCT" width="100%" height="180px">
+                                @endif
+                                <a href="{{ route('frontend.productDetail',$lq->tc_id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                                    Chi tiết
                                 </a>
+
                             </div>
 
                             <div class="block2-txt flex-w flex-t p-t-14">
                                 <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        Esprit Ruffle Shirt
+                                    <a href="{{ route('frontend.productDetail',$lq->tc_id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                        <h4 id="tensp" >{{ $lq->tc_ten }}</h4>
                                     </a>
-
-                                    <span class="stext-105 cl3">
-										$16.64
-									</span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-pic hov-img0">
-                                <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
-
-                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Quick View
-                                </a>
-                            </div>
-
-                            <div class="block2-txt flex-w flex-t p-t-14">
-                                <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        Herschel supply
-                                    </a>
-
-                                    <span class="stext-105 cl3">
-										$35.31
-									</span>
+                                    <span class="stext-105 cl3" style="color: #e10c00; font-weight: bold; font-size: large">
+                                    $ {{ $lq->tc_giaBan }}
+                            </span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
 
-                    <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-pic hov-img0">
-                                <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
-
-                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Quick View
-                                </a>
-                            </div>
-
-                            <div class="block2-txt flex-w flex-t p-t-14">
-                                <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        Only Check Trouser
-                                    </a>
-
-                                    <span class="stext-105 cl3">
-										$25.50
-									</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-pic hov-img0">
-                                <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
-
-                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Quick View
-                                </a>
-                            </div>
-
-                            <div class="block2-txt flex-w flex-t p-t-14">
-                                <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        Classic Trench Coat
-                                    </a>
-
-                                    <span class="stext-105 cl3">
-										$75.00
-									</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-pic hov-img0">
-                                <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
-
-                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Quick View
-                                </a>
-                            </div>
-
-                            <div class="block2-txt flex-w flex-t p-t-14">
-                                <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        Front Pocket Jumper
-                                    </a>
-
-                                    <span class="stext-105 cl3">
-										$34.75
-									</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-pic hov-img0">
-                                <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
-
-                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Quick View
-                                </a>
-                            </div>
-
-                            <div class="block2-txt flex-w flex-t p-t-14">
-                                <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        Vintage Inspired Classic
-                                    </a>
-
-                                    <span class="stext-105 cl3">
-										$93.20
-									</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-pic hov-img0">
-                                <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
-
-                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Quick View
-                                </a>
-                            </div>
-
-                            <div class="block2-txt flex-w flex-t p-t-14">
-                                <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        Shirt in Stretch Cotton
-                                    </a>
-
-                                    <span class="stext-105 cl3">
-										$52.66
-									</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                        <!-- Block2 -->
-                        <div class="block2">
-                            <div class="block2-pic hov-img0">
-                                <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="IMG-PRODUCT">
-
-                                <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Quick View
-                                </a>
-                            </div>
-
-                            <div class="block2-txt flex-w flex-t p-t-14">
-                                <div class="block2-txt-child1 flex-col-l ">
-                                    <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        Pieces Metallic Printed
-                                    </a>
-
-                                    <span class="stext-105 cl3">
-										$18.96
-									</span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

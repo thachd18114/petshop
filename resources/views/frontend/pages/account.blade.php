@@ -12,5 +12,3 @@
     @include('frontend.widgets.account-info')
 @endsection
 {{-- Thay thế nội dung vào Placeholder `custom-scripts` của view `frontend.layouts.master` --}}
-@section('custom-scripts')
-@endsection

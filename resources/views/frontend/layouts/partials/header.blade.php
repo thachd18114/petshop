@@ -2,10 +2,10 @@
     <!-- Header desktop -->
     <div class="container-menu-desktop">
         <!-- Topbar -->
-        <div class="top-bar">
+        <div class="top-bar" id="top-bar">
             <div class="content-topbar flex-sb-m h-full container">
                 <div class="left-top-bar">
-                    Free shipping for standard order over $100
+
                 </div>
                 <div class="right-top-bar flex-w h-full">
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
@@ -14,10 +14,10 @@
                     @if(session('tenDangNhap'))
                         <a href="{{route('dangnhap')}}" class="flex-c-m trans-04 p-lr-25" data-toggle="dropdown">Trang cá nhân
                             <span class="caret"></span></a>
-                        <ul class="dropdown-menu" style="z-index: 9999; padding-left: 10px">
-                            <li><a href="{{route('frontend.account')}}" style=" padding-bottom: 5px; font-size: 14px;">Quản lý tài khoản</a></li>
-                            <li><a href="#" style=" padding-bottom: 5px;font-size: 14px">Đơn hàng</a></li>
-                            <li><a href="{{route('logout')}}"  style=" padding-bottom: 5px;font-size: 14px">Đăng xuất</a></li>
+                        <ul class="dropdown-menu" id="dropdown-menu">
+                            <li><a href="{{route('frontend.account')}}">Quản lý tài khoản</a></li>
+                            <li><a href="#" >Đơn hàng</a></li>
+                            <li><a href="{{route('logout')}}" >Đăng xuất</a></li>
                         </ul>
                     </a>
                     @else
@@ -26,7 +26,7 @@
                         </a>
                     @endif
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        EN
+                        VN
                     </a>
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
                         USD

@@ -27,7 +27,8 @@ class FrontendController extends Controller
             ->with('loaithucung', $loaithucung);
     }
 
-    public function  product (Request $request) {
+    public function product(Request $request)
+    {
         $danhsachthucung = $this->searchThuCung($request);
         $loaithucung = LoaiThuCung::all();
         return view('frontend.pages.product')
@@ -37,15 +38,23 @@ class FrontendController extends Controller
 
     public function productDetail(Request $request, $id)
     {
-        $thucung = DB::table('thucung')->join('giong','giong.g_id','=', 'thucung.g_id')
-            ->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')->where('hinhanh.ha_id' ,'=', '1')->where('thucung.tc_id', $id)->first();
+        $thucung = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+            ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=',
+                '1')->where('thucung.tc_id', $id)->select('thucung.*','ha_ten','g_ten')->first();
         // Query Lấy các hình ảnh liên quan của các Sản phẩm đã được lọc
         $danhsachhinhanhlienquan = DB::table('hinhanh')
             ->where('tc_id', $id)
             ->get();
+//        $lienquan = ThuCung::where('g_id',$thucung->g_id)->first();
+        $idgiong = $thucung->g_id;
+        $lienquan = $query = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+            ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
+            ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=', '1')
+            ->where('tc_trangThai', '=', '1')->where('giong.g_id', '=', $idgiong)->get();
         $danhsachgiong = Giong::all();
         return view('frontend.pages.product-detail')
             ->with('tc', $thucung)
+            ->with('lienquan', $lienquan)
             ->with('danhsachhinhanhlienquan', $danhsachhinhanhlienquan)
             ->with('danhsachloai', $danhsachgiong);
     }
@@ -55,21 +64,23 @@ class FrontendController extends Controller
     {
         return view('frontend.pages.shopping-cart');
     }
-    public function choosecheckout() {
+
+    public function choosecheckout()
+    {
         $httt = HinhThucThanhToan::all();
-        if(Session::has('tenDangNhap')){
+        if (Session::has('tenDangNhap')) {
             return view('frontend.pages.choose-checkout')->with('hinhthucthanhtoan', $httt);
-        }
-        else {
+        } else {
             return view('frontend.pages.dangnhap');
         }
 
     }
+
     public function order(Request $request)
     {
         if (Session::has('tenDangNhap')) {
             $taikhoan = Session::get('tenDangNhap');
-            $kh = KhachHang::where('kh_taiKhoan',$taikhoan)->first();
+            $kh = KhachHang::where('kh_taiKhoan', $taikhoan)->first();
             $donhang = new Donhang();
             $donhang->kh_id = $kh->kh_id;
             $donhang->dh_nguoiNhan = $request->donhang['dh_nguoiNhan'];
@@ -79,50 +90,81 @@ class FrontendController extends Controller
             $donhang->ttdh_id = 1;
             $donhang->save();
 
-            foreach($request->giohang['items'] as $sp)
-            {
+            foreach ($request->giohang['items'] as $sp) {
                 $chitietdonhang = new ChiTietDonHang();
                 $chitietdonhang->dh_id = $donhang->dh_id;
                 $chitietdonhang->tc_id = $sp['_id'];
                 $chitietdonhang->save();
 
                 $thucung = ThuCung::find($sp['_id']);
-                if($thucung->tc_trangThai == 2){
+                if ($thucung->tc_trangThai == 2) {
                     response('error', 'san pham co the da duoc mua');
+                } else {
+                    $thucung->tc_trangThai = 2;
+                    $thucung->save();
                 }
-                else{
-                    $thucung ->tc_trangThai = 2;
-                }
 
-        }
+            }
 
 
-
-        }
-        else {
+        } else {
             return view('frontend.pages.dangnhap');
         }
-        return response(["error"=>false, "message"=>compact('donhang')], 200);
+        return response(["error" => false, "message" => compact('donhang')], 200);
     }
 
-        private function searchThuCung(Request $request)
+    private function searchThuCung(Request $request)
     {
-        $query = DB::table('thucung')->join('giong','giong.g_id','=', 'thucung.g_id')
-            ->join('loaithucung','loaithucung.ltc_id','=', 'giong.ltc_id')
-            ->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')->where('hinhanh.ha_id' ,'=', '1')
+        $query = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+            ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
+            ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=', '1')
+            ->where('tc_trangThai', '=', '1')
             ->select('*');
         // Kiểm tra điều kiện `searchByLoaiMa`
         $searchByGiongMa = $request->query('searchByGiongMa');
-       // dd($query);
-        if ($searchByGiongMa != null) { }
+        // dd($query);
+        if ($searchByGiongMa != null) {
+        }
 
         $data = $query->get();
         return $data;
     }
 
-    public function account() {
-     //  $tk= KhachHang::all();
-       return view('frontend.pages.account');
+    public function account()
+    {
+        if (Session::has('tenDangNhap')) {
+            $tdn = Session::get('tenDangNhap');
+            $tk = KhachHang::where('kh_taiKhoan', $tdn)->first();
+            return view('frontend.pages.account')->with('tk', $tk);
+        } else {
+            return view('frontend.index');
+        }
+
     }
+
+    public function update_acount (Request $request)
+    {
+        if (Session::has('tenDangNhap')) {
+            $kh_taiKhoan = Session::get('tenDangNhap');
+            $data = KhachHang::where('kh_taiKhoan', $kh_taiKhoan)->first();
+            $id = $data->kh_id;
+            $kh = KhachHang::find($id);
+            $kh->kh_hoTen = $request->kh_hoTen;
+            $kh->kh_email = $request->kh_email;
+            $kh->kh_ngaySinh = $request->kh_ngaySinh;
+            $kh->kh_dienThoai = $request->kh_dienThoai;
+            $kh->kh_diaChi = $request->kh_diaChi;
+            $kh->kh_gioiTinh = $request->kh_gioiTinh;
+            if ($request->kh_matKhau != ''){
+                $kh->kh_matKhau = md5($request->kh_matKhau);
+            }
+            $kh->save();
+            return redirect()->back()->with('success','Lưu thành công');
+        }
+        else {
+            return view('frontend.pages.dangnhap');
+        }
+    }
+
 
 }
