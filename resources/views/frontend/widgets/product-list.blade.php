@@ -55,9 +55,14 @@
 
                         <ul>
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Mới nhất
-                                </a>
+                                <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+                                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+                                        Tất cả thú cưng
+                                    </button>
+                                        <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".giong-2">
+                                           sdad
+                                        </button>
+                                </div>
                             </li>
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
@@ -185,9 +190,8 @@
         </div>
 
         <div class="row isotope-grid">
-
             @foreach($data as $index=>$sp)
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item loai-{{$sp->ltc_id}}">
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item loai-{{$sp->ltc_id}} giong-{{$sp->g_id}}">
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
@@ -207,8 +211,13 @@
                                     <h4 id="tensp" >{{ $sp->tc_ten }}</h4>
                                 </a>
                                 <span class="stext-105 cl3" style="color: #e10c00; font-weight: bold; font-size: large">
-                                    $ {{ $sp->tc_giaBan }}
-                            </span>
+                                    @if($sp->giatri != null)
+                                        <del style="color: #878787;">$ {{ $sp->tc_giaBan }}</del> <span style="padding-left: 10px">${{ $sp->tc_giaBan* (100-$sp->giatri)/100 }}</span>
+                            @else
+                                        $ {{ $sp->tc_giaBan }}
+
+                                    @endif
+                                </span>
                             </div>
                         </div>
                     </div>

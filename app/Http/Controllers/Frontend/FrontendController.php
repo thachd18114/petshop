@@ -20,8 +20,8 @@ class FrontendController extends Controller
     public function index(Request $request)
     {
         $danhsachthucung = $this->searchThuCung($request);
+//        dd($danhsachthucung);
         $loaithucung = LoaiThuCung::all();
-
         return view('frontend.index')
             ->with('danhsachthucung', $danhsachthucung)
             ->with('loaithucung', $loaithucung);
@@ -86,6 +86,7 @@ class FrontendController extends Controller
             $donhang->dh_nguoiNhan = $request->donhang['dh_nguoiNhan'];
             $donhang->dh_diaChi = $request->donhang['dh_diaChi'];
             $donhang->dh_dienThoai = $request->donhang['dh_dienThoai'];
+            $donhang->dh_tongGia = $request->donhang['dh_tongGia'];
             $donhang->httt_id = $request->donhang['httt_id'];
             $donhang->ttdh_id = 1;
             $donhang->save();
@@ -115,11 +116,20 @@ class FrontendController extends Controller
 
     private function searchThuCung(Request $request)
     {
+        $data = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
         $query = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
             ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
             ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=', '1')
-            ->where('tc_trangThai', '=', '1')
-            ->select('*');
+            ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
+            ->leftjoin ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
+            ->where('kh_ngayBatDau', '<=', $data)
+            ->where('kh_ngayKetThuc', '>=',$data)
+            ->orWhere('kh_ngayBatDau' ,'=', null)
+            ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
+                'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
+                'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'loaithucung.ltc_id','loaithucung.ltc_ten')
+//            ->orHaving('cou')
+            ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,  loaithucung.*,max(`km_giaTri`) as giatri');
         // Kiểm tra điều kiện `searchByLoaiMa`
         $searchByGiongMa = $request->query('searchByGiongMa');
         // dd($query);

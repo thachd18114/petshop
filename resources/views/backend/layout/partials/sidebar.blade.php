@@ -68,8 +68,8 @@
                     <span>&nbsp; Nhà cung cấp</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
+            <li class="@yield('khuyenmai')">
+                <a href="{{route('khuyenmai')}}">
                     <i class="fas fa-donate"></i>
                     <span>&nbsp; Khuyến mãi</span>
                 </a>

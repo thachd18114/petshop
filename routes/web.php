@@ -93,9 +93,24 @@ Route::get('/admin/edit_khachhang/{id}', 'KhachHangController@edit');
 Route::post('/admin/update_khachhang/{id}','KhachHangController@update');
 Route::get('/admin/delete_khachhang/{id}','KhachHangController@delete');
 
+//-------------------------------Khuyến Mãi-------------------------------------//
+
+Route::get('/admin/list_khuyenmai', 'KhuyenMaiController@index');
+Route::get('/admin/khuyenmai', function (){return view('backend.khuyenmai.index');})->name('khuyenmai');
+Route::post('/admin/createkhuyenmai','KhuyenMaiController@store');
+Route::get('/admin/edit_khuyenmai/{id}', 'KhuyenMaiController@edit');
+Route::post('/admin/update_khuyenmai/{id}','KhuyenMaiController@update');
+Route::get('/admin/delete_khuyenmai/{id}','KhuyenMaiController@delete');
+
+//-------------------------------Chi tiet khuyen mai-------------------------------------//
+
+Route::get('/admin/thucung_khuyenmai/{id}', 'ChiTietKhuyenMaiController@index')->name('km_tc');
+Route::get('/admin/list_thucung_khuyenmai/{id}', 'ChiTietKhuyenMaiController@getData');
+Route::post('/admin/create_chitietkm/{km}','ChiTietKhuyenMaiController@store');
+Route::get('/admin/delete_chitietkm/{km}/{tc}','ChiTietKhuyenMaiController@detele');
+Route::post('/admin/delete_listchitietkm/{km}','ChiTietKhuyenMaiController@detele_list');
+
 //-------------------------------Frontend-------------------------------------//
-
-
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
 Route::get('/thu-cung', 'Frontend\FrontendController@product')->name('frontend.product');
 Route::get('/thu-cung/{id}', 'Frontend\FrontendController@productDetail')->name('frontend.productDetail');

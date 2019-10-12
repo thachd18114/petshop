@@ -126,7 +126,7 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
         // var ngaySinh = new Date($scope.ThuCung.tc_ngaySinh+ "T05:00:00.000Z");
         $scope.ThuCung['tc_ngaySinh'] = new Date( $scope.ThuCung['tc_ngaySinh']);
         $scope.ThuCung['tc_ngaySinh'] = $filter('date')($scope.ThuCung['tc_ngaySinh'], "yyyy/MM/dd");
-        console.log($scope.ThuCung['tc_ngaySinh']);
+        // console.log($scope.ThuCung['tc_ngaySinh']);
 
         switch(state){
             case 'create':

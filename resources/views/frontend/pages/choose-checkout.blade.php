@@ -83,6 +83,7 @@
                         "dh_diaChi": $scope.orderForm.dh_diaChi.$viewValue,
                         "dh_dienThoai": $scope.orderForm.dh_dienThoai.$viewValue,
                         "httt_id": $scope.orderForm.httt_id.$viewValue,
+                        "dh_tongGia" : ngCart.totalCost(),
                     };
 
                     var dataCart = ngCart.getCart();
@@ -105,7 +106,7 @@
                         // }
                     }, function errorCallback(response) {
                         swal('Có lỗi trong quá trình thực hiện Đơn hàng!', 'Vui lòng thử lại sau vài phút.', 'error');
-                        window.location.reload();
+                        // window.location.reload();
                         console.log(response);
                     });
                 }

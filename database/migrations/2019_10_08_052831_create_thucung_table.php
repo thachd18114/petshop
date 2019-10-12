@@ -25,13 +25,19 @@ class CreateThucungTable extends Migration
             $table->text('tc_moTa');
             $table->string('tc_mauSac', 20);
             $table->unsignedTinyInteger('tc_trangThaiTiemChung');
-            $table->unsignedTinyInteger('tc_trangThai');
+            $table->unsignedInteger('ncc_id');
             $table->unsignedInteger('g_id');
             $table->unsignedInteger('ng_id');
+//            $table->unsignedInteger('km_id');
+            $table->unsignedTinyInteger('tc_trangThai');
 
             $table->foreign('g_id')->references('g_id')->on('giong')
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ng_id')->references('ng_id')->on('nguongoc')
+                ->onDelete('cascade')->onUpdate('cascade');
+//            $table->foreign('km_id')->references('km_id')->on('khuyenmai')
+//                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ncc_id')->references('ncc_id')->on('nhacungcap')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }

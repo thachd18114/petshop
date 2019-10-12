@@ -8,7 +8,7 @@ class ThuCung extends Model
 {
     public    $timestamps   = false;
     protected $table = 'thucung';
-    protected $fillable = ['tc_ten','tc_giaBan', 'tc_tuoi', 'tc_gioiTinh','tc_canNang', 'tc_moTa', 'mauSac','tc_trangThaiTiemChung','tc_trangThai','g_id','ng_id'];
+    protected $fillable = ['tc_ten','tc_giaBan','tc_ngaySinh', 'tc_tuoi', 'tc_gioiTinh','tc_canNang', 'tc_moTa', 'mauSac','tc_trangThaiTiemChung','tc_trangThai','g_id','ng_id'];
     protected $guarded = ['tc_id'];
 
     protected $primaryKey = 'tc_id';

@@ -30,6 +30,7 @@ class ThuCungController extends Controller
         $tc->tc_trangThai = $request->tc_trangThai;
         $tc->g_id = $request->g_id;
         $tc->ng_id = $request->ng_id;
+        $tc->ncc_id = 1;
         $tc->save();
 //        foreach ($request->ha_ten as $index => $file) {
 ////            $file->storeAs('public/photos', $file);
@@ -60,6 +61,7 @@ class ThuCungController extends Controller
             return response(["error" => false, "message" => compact('hinhAnh')], 200);
         }
     }
+
 //    public function store(Request $request)
 //    {
 //        $tc = new ThuCung();
@@ -92,12 +94,10 @@ class ThuCungController extends Controller
 //        }
 //
 //    }
-//    public  function hinhanh_thucung( Request $request, $id) {
-//        $hinhanh = DB::table('thucung')->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')
-//            ->where('hinhanh.ha_id' ,'=', '1')
-//            ->where('thucung.tc_id', $id)->first();
-//        return response()->json($$hinhanh);
-//    }
+    public  function thucung_detail( $id) {
+        $thucung_detail = ThuCung::where('tc_id',$id)->first();
+        return response()->json($thucung_detail);
+    }
     public function edit($id){
         $thucung  = ThuCung::where('tc_id',$id)->first();
         return response()->json($thucung);
