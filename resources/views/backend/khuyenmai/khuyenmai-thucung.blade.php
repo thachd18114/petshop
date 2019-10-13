@@ -7,7 +7,7 @@
     Danh Sách Thú Cưng Khuyến Mãi
 @endsection
 @section('breadcrumb')
-    <a href="{{asset('/admin')}}"><i class="fa fa-dashboard"></i> Trang chủ</a> >
+    <a href="{{asset('/admin/khuyenmai')}}"><i class="fa fa-dashboard"></i> Khuyến mãi</a> >
     Danh sách
     <input type="text" class="hidden" name="km_id" id="km_id" value="{{$km_id->km_id}}"/>
 @endsection
@@ -34,7 +34,7 @@
                     <th>Trạng thái</th>
                     <th style="text-align: center;width: 15%">
                         <button class="btn btn-social-icon btn bg-orange"title="Load lại trang" style="width: 22px; height: 22px;" name="btnReLoad" id="btnReLoad" ng-click="refreshData()"><i class="fas fa-sync-alt" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
-                        <button class="btn btn-social-icon btn bg-olive" title="Tạo mới" style="width: 22px; height: 22px;" name="btnAdd" id="btnAdd"   ng-click="modal('create')" > <i class="fas fa-plus" style="font-size: 12px;margin-top: -6px"></i></button>
+                        <button class="btn btn-social-icon btn bg-olive" title="Tạo mới" style="width: 22px; height: 22px;" name="btnAdd" id="btnAdd"   ng-click="modal()" > <i class="fas fa-plus" style="font-size: 12px;margin-top: -6px"></i></button>
                         <button class="btn btn-social-icon btn-danger" title="Xóa" style="width: 22px; height: 22px;" ng-click="deletelist()" ><i class="fas fa-trash-alt" style="font-size: 12px;margin-top: -6px"></i></button>
 
                     </th>

@@ -17,8 +17,8 @@ class CreateKhuyenmaiTable extends Migration
             $table->engine='InnoDB';
             $table->increments('km_id');
             $table->string('km_ten',50);
-            $table->dateTime('kh_ngayBatDau')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->dateTime('kh_ngayKetThuc')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('km_ngayBatDau')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('km_ngayKetThuc')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->unsignedInteger('km_giaTri');
             $table->unsignedInteger('km_trangThai');
         });

@@ -30,7 +30,7 @@ b.controller('KhuyenMaiTCController', function($scope,$filter,$http,MainURL,DTOp
     }
     $scope.refreshData();
     $scope.list_tc = function(){
-        $http.get(MainURL + 'list_thucung').then(function(response){
+        $http.get(MainURL + 'list_thucungkm/'+$('#km_id').val()).then(function(response){
             $scope.listtc = response.data;
             angular.forEach($scope.listtc, function(value, key){
                 if (value.tc_trangThaiTiemChung === 1){

@@ -15,8 +15,8 @@ class KhuyenMaiController extends Controller
         $khuyenmai = new KhuyenMai();
         $khuyenmai->km_ten = $request->km_ten;
         $khuyenmai->km_giaTri = $request->km_giaTri;
-        $khuyenmai->kh_ngayBatDau = $request->kh_ngayBatDau;
-        $khuyenmai->kh_ngayKetThuc = $request->kh_ngayKetThuc;
+        $khuyenmai->km_ngayBatDau = $request->km_ngayBatDau;
+        $khuyenmai->km_ngayKetThuc = $request->km_ngayKetThuc;
         $khuyenmai->km_trangThai = 1;
         $khuyenmai->save();
     }

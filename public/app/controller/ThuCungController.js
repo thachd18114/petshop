@@ -13,6 +13,11 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
         });
     };
 
+    $scope.nhacungcap = function(){
+        $http.get(MainURL + 'list_nhacungcap').then(function(response){
+            $scope.listnhacungcap = response.data;
+        });
+    };
     $scope.nguogoc = function(){
         $http.get(MainURL + 'list_nguongoc').then(function(response){
             $scope.listnguongoc = response.data;
@@ -50,6 +55,7 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
     $scope.modal = function (state, id) {
         $scope.giong();
         $scope.nguogoc();
+        $scope.nhacungcap();
         $scope.state = state;
         switch(state){
             case 'create':
@@ -68,6 +74,7 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
                     tc_ngaySinh : "",
                     tc_trangThai : 1,
                     g_id : 0,
+                    ncc_id : 0
                 }
                 $("#ha_ten").fileinput({
                     theme: 'fas',
@@ -91,7 +98,7 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
                     $scope.ThuCung['tc_ngaySinh'] = new Date( $scope.ThuCung['tc_ngaySinh']);
                     // $scope.ThuCung['tc_ngaySinh'] = $filter('date')($scope.ThuCung['tc_ngaySinh'], "dd/MM/yyyy");
                     $('#tc_ngaySinh').val($scope.ThuCung['tc_ngaySinh']);
-                    console.log($scope.ThuCung['tc_ngaySinh']);
+                    // console.log($scope.ThuCung['tc_ngaySinh']);
                     $("#ha_ten").fileinput({
                         theme: 'fas',
                         showUpload: false,

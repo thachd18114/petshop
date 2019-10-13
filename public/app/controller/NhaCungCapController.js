@@ -1,24 +1,11 @@
-b.controller('KhuyenMaiController', function($scope,$filter,$http,MainURL,DTOptionsBuilder, DTColumnBuilder) {
+b.controller('NhaCungCapController', function($scope,$http,MainURL,DTOptionsBuilder, DTColumnBuilder) {
     $scope.isLoaded = true;
-    $scope.dataTitle = "Khuyến mãi";
+    $scope.dataTitle = "Nhà Cung Cấp";
 
     $scope.refreshData = function(){
         $scope.isLoading = true;
-        $http.get(MainURL + 'list_khuyenmai').then(function(response){
+        $http.get(MainURL + 'list_nhacungcap').then(function(response){
             $scope.memberList = response.data;
-            angular.forEach($scope.memberList, function(value, key){
-                 value.kh_ngayBatDau = new Date( value.kh_ngayBatDau);
-                 value.kh_ngayBatDau = $filter('date')(value.kh_ngayBatDau, "dd/MM/yyyy");
-                value.kh_ngayKetThuc = new Date( value.kh_ngayKetThuc);
-                value.kh_ngayKetThuc = $filter('date')(value.kh_ngayKetThuc, "dd/MM/yyyy");
-                if (value.km_trangThai ===1) {
-                    value.km_trangThai = 'Kích hoạt';
-                }
-                else {
-                    value.km_trangThai = 'Khóa';
-                }
-            });
-
             $scope.isLoading = false;
         });
     }
@@ -30,27 +17,16 @@ b.controller('KhuyenMaiController', function($scope,$filter,$http,MainURL,DTOpti
             case 'create':
                 $scope.modalTitle = "Thêm " + $scope.dataTitle;
                 $scope.modalButton = "Thêm";
-                $scope.KhuyenMai ={
-                    km_ten : "",
-                    km_trangThai: 1,
-                    km_ngayBatDau: '',
-                    km_ngayKetThuc: '',
-                    km_giaTri : '',
+                $scope.NhaCungCap ={
+                    ncc_ten : "",
                 }
                 break;
             case 'edit':
                 $scope.id = id;
                 $scope.modalTitle = "Cập nhật " + $scope.dataTitle;
                 $scope.modalButton = "Cập nhật";
-                $http.get(MainURL + 'edit_khuyenmai/'+id).then(function(response){
-                    $scope.KhuyenMai = response.data;
-                    $scope.KhuyenMai['kh_ngayBatDau'] = new Date( $scope.KhuyenMai['kh_ngayBatDau']);
-                    // $scope.ThuCung['tc_ngaySinh'] = $filter('date')($scope.ThuCung['tc_ngaySinh'], "dd/MM/yyyy");
-                    $('#km_ngayBatDau').val($scope.KhuyenMai['kh_ngayBatDau']);
-                    $scope.KhuyenMai['kh_ngayKetThuc'] = new Date( $scope.KhuyenMai['kh_ngayKetThuc']);
-                    // $scope.ThuCung['tc_ngaySinh'] = $filter('date')($scope.ThuCung['tc_ngaySinh'], "dd/MM/yyyy");
-                    $('#km_ngayKetThuc').val($scope.KhuyenMai['kh_ngayKetThuc']);
-
+                $http.get(MainURL + 'edit_nhacungcap/'+id).then(function(response){
+                    $scope.NhaCungCap = response.data;
                 });
 
 
@@ -59,15 +35,10 @@ b.controller('KhuyenMaiController', function($scope,$filter,$http,MainURL,DTOpti
     }
 
     $scope.save = function (state,id){
-        $scope.KhuyenMai['kh_ngayBatDau'] = new Date( $scope.KhuyenMai['kh_ngayBatDau']);
-        $scope.KhuyenMai['kh_ngayBatDau'] = $filter('date')($scope.KhuyenMai['kh_ngayBatDau'], "yyyy/MM/dd");
-
-        $scope.KhuyenMai['kh_ngayKetThuc'] = new Date( $scope.KhuyenMai['kh_ngayKetThuc']);
-        $scope.KhuyenMai['kh_ngayKetThuc'] = $filter('date')($scope.KhuyenMai['kh_ngayKetThuc'], "yyyy/MM/dd");
         switch(state){
             case 'create':
-                var url = MainURL + "createkhuyenmai";
-                var data = $.param($scope.KhuyenMai);
+                var url = MainURL + "createnhacungcap";
+                var data = $.param($scope.NhaCungCap);
                 $http({
                     method : "POST",
                     url : url,
@@ -85,8 +56,8 @@ b.controller('KhuyenMaiController', function($scope,$filter,$http,MainURL,DTOpti
                 });
                 break;
             case 'edit' :
-                var url = MainURL + 'update_khuyenmai/' + id;
-                var data = $.param($scope.KhuyenMai);
+                var url = MainURL + 'update_nhacungcap/' + id;
+                var data = $.param($scope.NhaCungCap);
                 $http({
                     method : "POST",
                     url : url,
@@ -119,7 +90,7 @@ b.controller('KhuyenMaiController', function($scope,$filter,$http,MainURL,DTOpti
             },
             function(isConfirm) {
                 if (isConfirm) {
-                    $http.get(MainURL+'delete_khuyenmai/'+id).then(function(){
+                    $http.get(MainURL+'delete_nhacungcap/'+id).then(function(){
                         swal("", "Xóa thành công!", "success")
                         $scope.refreshData();
                     }).catch(function(){

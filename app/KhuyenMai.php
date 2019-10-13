@@ -8,7 +8,7 @@ class KhuyenMai extends Model
 {
     public    $timestamps   = false;
     protected $table = 'khuyenmai';
-    protected $fillable = ['km_ten','kh_ngayBatDau', 'kh_ngayKetThuc'];
+    protected $fillable = ['km_ten','km_ngayBatDau', 'km_ngayKetThuc'];
     protected $guarded = ['km_id'];
 
     protected $primaryKey = 'km_id';

@@ -11,7 +11,9 @@ class ThuCungController extends Controller
 {
     public function index () {
         $ds_thucung = ThuCung::join('nguongoc', 'nguongoc.ng_id', '=', 'thucung.ng_id')
-            ->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')->where('hinhanh.ha_id' ,'=', '1')->get();
+            ->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')->where('hinhanh.ha_id' ,'=', '1')
+            ->join('nhacungcap', 'nhacungcap.ncc_id', '=', 'thucung.ncc_id')
+            ->get();
         return response()->json($ds_thucung);
     }
 
@@ -30,7 +32,7 @@ class ThuCungController extends Controller
         $tc->tc_trangThai = $request->tc_trangThai;
         $tc->g_id = $request->g_id;
         $tc->ng_id = $request->ng_id;
-        $tc->ncc_id = 1;
+        $tc->ncc_id = $request->ncc_id;
         $tc->save();
 //        foreach ($request->ha_ten as $index => $file) {
 ////            $file->storeAs('public/photos', $file);
@@ -95,7 +97,23 @@ class ThuCungController extends Controller
 //
 //    }
     public  function thucung_detail( $id) {
-        $thucung_detail = ThuCung::where('tc_id',$id)->first();
+        $data = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $thucung_detail = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+            ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=',
+                '1')
+            ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
+            ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
+            ->leftjoin ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
+            ->where('km_ngayBatDau', '<=', $data)
+            ->where('km_ngayKetThuc', '>=',$data)
+            ->orWhere('km_ngayBatDau' ,'=', null)
+            ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
+                'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
+                'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'loaithucung.ltc_id','loaithucung.ltc_ten')
+//            ->orHaving('cou')
+                ->having('thucung.tc_id',$id)
+            ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,  loaithucung.*,max(`km_giaTri`) as giatri')
+            ->first();
         return response()->json($thucung_detail);
     }
     public function edit($id){

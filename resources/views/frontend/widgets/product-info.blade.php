@@ -72,9 +72,15 @@
                                 </span>
                             </div>
                             <div class="size-204 respon6-next"style="padding-left: 100px">
-                                <span class="mtext-106 cl2 product_price" style="color: #d0011b; font-size: 1.875rem;font-weight: bold" >
+                                @if($tc->giatri != null)
+                                    <del  style="color: #878787; font-size: 22px;">$ {{ $tc->tc_giaBan }}</del> <span class="mtext-106 cl2 product_price"  style="color: #d0011b; font-size: 1.875rem;font-weight: bold; padding-left: 15px">${{ $tc->tc_giaBan* (100-$tc->giatri)/100 }}</span>
+                                @else
+                                    <span class="mtext-106 cl2 product_price" style="color: #d0011b; font-size: 1.875rem;font-weight: bold" >
                                        $ {{$tc->tc_giaBan}}
                                 </span>
+
+                                @endif
+
                             </div>
                         </div>
                         <div class="flex-w flex-r-m p-b-10">
@@ -125,6 +131,17 @@
 
                             </div>
                         </div>
+                        <div class="flex-w flex-r-m p-b-10 ">
+                            <div class="size-203">
+                                <span class="mtext-106 cl2">
+                                       Ngày sinh
+                                </span>
+                            </div>
+                            <div class="size-204 respon6-next" style="padding-left: 100px;font-weight: bold">
+                                {{date('d-m-Y', strtotime($tc->tc_ngaySinh))}}
+
+                            </div>
+                        </div>
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203">
                                 <span class="mtext-106 cl2">
@@ -165,7 +182,13 @@
                     <!--  -->
                     <div class="flex-w flex-r-m p-b-10 p-t-33" id="addtocard">
                         <div class="size-204 flex-w flex-m respon6-next">
+                            @if($tc->giatri != null)
+                                <ngcart-addtocart class="js-addcart-detail" template-url="{{ asset('vendor/ngCart/template/ngCart/addtocart.html') }}" id="{{ $tc->tc_id }}" name="{{ $tc->tc_ten }}" price="{{ $tc->tc_giaBan* (100-$tc->giatri)/100  }}" quantity="1" data="{ sp_hinh_url: '{{ asset("storage/photos/" . $tc->ha_ten) }}'}">Thêm vào giỏ hàng</ngcart-addtocart>
+
+                            @else
                                 <ngcart-addtocart class="js-addcart-detail" template-url="{{ asset('vendor/ngCart/template/ngCart/addtocart.html') }}" id="{{ $tc->tc_id }}" name="{{ $tc->tc_ten }}" price="{{ $tc->tc_giaBan }}" quantity="1" data="{ sp_hinh_url: '{{ asset("storage/photos/" . $tc->ha_ten) }}'}">Thêm vào giỏ hàng</ngcart-addtocart>
+
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -206,25 +229,28 @@
                             <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                 <div class="p-b-30 m-lr-15-sm">
                                     <!-- Review -->
-                                    <?php for($i=0; $i < 3;$i++) { ?>
+                                    @foreach($binhluan as $bl)
                                     <div class="flex-w flex-t p-b-68">
                                         <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                            <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="AVATAR">
+{{--                                            <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="AVATAR">--}}
                                         </div>
 
                                         <div class="size-207">
                                             <div class="flex-w flex-sb-m p-b-17">
 													<span class="mtext-107 cl2 p-r-20">
-														Ariana Grande
+														 {{$bl->kh_taiKhoan}}
+													</span>
+                                                <span class="fs-18 ">
+														2 tháng trước
 													</span>
                                             </div>
 
                                             <p class="stext-102 cl6">
-                                                Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
+                                                {{$bl->bl_noiDung}}}
                                             </p>
                                         </div>
                                     </div>
-<?php }?>
+                                    @endforeach
                                     <!-- Add review -->
                                     <form class="w-full">
                                         <h5 class="mtext-108 cl2 p-b-7">
@@ -307,9 +333,17 @@
                 angular.forEach(ngCart.getCart().items, function (value, key) {
                     $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
                         $scope.thucung = response.data;
-                        if($scope.thucung.length >0 || $scope.thucung.tc_trangThai ===1){
-                            value.setPrice($scope.thucung.tc_giaBan);
-                            value.setName($scope.thucung.tc_ten);
+                        if($scope.thucung.length >0 || $scope.thucung.tc_trangThai === 1){
+                            $scope.gia = $scope.thucung.tc_giaBan*(100 - $scope.thucung.giatri)/100;
+                            // console.log($scope.gia);
+                            if ($scope.thucung.km_giaTri == null){
+                                value.setPrice($scope.gia);
+                                value.setName($scope.thucung.tc_ten);
+                            } else {
+                                value.setPrice($scope.thucung.tc_giaBan);
+                                value.setName($scope.thucung.tc_ten);
+                            }
+
                             // value.setData($scope.thucung.tc_giaBan);
                         }
                         else {

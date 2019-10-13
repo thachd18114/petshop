@@ -106,9 +106,19 @@ Route::get('/admin/delete_khuyenmai/{id}','KhuyenMaiController@delete');
 
 Route::get('/admin/thucung_khuyenmai/{id}', 'ChiTietKhuyenMaiController@index')->name('km_tc');
 Route::get('/admin/list_thucung_khuyenmai/{id}', 'ChiTietKhuyenMaiController@getData');
+Route::get('/admin/list_thucungkm/{id}', 'ChiTietKhuyenMaiController@listthucung');
 Route::post('/admin/create_chitietkm/{km}','ChiTietKhuyenMaiController@store');
 Route::get('/admin/delete_chitietkm/{km}/{tc}','ChiTietKhuyenMaiController@detele');
 Route::post('/admin/delete_listchitietkm/{km}','ChiTietKhuyenMaiController@detele_list');
+
+//-------------------------------Nhà cưng cấp-------------------------------------//
+
+Route::get('/admin/list_nhacungcap', 'NhaCungCapController@index');
+Route::get('/admin/nhacungcap', function (){return view('backend.nhacungcap.index');})->name('nhacungcap');
+Route::post('/admin/createnhacungcap','NhaCungCapController@store');
+Route::get('/admin/edit_nhacungcap/{id}', 'NhaCungCapController@edit');
+Route::post('/admin/update_nhacungcap/{id}','NhaCungCapController@update');
+Route::get('/admin/delete_nhacungcap/{id}','NhaCungCapController@delete');
 
 //-------------------------------Frontend-------------------------------------//
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');

@@ -88,9 +88,17 @@
                 angular.forEach(ngCart.getCart().items, function (value, key) {
                     $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
                         $scope.thucung = response.data;
-                        if($scope.thucung.length >0 || $scope.thucung.tc_trangThai ===1){
-                            value.setPrice($scope.thucung.tc_giaBan);
-                            value.setName($scope.thucung.tc_ten);
+                        if($scope.thucung.length >0 || $scope.thucung.tc_trangThai === 1){
+                            $scope.gia = $scope.thucung.tc_giaBan*(100 - $scope.thucung.giatri)/100;
+                            // console.log($scope.gia);
+                            if ($scope.thucung.km_giaTri == null){
+                                value.setPrice($scope.gia);
+                                value.setName($scope.thucung.tc_ten);
+                            } else {
+                                value.setPrice($scope.thucung.tc_giaBan);
+                                value.setName($scope.thucung.tc_ten);
+                            }
+
                             // value.setData($scope.thucung.tc_giaBan);
                         }
                         else {

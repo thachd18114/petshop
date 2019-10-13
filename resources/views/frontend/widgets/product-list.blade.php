@@ -212,7 +212,7 @@
                                 </a>
                                 <span class="stext-105 cl3" style="color: #e10c00; font-weight: bold; font-size: large">
                                     @if($sp->giatri != null)
-                                        <del style="color: #878787;">$ {{ $sp->tc_giaBan }}</del> <span style="padding-left: 10px">${{ $sp->tc_giaBan* (100-$sp->giatri)/100 }}</span>
+                                        <del style="color: #878787;">$ {{ $sp->tc_giaBan }}</del> <span style="padding-left: 15px">${{ $sp->tc_giaBan* (100-$sp->giatri)/100 }}</span>
                             @else
                                         $ {{ $sp->tc_giaBan }}
 
@@ -247,9 +247,16 @@
                     $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
                         $scope.thucung = response.data;
                         if($scope.thucung.length >0 || $scope.thucung.tc_trangThai === 1){
-                            console.log($scope.thucung);
-                            value.setPrice($scope.thucung.tc_giaBan);
-                            value.setName($scope.thucung.tc_ten);
+                             $scope.gia = $scope.thucung.tc_giaBan*(100 - $scope.thucung.giatri)/100;
+                            // console.log($scope.gia);
+                            if ($scope.thucung.km_giaTri == null){
+                                value.setPrice($scope.gia);
+                                value.setName($scope.thucung.tc_ten);
+                            } else {
+                                value.setPrice($scope.thucung.tc_giaBan);
+                                value.setName($scope.thucung.tc_ten);
+                            }
+
                              // value.setData($scope.thucung.tc_giaBan);
                         }
                         else {

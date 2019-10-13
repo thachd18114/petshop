@@ -28,7 +28,7 @@
                     <th>Tên</th>
                     <th>Ngày bắt đầu</th>
                     <th>Ngày kết thúc</th>
-                    <th>Trạng thái</th>
+                    <th>Giá trị (%)</th>
                     <th style="text-align: center;width: 15%">
                         <button class="btn btn-social-icon btn bg-orange"title="Load lại trang" style="width: 22px; height: 22px;" name="btnReLoad" id="btnReLoad" ng-click="refreshData()"><i class="fas fa-sync-alt" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
                         <button class="btn btn-social-icon btn bg-olive" title="Tạo mới" style="width: 22px; height: 22px;" name="btnAdd" id="btnAdd"   ng-click="modal('create')" > <i class="fas fa-plus" style="font-size: 12px;margin-top: -6px"></i></button>
@@ -39,9 +39,9 @@
                 <tr ng-repeat="km in memberList">
                     <td><% km.km_id %> </td>
                     <td><% km.km_ten %></td>
-                    <td><% km.kh_ngayBatDau %></td>
-                    <td><% km.kh_ngayKetThuc %></td>
-                    <td><% km.km_trangThai %></td>
+                    <td><% km.km_ngayBatDau %></td>
+                    <td><% km.km_ngayKetThuc %></td>
+                    <td><% km.km_giaTri %></td>
                     <td style="text-align: center">
                        <a href="{{asset('admin/thucung_khuyenmai') }}/<% km.km_id %>"><button class="btn btn-social-icon btn bg-orange" title="Danh sách thú cưng" style="width: 22px; height: 22px;" ><i class="fas fa-clipboard-list" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;</a>
                         <button class="btn btn-social-icon btn bg-purple" title="Cập nhật" style="width: 22px; height: 22px;" ng-click="modal('edit',km.km_id)" ><i class="fas fa-edit" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
@@ -82,15 +82,15 @@
                                     <div class="form-group">
                                         <label for="km_ngayBatDau" class="col-sm-2 control-label">Ngày bắt đầu</label>
                                         <div class="col-sm-10">
-                                            <input type="date"  class="form-control"  id="kh_ngayBatDau" name="kh_ngayBatDau" ng-model="KhuyenMai.kh_ngayBatDau" ng-required="true">
-                                            <span class="error" ng-show="frmKhuyenMai.kh_ngayBatDau.$error.required">Vui lòng nhập ngày bắt đầu!</span>
+                                            <input type="date"  class="form-control"  id="km_ngayBatDau" name="km_ngayBatDau" ng-model="KhuyenMai.km_ngayBatDau" ng-required="true">
+                                            <span class="error" ng-show="frmKhuyenMai.km_ngayBatDau.$error.required">Vui lòng nhập ngày bắt đầu!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="km_ngayKetThuc" class="col-sm-2 control-label">Ngày kết thúc</label>
                                         <div class="col-sm-10">
-                                            <input type="date"  class="form-control"  id="kh_ngayKetThuc" name="kh_ngayKetThuc" ng-model="KhuyenMai.kh_ngayKetThuc" ng-required="true">
-                                            <span class="error" ng-show="frmKhuyenMai.kh_ngayKetThuc.$error.required">Vui lòng nhập ngày kết thúc</span>
+                                            <input type="date"  class="form-control"  id="km_ngayKetThuc" name="km_ngayKetThuc" ng-model="KhuyenMai.km_ngayKetThuc" ng-required="true">
+                                            <span class="error" ng-show="frmKhuyenMai.km_ngayKetThuc.$error.required">Vui lòng nhập ngày kết thúc</span>
                                         </div>
                                     </div>
                                     <div class="form-group">

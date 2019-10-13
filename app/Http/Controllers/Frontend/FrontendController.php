@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\BinhLuan;
 use App\ChiTietDonHang;
 use App\DonHang;
 use App\Giong;
@@ -38,9 +39,23 @@ class FrontendController extends Controller
 
     public function productDetail(Request $request, $id)
     {
+        $data = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
         $thucung = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
             ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=',
-                '1')->where('thucung.tc_id', $id)->select('thucung.*','ha_ten','g_ten')->first();
+                '1')->where('thucung.tc_id', $id)->select('thucung.*','ha_ten','g_ten')
+            ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
+            ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
+            ->leftjoin ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
+            ->where('km_ngayBatDau', '<=', $data)
+            ->where('km_ngayKetThuc', '>=',$data)
+            ->orWhere('km_ngayBatDau' ,'=', null)
+            ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
+                'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
+                'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'loaithucung.ltc_id','loaithucung.ltc_ten')
+//            ->orHaving('cou')
+                ->having('thucung.tc_id',$id)
+            ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,  loaithucung.*,max(`km_giaTri`) as giatri')
+            ->first();
         // Query Lấy các hình ảnh liên quan của các Sản phẩm đã được lọc
         $danhsachhinhanhlienquan = DB::table('hinhanh')
             ->where('tc_id', $id)
@@ -51,12 +66,14 @@ class FrontendController extends Controller
             ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
             ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=', '1')
             ->where('tc_trangThai', '=', '1')->where('giong.g_id', '=', $idgiong)->get();
-        $danhsachgiong = Giong::all();
+        $binhluan = DB::table('binhluan')->join('khachhang', 'khachhang.kh_id', '=', 'binhluan.kh_id')
+            ->where('tc_id', $id)->get();
+        //dd($binhluan);
         return view('frontend.pages.product-detail')
             ->with('tc', $thucung)
             ->with('lienquan', $lienquan)
             ->with('danhsachhinhanhlienquan', $danhsachhinhanhlienquan)
-            ->with('danhsachloai', $danhsachgiong);
+            ->with('binhluan', $binhluan);
     }
 
 
@@ -122,9 +139,9 @@ class FrontendController extends Controller
             ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=', '1')
             ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
             ->leftjoin ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
-            ->where('kh_ngayBatDau', '<=', $data)
-            ->where('kh_ngayKetThuc', '>=',$data)
-            ->orWhere('kh_ngayBatDau' ,'=', null)
+            ->where('km_ngayBatDau', '<=', $data)
+            ->where('km_ngayKetThuc', '>=',$data)
+            ->orWhere('km_ngayBatDau' ,'=', null)
             ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
                 'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
                 'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'loaithucung.ltc_id','loaithucung.ltc_ten')

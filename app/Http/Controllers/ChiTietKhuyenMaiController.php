@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ChiTietKhuyenMai;
 use App\KhuyenMai;
+use App\ThuCung;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Helper\Table;
 
@@ -16,6 +17,18 @@ class ChiTietKhuyenMaiController extends Controller
     public function getData($id){
         $ds_kmtc = ChiTietKhuyenMai::join('thucung', 'thucung.tc_id','=', 'chitietkhuyenmai.tc_id')->where('km_id',$id)->get();
         return response()->json($ds_kmtc);
+    }
+
+    public function listthucung($id) {
+        $ctkm = ChiTietKhuyenMai::where('km_id',$id)->get();
+        foreach ($ctkm as $ct) {
+            $data[] = $ct->tc_id;
+        }
+        $ds_thucung = \DB::table('thucung')->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')
+            ->where('hinhanh.ha_id' ,'=', '1')
+            ->whereNotIn('thucung.tc_id', $data )
+            ->get();
+        return response()->json($ds_thucung);
     }
 
     public function store(Request $request, $km) {

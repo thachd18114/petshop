@@ -26,7 +26,7 @@
                     <th>Giới tính</th>
                     <th>Cân nặng</th>
                     <th>Nguồn gốc</th>
-                    <th>Trạng Thái Tiêm Chủng</th>
+                    <th>Nhà cung cấp</th>
                     <th>Trạng Thái</th>
                     <th width="16%"></th>
                     <th style="text-align: center;width: 12%">
@@ -43,7 +43,7 @@
                     <td><% tc.tc_gioiTinh %></td>
                     <td><% tc.tc_canNang %></td>
                     <td><% tc.ng_ten %></td>
-                    <td><% tc.tc_trangThaiTiemChung %></td>
+                    <td><% tc.ncc_ten %></td>
                     <td><% tc.tc_trangThai %></td>
                     <td> <img src="{{ asset('storage/photos') }}/<% tc.ha_ten %>" alt="IMG-PRODUCT" width="150px" height="100px"></td>
 
@@ -86,6 +86,16 @@
                                                 <option ng-repeat="g in listgiong " value="<% g.g_id %>" ng-value="<% g.g_id %>"><% g.g_ten %></option>
                                             </select>
                                             <span class="error" ng-if="ThuCung.g_id == 0">Bạn chưa chọn giống!</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ncc_id" class="col-sm-2 control-label">Nhà cung cấp </label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control select2" style="width: 100%"  ng-model="ThuCung.ncc_id">
+                                                <option value="0" ng-value="0">Chọn nhà cung cấp</option>
+                                                <option ng-repeat="ncc in listnhacungcap " value="<% ncc.ncc_id %>" ng-value="<% ncc.ncc_id %>"><% ncc.ncc_ten %></option>
+                                            </select>
+                                            <span class="error" ng-if="ThuCung.ncc_id == 0">Bạn chưa chọn nhà cung cấp!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">

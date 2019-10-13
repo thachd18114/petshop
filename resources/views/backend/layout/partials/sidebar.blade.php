@@ -38,6 +38,12 @@
                     <span> &nbsp; Nguồn gốc</span>
                 </a>
             </li>
+            <li class="@yield('nhacungcap')">
+                <a href="{{route('nhacungcap')}}">
+                    <i class="fas fa-industry"></i>
+                    <span>&nbsp; Nhà cung cấp</span>
+                </a>
+            </li>
             <li class="@yield('thucung')">
                 <a href="{{ route('thucung')}}">
                     <i class="fa fa-dove"></i>
@@ -62,12 +68,7 @@
                     <span>&nbsp;Hình thức thanh toán</span>
                 </a>
             </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fas fa-industry"></i>
-                    <span>&nbsp; Nhà cung cấp</span>
-                </a>
-            </li>
+
             <li class="@yield('khuyenmai')">
                 <a href="{{route('khuyenmai')}}">
                     <i class="fas fa-donate"></i>
