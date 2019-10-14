@@ -1,17 +1,62 @@
+<?php
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+function limit_description($string){
+    $string = strip_tags($string);
+    if (strlen($string) > 100) {
+
+        // truncate string
+        $stringCut = substr($string, 0, 100);
+        $endPoint = strrpos($stringCut, ' ');
+
+        //if the string doesn't contain any space then it will cut without word basis.
+        $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+        $string .= '...';
+    }
+    return $string;
+}
+function time_elapsed_string($datetime, $full = false) {
+    $now = now();
+    $ago = new DateTime($datetime);
+    $diff = $now->diff($ago);
+
+    $diff->w = floor($diff->d / 7);
+    $diff->d -= $diff->w * 7;
+
+    $string = array(
+        'y' => 'năm',
+        'm' => 'tháng',
+        'w' => 'tuần',
+        'd' => 'ngày',
+        'h' => 'giờ',
+        'i' => 'phút',
+        's' => 'giây',
+    );
+    foreach ($string as $k => &$v) {
+        if ($diff->$k) {
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? '' : '');
+        } else {
+            unset($string[$k]);
+        }
+    }
+
+    if (!$full) $string = array_slice($string, 0, 1);
+    return $string ? implode(', ', $string) . ' trước' : 'Vừa xong';
+}
+?>
 <div class="container">
     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="{{route('frontend.home')}}" class="stext-109 cl8 hov-cl1 trans-04">
             Trang chủ
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
-        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-            Cori
-            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-        </a>
+{{--        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">--}}
+{{--            Chó--}}
+{{--            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>--}}
+{{--        </a>--}}
 
         <span class="stext-109 cl4">
-				Rolls-Roys - Golden Retriever
+				  {{$tc->tc_ten}}
 			</span>
     </div>
 </div>
@@ -199,20 +244,20 @@
             <!-- Tab01 -->
             <div class="tab01">
                 <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
+                <ul class="nav nav-tabs" role="tablist" id="myTab">
                     <li class="nav-item p-b-10">
-                        <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
+                        <a class="nav-link active" id="mota" data-toggle="tab" href="#description" role="tab" style="font-size: 16px">Mô tả chi tiết</a>
                     </li>
 
                     <li class="nav-item p-b-10">
-                        <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+                        <a class="nav-link  " id="binhluan" data-toggle="tab" href="#reviews" role="tab"style="font-size: 16px">Bình luận</a>
                     </li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content p-t-43">
                     <!-- - -->
-                    <div class="tab-pane fade show active" id="description" role="tabpanel">
+                    <div class="tab-pane fade show active " id="description" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
                             <p class="stext-102 cl6">
                                 {!! $tc->tc_moTa !!}
@@ -224,7 +269,7 @@
 
 
                     <!-- - -->
-                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <div class="tab-pane fade show " id="reviews" role="tabpanel">
                         <div class="row">
                             <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                 <div class="p-b-30 m-lr-15-sm">
@@ -232,38 +277,38 @@
                                     @foreach($binhluan as $bl)
                                     <div class="flex-w flex-t p-b-68">
                                         <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-{{--                                            <img src="{{ asset('themes/cozastore/images/spcho4.png')}}" alt="AVATAR">--}}
+                                            <img src="{{ asset('img/avata.jpg')}}" alt="AVATAR">
                                         </div>
 
                                         <div class="size-207">
                                             <div class="flex-w flex-sb-m p-b-17">
-													<span class="mtext-107 cl2 p-r-20">
+													<span class="mtext-107 cl2 p-r-20" style="font-size: 20px">
 														 {{$bl->kh_taiKhoan}}
 													</span>
-                                                <span class="fs-18 ">
-														2 tháng trước
-													</span>
+                                                <span class="fs-18" style="font-size: 14px;color: #878787;">
+														<?php echo time_elapsed_string($bl->bl_thoiGian);?>
+                                                </span>
                                             </div>
 
                                             <p class="stext-102 cl6">
-                                                {{$bl->bl_noiDung}}}
+                                                {{$bl->bl_noiDung}}
                                             </p>
                                         </div>
                                     </div>
                                     @endforeach
                                     <!-- Add review -->
-                                    <form class="w-full">
+                                    <form class="w-full" name="frmBinhluan" id="frmBinhluan">
                                         <h5 class="mtext-108 cl2 p-b-7">
-                                            Add a review
+                                           Bình luận
                                         </h5>
                                         <div class="row p-b-25">
                                             <div class="col-12 p-b-5">
-                                                <label class="stext-102 cl3" for="review">Your review</label>
-                                                <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+                                                <label class="stext-102 cl3" for="review">Nhập vào đây</label>
+                                                <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="noiDung" name="noiDung"></textarea>
                                             </div>
                                         </div>
 
-                                        <button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+                                        <button id="btnComment" class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10" >
                                             Submit
                                         </button>
                                     </form>
@@ -325,7 +370,46 @@
 </div>
 </div>
 @section('custom-scripts')
-    <script>
+
+<script>
+    $(document).ready(function(e){
+        $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        var activeTab = localStorage.getItem('activeTab');
+        if(activeTab){
+            $('#myTab a[href="' + activeTab + '"]').tab('show');
+            document.getElementById('noiDung').scrollIntoView();
+        }
+    });
+    $('#btnComment').click(function(){
+        var tdn = '<?php echo Session::get('tenDangNhap');  ?>';
+        if (tdn){
+            var url =  'http://localhost/petshop/public/binhluan/'+{{ $tc->tc_id }};
+            // alert(url);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data:{
+                    'kh_taiKhoan' : tdn,
+                    'noiDung' : $("#noiDung").val(),
+                    "_token": "{{ csrf_token() }}",
+                },
+                success: function(response){
+                    location.reload();
+                },
+                error:function(response){
+
+                }
+            });
+        }
+        else {
+            window.location="http://localhost/petshop/public/dangnhap";
+        }
+
+    });
+</script>
+<script>
         app.controller ('customs', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
             ngCart.setShipping(0);
 
@@ -353,6 +437,8 @@
                 });
                 // console.log();
             });
+
+
         }]);
-    </script>
+</script>
     @endsection

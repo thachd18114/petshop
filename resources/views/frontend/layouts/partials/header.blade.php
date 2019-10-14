@@ -16,7 +16,7 @@
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="dropdown-menu">
                             <li><a href="{{route('frontend.account')}}">Quản lý tài khoản</a></li>
-                            <li><a href="#" >Đơn hàng</a></li>
+                            <li><a href="{{route('frontend.account.order')}}" >Đơn hàng</a></li>
                             <li><a href="{{route('logout')}}" >Đăng xuất</a></li>
                         </ul>
                     </a>

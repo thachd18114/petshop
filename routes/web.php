@@ -124,7 +124,7 @@ Route::get('/admin/delete_nhacungcap/{id}','NhaCungCapController@delete');
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
 Route::get('/thu-cung', 'Frontend\FrontendController@product')->name('frontend.product');
 Route::get('/thu-cung/{id}', 'Frontend\FrontendController@productDetail')->name('frontend.productDetail');
-
+Route::post('/binhluan/{id}', 'BinhLuanController@store')->name('binhluan');
 
 Route::get('/gio-hang', 'Frontend\FrontendController@cart')->name('frontend.cart');
 
@@ -135,6 +135,10 @@ Route::get('/chooes-checkout', 'Frontend\FrontendController@choosecheckout')->na
 Route::get('/account-info', 'Frontend\FrontendController@account')->name('frontend.account');
 
 Route::post('/update-account', 'Frontend\FrontendController@update_acount')->name('frontend.update_acount');
+
+Route::get('/account-order/', 'Frontend\FrontendController@list_order')->name('frontend.account.order');
+
+Route::get('/order-info/{id}', 'Frontend\FrontendController@order_info')->name('frontend.order.info');
 
 Route::get('/lienhe', function (){
     return view('frontend.pages.contact');

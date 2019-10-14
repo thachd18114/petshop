@@ -78,7 +78,7 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fas fa-file-import"></i>
-                    <span>&nbsp;Phiếu nhập</span>
+                    <span>&nbsp;Trạng thái đơn hàng</span>
                 </a>
             </li>
             <li class="">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\BinhLuan;
 use App\ChiTietDonHang;
+use App\ChiTietKhuyenMai;
 use App\DonHang;
 use App\Giong;
 use App\HinhAnh;
@@ -145,7 +146,7 @@ class FrontendController extends Controller
             ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
                 'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
                 'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'loaithucung.ltc_id','loaithucung.ltc_ten')
-//            ->orHaving('cou')
+            ->Having('tc_trangThai', '=',1)
             ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,  loaithucung.*,max(`km_giaTri`) as giatri');
         // Kiểm tra điều kiện `searchByLoaiMa`
         $searchByGiongMa = $request->query('searchByGiongMa');
@@ -192,6 +193,39 @@ class FrontendController extends Controller
             return view('frontend.pages.dangnhap');
         }
     }
+    public function list_order()
+    {
+        if (Session::has('tenDangNhap')) {
+            $taikhoan = Session::get('tenDangNhap');
+            $kh = KhachHang::where('kh_taiKhoan', $taikhoan)->first();
+            $ds_donhang = DonHang::join('hinhthucthanhtoan', 'hinhthucthanhtoan.httt_id', '=', 'donhang.httt_id')
+                ->join('trangthaidonhang', 'trangthaidonhang.ttdh_id', '=', 'donhang.ttdh_id')
+                ->where('kh_id', $kh->kh_id)
+                ->orderBy('dh_ngayTao','desc')
+                ->get();
 
+            return view('frontend.pages.order')
+                ->with('ds_donhang', $ds_donhang);
+        }
+        else {
+            return view('frontend.pages.dangnhap');
+        }
+    }
+
+    public function order_info($id)
+    {
+        if (Session::has('tenDangNhap')) {
+
+            $chitiet = ChiTietDonHang::join('thucung', 'thucung.tc_id', '=', 'chitietdonhang.tc_id')
+                ->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+                ->select('giong.g_ten','thucung.tc_id', 'thucung.tc_ten', 'thucung.tc_giaBan', 'thucung.g_id')
+                ->where('chitietdonhang.dh_id', $id)->get();
+            return view('frontend.pages.order-detail')
+                ->with('chitiet', $chitiet);
+        }
+        else {
+            return view('frontend.pages.dangnhap');
+        }
+    }
 
 }
