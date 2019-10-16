@@ -6,4 +6,4 @@ var app = angular.module('petApp', ['ngCart'],
     function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
-    }).constant('MainURL', 'http://petshopct.herokuapp.com/public');
+    }).constant('MainURL', 'http://petshopct.herokuapp.com/public/');
