@@ -385,7 +385,7 @@ function time_elapsed_string($datetime, $full = false) {
     $('#btnComment').click(function(){
         var tdn = '<?php echo Session::get('tenDangNhap');  ?>';
         if (tdn){
-            var url =  'http://localhost/petshop/public/binhluan/'+{{ $tc->tc_id }};
+            var url =  'http://petshopct.herokuapp.com/public/binhluan/'+{{ $tc->tc_id }};
             // alert(url);
             $.ajax({
                 url: url,
@@ -404,7 +404,7 @@ function time_elapsed_string($datetime, $full = false) {
             });
         }
         else {
-            window.location="http://localhost/petshop/public/dangnhap";
+            window.location="http://petshopct.herokuapp.com/public/dangnhap";
         }
 
     });

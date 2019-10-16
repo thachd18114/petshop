@@ -118,7 +118,7 @@
                     kh_taiKhoan:{
                         required: true,
                         maxlength: 16,
-                        remote: "http://localhost/petshop/public/checkUser"
+                        remote: "http://petshopct.herokuapp.com/public/checkUser"
                     },
                     kh_matKhau:{
                         required: true
