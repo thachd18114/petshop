@@ -34,9 +34,9 @@
                 <td>{{$dh->dh_tongGia}}</td>
                 <td>{{$dh->ttdh_ten}}</td>
                 @if($dh->ttdh_id ==1)
-                    <td><a href="{{route('frontend.order.info', ['id'=> $dh->dh_id])}}">Chi tiết</a> &nbsp&nbsp&nbsp <a href="#">Hủy</a>&nbsp</td>
+                    <td><a href="{{route('frontend.order.info', ['id'=> $dh->dh_id])}}">Chi tiết</a> &nbsp&nbsp&nbsp <button  onclick="xoa()" id="detele" >Hủy</button>&nbsp</td>
                 @else
-                    <td><a href="#">Chi tiết</a></td>
+                    <td><a href="{{route('frontend.order.info', ['id'=> $dh->dh_id])}}">Chi tiết</a></td>
                 @endif
             </tr>
 
@@ -53,4 +53,32 @@
         </div>
     </div>
     @endif
+@section('custom-scripts')
+    <script type="text/javascript">
+     function xoa(){
+         swal({
+                 title: "Bạn có muốn hủy đơn hàng ?",
+                 text: "",
+                 type: "warning",
+                 showCancelButton: true,
+                 confirmButtonClass: "btn-danger",
+                 confirmButtonText: "Chấp nhận",
+                 cancelButtonText: "Không",
+                 closeOnConfirm: false
+             },
+             function(isConfirm) {
+                 if (isConfirm) {
+                     $http.get(MainURL+'delete_giong/'+id).then(function(){
+                         swal("", "Hủy thành công!", "success")
+
+                     }).catch(function(){
+                         swal("",'Có lỗi xảy ra!', "error");
+
+                     });
+
+                 }
+             });
+        }
+    </script>
+@endsection
 

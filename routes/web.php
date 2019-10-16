@@ -16,10 +16,12 @@ Route::get('/', function () {
 });
 Route::get('/admin', function (){
     return view('backend.layout.master');
-});
+})->name('trangchu');
 Route::get('/admin/dangnhap', function (){
-    return view('backend.dangnhap');
-});
+    return view('backend.dangnhap');})->name('dangnhap.ad');;
+Route::post('admin/dangnhap/checkad','DangNhapController@loginAdmin')->name('checkLoginAD');
+Route::get('admin/dangxuat','DangXuatController@logoutAd')->name('logoutAd');
+
 Route::get('/dangnhap','DangNhapController@index')->name('dangnhap');
 Route::post('/dangnhap/check','DangNhapController@check')->name('dangnhap.check');
 

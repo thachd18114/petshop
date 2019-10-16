@@ -18,7 +18,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{asset('themes/adminlte/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Phuc mat xe</span>
+                        <span class="hidden-xs">{{ Session::get('tenDangNhap') }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -26,16 +26,15 @@
                             <img src="{{asset('themes/adminlte/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
 
                             <p>
-                                Phuc mat xe
-                                <small>Member since Nov. 2012</small>
+                                {{ Session::get('tenDangNhap') }}
                             </p>
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="#" class="btn btn-default btn-flat">Cập nhật thông tin</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="{{route('logoutAd')}}" class="btn btn-default btn-flat">Đăng xuất</a>
                             </div>
                         </li>
                     </ul>

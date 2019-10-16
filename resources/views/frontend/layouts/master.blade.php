@@ -71,7 +71,7 @@
 <script src="{{ asset('themes/cozastore/js/slick-custom.js') }}"></script>
 <!--===============================================================================================-->
 <script src="{{ asset('themes/cozastore/vendor/parallax100/parallax100.js') }}"></script>
-
+<link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap-sweetalert/dist/sweetalert.css') }}">
 <!--===============================================================================================-->
 <script src="{{ asset('themes/cozastore/vendor/MagnificPopup/jquery.magnific-popup.min.js') }}"></script>
 
@@ -83,6 +83,7 @@
 <!--===============================================================================================-->
 <script src="{{ asset('themes/cozastore/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 <!--===============================================================================================-->
+<script src="{{ asset('vendor/bootstrap-sweetalert/dist/sweetalert.min.js') }}"></script>
 <script src="{{ asset('themes/cozastore/js/main.js') }}"></script>
 <script src="{{ asset('app/lib/angular.min.js') }}"></script>
 <!-- Include thư viện quản lý Cart - AngularJS -->

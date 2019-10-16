@@ -7,7 +7,7 @@
 @section('custom-css')
 @endsection
 @section('main-content')
-    @include('frontend.widgets.order-info')
+    @include('frontend.widgets.order-info',[$data = $chitiet, $tam=$tamtinh,$dh=$donhang])
 @endsection
 @section('custom-scripts')
 

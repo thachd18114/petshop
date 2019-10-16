@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>Đănh nhập </title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ asset('themes/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
@@ -24,31 +24,30 @@
 
 <body class="login">
 <div>
-    <a class="hiddenanchor" id="signup"></a>
-    <a class="hiddenanchor" id="signin"></a>
-
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form>
-                    <h1>Login Form</h1>
+                <form name="frmLoginAd" action="{{ route('checkLoginAD') }}" method="POST">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <h1>Đăng nhập</h1>
                     <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
+                        <input type="text" class="form-control" name="nv_taiKhoan" id="nv_taiKhoan" placeholder="Username" required="" />
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
+                        <input type="password" class="form-control" id="nv_matKhau" name="nv_matKhau" placeholder="Password" required="" />
                     </div>
+                    @if(session()->has('error'))
+                        <div style="color: red;padding-bottom: 10px">
+                            {{ session()->get('error') }}
+                        </div>
+                    @endif
                     <div>
-                        <a class="btn btn-default submit" href="index.html">Log in</a>
-                        <a class="reset_pass" href="#">Lost your password?</a>
+                        <button type="submit" class="btn btn-default submit">Đăng nhập</button>
                     </div>
 
                     <div class="clearfix"></div>
 
                     <div class="separator">
-                        <p class="change_link">New to site?
-                            <a href="#signup" class="to_register"> Create Account </a>
-                        </p>
 
                         <div class="clearfix"></div>
                         <br />
@@ -56,42 +55,6 @@
                         <div>
                             <h1><i class="fa fa-paw"></i> PETSHOP!</h1>
                             <p>©2019 All Rights Reserved. </p>
-                        </div>
-                    </div>
-                </form>
-            </section>
-        </div>
-
-        <div id="register" class="animate form registration_form">
-            <section class="login_content">
-                <form>
-                    <h1>Create Account</h1>
-                    <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
-                    </div>
-                    <div>
-                        <input type="email" class="form-control" placeholder="Email" required="" />
-                    </div>
-                    <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
-                    </div>
-                    <div>
-                        <a class="btn btn-default submit" href="index.html">Submit</a>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="separator">
-                        <p class="change_link">Already a member ?
-                            <a href="#signin" class="to_register"> Log in </a>
-                        </p>
-
-                        <div class="clearfix"></div>
-                        <br />
-
-                        <div>
-                            <h1><i class="fa fa-paw"></i> PETSHOP</h1>
-                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
                         </div>
                     </div>
                 </form>

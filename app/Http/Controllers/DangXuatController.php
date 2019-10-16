@@ -14,4 +14,14 @@ class DangXuatController extends Controller
 
         return redirect(route('frontend.home'));
     }
+
+    public function logoutAd(){
+        if(Session::has('tenDangNhap')){
+            Session::forget('tenDangNhap');
+        }
+        if(Session::has('quyen')){
+            Session::forget('quyen');
+        }
+        return redirect(route('dangnhap.ad'));
+    }
 }

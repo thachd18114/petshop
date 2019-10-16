@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\KhachHang;
+use App\NhanVien;
 use Illuminate\Http\Request;
 use Session;
 
@@ -20,6 +21,24 @@ class DangNhapController extends Controller
             $request->session()->put('tenDangNhap',$kh->kh_taiKhoan);
             $request->session()->put('id',$kh->kh_id);
             return redirect(route('frontend.home'));
+        }
+        else {
+            return redirect()->back()->with('error','Sai tài khoản hoặc mật khẩu!');
+        }
+    }
+
+    public function loginAdmin(Request $request){
+        if(Session::has('tenDangNhap')){
+            Session::forget('tenDangNhap');
+        }
+        if(Session::has('quyen')){
+            Session::forget('quyen');
+        }
+        $tk = NhanVien::where('nv_taiKhoan',$request->nv_taiKhoan)->where('nv_matKhau',$request->nv_matKhau)->first();
+        if ($tk) {
+            $request->session()->put('tenDangNhap',$tk->nv_taiKhoan);
+            $request->session()->put('id',$tk->nv_id);
+            return redirect(route('trangchu'));
         }
         else {
             return redirect()->back()->with('error','Sai tài khoản hoặc mật khẩu!');

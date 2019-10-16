@@ -215,17 +215,43 @@ class FrontendController extends Controller
     public function order_info($id)
     {
         if (Session::has('tenDangNhap')) {
+            $donhang = DonHang::join('khachhang', 'khachhang.kh_id', '=', 'donhang.kh_id')
+                ->join('hinhthucthanhtoan', 'hinhthucthanhtoan.httt_id', '=', 'donhang.httt_id')->where('dh_id', $id)->first();
 
-            $chitiet = ChiTietDonHang::join('thucung', 'thucung.tc_id', '=', 'chitietdonhang.tc_id')
-                ->join('giong', 'giong.g_id', '=', 'thucung.g_id')
-                ->select('giong.g_ten','thucung.tc_id', 'thucung.tc_ten', 'thucung.tc_giaBan', 'thucung.g_id')
-                ->where('chitietdonhang.dh_id', $id)->get();
+            $data = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+            $chitiet = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+               ->join('chitietdonhang','chitietdonhang.tc_id', '=', 'thucung.tc_id')
+                ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=',
+                    '1')->where('thucung.tc_id', $id)->select('thucung.*','ha_ten','g_ten')
+                ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
+                ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
+                ->leftjoin ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
+                ->where('km_ngayBatDau', '<=', $data)
+                ->where('km_ngayKetThuc', '>=',$data)
+                ->orWhere('km_ngayBatDau' ,'=', null)
+                ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
+                    'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
+                    'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'loaithucung.ltc_id','loaithucung.ltc_ten','chitietdonhang.dh_id')
+               ->having('chitietdonhang.dh_id', $id)
+                ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,  loaithucung.*,max(`km_giaTri`) as giatri,chitietdonhang.dh_id')
+                ->get();
+
+            $tamtinh = 0;
+            foreach ($chitiet as $ct){
+                $tamtinh += $ct->tc_giaBan-$ct->tc_giaBan*$ct->giatri;
+            }
             return view('frontend.pages.order-detail')
-                ->with('chitiet', $chitiet);
+                ->with('chitiet', $chitiet)
+                ->with('donhang', $donhang)
+                ->with('tamtinh', $tamtinh);
         }
         else {
             return view('frontend.pages.dangnhap');
         }
+    }
+
+    public function cancel_order($id) {
+
     }
 
 }
