@@ -1,9 +1,9 @@
 var b = angular.module('backend', ['datatables','ckeditor','file-model'], function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
-    }).constant('MainURL', 'http://localhost/petshop/public/admin/');
+    }).constant('MainURL', 'http://petshopct.herokuapp.com/public/admin/');
 var app = angular.module('petApp', ['ngCart'],
     function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
-    }).constant('MainURL', 'http://localhost/petshop/public/');
+    }).constant('MainURL', 'http://petshopct.herokuapp.com/public');
