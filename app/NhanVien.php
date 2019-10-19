@@ -15,4 +15,8 @@ class NhanVien extends Model
 
     protected $dates        = ['nv_ngaySinh'];
     protected $dateFormat   = 'Y-m-d H:i:s';
+
+    public function Quyen() {
+        return $this->belongsTo('App\Quyen', 'q_id', 'q_id');
+    }
 }

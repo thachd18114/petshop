@@ -81,8 +81,8 @@
                     <span>&nbsp;Trạng thái đơn hàng</span>
                 </a>
             </li>
-            <li class="">
-                <a href="#">
+            <li class="@yield('quyen')">
+                <a href="{{route('quyen')}}">
                     <i class="fas fa-user-clock"></i>
                     <span>&nbsp;Quyền</span>
                 </a>
@@ -91,6 +91,12 @@
                 <a href="#">
                     <i class="fas fa-user-clock"></i>
                     <span>&nbsp;Nhan Vien</span>
+                </a>
+            </li>
+            <li class="@yield('faq')">
+                <a href="{{route('faq')}}">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>&nbsp;FAQ</span>
                 </a>
             </li>
         </ul>

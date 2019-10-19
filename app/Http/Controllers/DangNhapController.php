@@ -28,16 +28,16 @@ class DangNhapController extends Controller
     }
 
     public function loginAdmin(Request $request){
-        if(Session::has('tenDangNhap')){
+        if(Session::has('tenDangNhapAD')){
             Session::forget('tenDangNhap');
         }
         if(Session::has('quyen')){
             Session::forget('quyen');
         }
-        $tk = NhanVien::where('nv_taiKhoan',$request->nv_taiKhoan)->where('nv_matKhau',$request->nv_matKhau)->first();
+        $tk = NhanVien::where('nv_taiKhoan',$request->nv_taiKhoan)->where('nv_matKhau',md5($request->nv_matKhau))->first();
         if ($tk) {
-            $request->session()->put('tenDangNhap',$tk->nv_taiKhoan);
-            $request->session()->put('id',$tk->nv_id);
+            $request->session()->put('tenDangNhapAD',$tk->nv_taiKhoan);
+            $request->session()->put('quyen',$tk->q_id);
             return redirect(route('trangchu'));
         }
         else {

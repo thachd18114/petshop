@@ -122,9 +122,29 @@ Route::get('/admin/edit_nhacungcap/{id}', 'NhaCungCapController@edit');
 Route::post('/admin/update_nhacungcap/{id}','NhaCungCapController@update');
 Route::get('/admin/delete_nhacungcap/{id}','NhaCungCapController@delete');
 
+//-------------------------------quyen-------------------------------------//
+
+Route::get('/admin/list_quyen', 'QuyenController@index');
+Route::get('/admin/quyen', function (){return view('backend.quyen.index');})->name('quyen');
+Route::post('/admin/createquyen','QuyenController@store');
+Route::get('/admin/edit_quyen/{id}', 'QuyenController@edit');
+Route::post('/admin/update_quyen/{id}','QuyenController@update');
+Route::get('/admin/delete_quyen/{id}','QuyenController@delete');
+
+//-------------------------------FAQ-------------------------------------//
+
+Route::get('/admin/list_faq', 'FaqController@index');
+Route::get('/admin/faq', function (){return view('backend.faq.index');})->name('faq');
+Route::get('/admin/faq/{id}', 'FaqController@getKh_id');
+Route::get('/admin/faq_info/{id}','FaqController@faq_info');
+Route::post('/admin/create_ph/', 'FaqController@store_ph');
+//Route::post('/admin/update_quyen/{id}','QuyenController@update');
+//Route::get('/admin/delete_quyen/{id}','QuyenController@delete');
+
 //-------------------------------Frontend-------------------------------------//
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
-Route::get('/thu-cung', 'Frontend\FrontendController@product')->name('frontend.product');
+Route::get('/filter-giong/{id}', 'Frontend\FrontendController@filter_giong');
+Route::get('/thu-cung','Frontend\FrontendController@product' )->name('frontend.product');
 Route::get('/thu-cung/{id}', 'Frontend\FrontendController@productDetail')->name('frontend.productDetail');
 Route::post('/binhluan/{id}', 'BinhLuanController@store')->name('binhluan');
 
@@ -142,6 +162,8 @@ Route::get('/account-order/', 'Frontend\FrontendController@list_order')->name('f
 
 Route::get('/order-info/{id}', 'Frontend\FrontendController@order_info')->name('frontend.order.info');
 
-Route::get('/lienhe', function (){
-    return view('frontend.pages.contact');
-});
+Route::get('/faq', 'FaqController@ftfaq_info')->name('frontend.faq');
+
+Route::GET('/question/', 'FaqController@store_ch')->name('question');
+
+

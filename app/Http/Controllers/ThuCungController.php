@@ -53,12 +53,12 @@ class ThuCungController extends Controller
             foreach ($request->ha_ten as $index => $file) {
                 $name = $id . '_' . $index . '_' . $file->getClientOriginalName();
                 $file->storeAs('public/photos', $name);
-                $ten = storage_path('app/photos/'.$name);
+
                 // Tạo đối tưọng HinhAnh
                 $hinhAnh = new HinhAnh();
                 $hinhAnh->tc_id = $id;
                 $hinhAnh->ha_id = ($index + 1);
-                $hinhAnh->ha_ten = $ten;
+                $hinhAnh->ha_ten = $name;
                 $hinhAnh->save();
             }
             return response(["error" => false, "message" => compact('hinhAnh')], 200);

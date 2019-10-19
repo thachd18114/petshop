@@ -16,8 +16,8 @@ class DangXuatController extends Controller
     }
 
     public function logoutAd(){
-        if(Session::has('tenDangNhap')){
-            Session::forget('tenDangNhap');
+        if(Session::has('tenDangNhapAD')){
+            Session::forget('tenDangNhapAD');
         }
         if(Session::has('quyen')){
             Session::forget('quyen');

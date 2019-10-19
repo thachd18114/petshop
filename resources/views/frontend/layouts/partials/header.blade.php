@@ -8,7 +8,7 @@
 
                 </div>
                 <div class="right-top-bar flex-w h-full">
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    <a href="{{route('frontend.faq')}}"  class="flex-c-m trans-04 p-lr-25">
                         Help & FAQs
                     </a>
                     @if(session('tenDangNhap'))
@@ -84,23 +84,26 @@
     </div>
 </header>
 @section('custom-scripts')
-    <script>
-        app.controller ('summary', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
-            ngCart.setShipping(0);
+{{--    <script>--}}
+{{--        app.controller ('summary', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {--}}
+{{--            ngCart.setShipping(0);--}}
 
-            angular.forEach(ngCart.getCart().items, function(value, key) {
-                angular.forEach(ngCart.getCart().items, function (value, key) {
-                    $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
-                        $scope.thucung = response.data;
-                        if($scope.thucung){
-                            value.setPrice($scope.thucung.tc_giaBan);
-                            value.setName($scope.thucung.tc_ten);
-                            // value.setData($scope.thucung.tc_giaBan);
-                        }
-                    });
-                });
-                // console.log();
-            });
-        }]);
-    </script>
+{{--            angular.forEach(ngCart.getCart().items, function(value, key) {--}}
+{{--                angular.forEach(ngCart.getCart().items, function (value, key) {--}}
+{{--                    $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {--}}
+{{--                        $scope.thucung = response.data;--}}
+{{--                        if($scope.thucung){--}}
+{{--                            value.setPrice($scope.thucung.tc_giaBan);--}}
+{{--                            value.setName($scope.thucung.tc_ten);--}}
+{{--                            // value.setData($scope.thucung.tc_giaBan);--}}
+{{--                        }--}}
+{{--                    });--}}
+{{--                });--}}
+{{--                // console.log();--}}
+{{--            });--}}
+{{--            $scope.show = function () {--}}
+{{--                alert('ok');--}}
+{{--            }--}}
+{{--        }]);--}}
+{{--    </script>--}}
 @endsection

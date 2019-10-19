@@ -21,6 +21,7 @@ class ChiTietKhuyenMaiController extends Controller
 
     public function listthucung($id) {
         $ctkm = ChiTietKhuyenMai::where('km_id',$id)->get();
+        $data=[];
         foreach ($ctkm as $ct) {
             $data[] = $ct->tc_id;
         }

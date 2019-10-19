@@ -32,6 +32,10 @@ class KhuyenMaiController extends Controller
         if($khuyenmai)
         {
             $khuyenmai->km_ten = $request->km_ten;
+            $khuyenmai->km_giaTri = $request->km_giaTri;
+            $khuyenmai->km_ngayBatDau = $request->km_ngayBatDau;
+            $khuyenmai->km_ngayKetThuc = $request->km_ngayKetThuc;
+            $khuyenmai->km_trangThai = 1;
             $khuyenmai->save();
         }
         else

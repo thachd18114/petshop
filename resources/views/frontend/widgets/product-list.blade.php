@@ -1,4 +1,3 @@
-
 <section class="bg0 p-t-23 p-b-140">
     <div class="container">
         <div class="p-b-10">
@@ -9,12 +8,12 @@
 
         <div class="flex-w flex-sb-m p-b-52" ng-controller="summary">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*" ng-click="g(0)">
                     Tất cả thú cưng
                 </button>
 
                 @foreach($loaithucung as $loaithucung)
-                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".loai-{{$loaithucung->ltc_id}}">
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"  data-filter=".loai-{{$loaithucung->ltc_id}}" ng-click="g({{$loaithucung->ltc_id}})">
                         {{ $loaithucung->ltc_ten }}
                     </button>
                 @endforeach
@@ -50,31 +49,29 @@
                 <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
                     <div class="filter-col1 p-r-15 p-b-27">
                         <div class="mtext-102 cl2 p-b-15">
-                            Sắp xếp theo
+                            Giống
                         </div>
 
                         <ul>
-                            <li class="p-b-6">
-                                <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-                                        Tất cả thú cưng
+                            <li class="p-b-6" ng-show="!listg" >
+                                <div class="flex-w flex-l-m filter-tope-group m-tb-10 " >
+{{--                                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 " data-filter="*">--}}
+{{--                                        Tất cả giống--}}
+{{--                                    </button>--}}
+                                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".giong-<% lg.g_id %>" ng-repeat="lg in lg1">
+                                        <% lg.g_ten %>
                                     </button>
-                                        <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".giong-2">
-                                           sdad
-                                        </button>
                                 </div>
                             </li>
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Giá tăng dần
-                                </a>
+                                <div class="flex-w flex-l-m filter-tope-group m-tb-10" >
+                                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".giong-<% t.g_id %>" ng-repeat="t in listg">
+                                        <% t.g_ten %>
+                                    </button>
+                                </div>
                             </li>
 
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Giá giảm dần
-                                </a>
-                            </li>
+
                         </ul>
                     </div>
 
@@ -89,34 +86,45 @@
                                     All
                                 </a>
                             </li>
-
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
-                                    0đ - 1 triệu
+                                    Giá tăng dần
                                 </a>
                             </li>
 
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
-                                    1 triệu - 3 triệu
+                                    Giá giảm dần
                                 </a>
                             </li>
 
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
-                                    3 triệu - 7 triệu
+                                    0đ - 50 $
                                 </a>
                             </li>
 
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
-                                    7 triệu - 10 triệu
+                                    50$ - 400$
+                                </a>
+                            </li>
+
+{{--                            <li class="p-b-6">--}}
+{{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
+{{--                                    3 triệu - 7 triệu--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+
+                            <li class="p-b-6">
+                                <a href="#" class="filter-link stext-106 trans-04">
+                                    400$ - 800$
                                 </a>
                             </li>
 
                             <li class="p-b-6">
                                 <a href="#" class="filter-link stext-106 trans-04">
-                                    >10 triệu
+                                    >800$
                                 </a>
                             </li>
                         </ul>
@@ -199,8 +207,8 @@
                                 <img src="{{ asset('img/film-and-vid.jpg') }}" alt="IMG-PRODUCT">
                             @else
 
-                            <img src="{{ asset('storage/photos/' . $sp->ha_ten) }}" alt="IMG-PRODUCT" width="100%" height="180px">
-                        @endif
+                                <img src="{{ asset('storage/photos/' . $sp->ha_ten) }}" alt="IMG-PRODUCT" width="100%" height="180px">
+                            @endif
                             <a href="{{ route('frontend.productDetail',$sp->tc_id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                 Chi tiết
                             </a>
@@ -211,9 +219,9 @@
                                     <h4 id="tensp" >{{ $sp->tc_ten }}</h4>
                                 </a>
                                 <span class="stext-105 cl3" style="color: #e10c00; font-weight: bold; font-size: large">
-                                    @if($sp->giatri != null)
+                                    @if($sp->giatri != null && $sp->km_ngayBatDau <= $date && $sp->km_ngayKetThuc >= $date )
                                         <del style="color: #878787;">$ {{ $sp->tc_giaBan }}</del> <span style="padding-left: 15px">${{ $sp->tc_giaBan* (100-$sp->giatri)/100 }}</span>
-                            @else
+                                    @else
                                         $ {{ $sp->tc_giaBan }}
 
                                     @endif
@@ -227,27 +235,26 @@
 
 
 
-    </div>
+        </div>
 
-    <!-- Load more -->
-    <div class="flex-c-m flex-w w-full p-t-45">
-        <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-            Load More
-        </a>
-    </div>
+        <!-- Load more -->
+        <div class="flex-c-m flex-w w-full p-t-45">
+            <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                Load More
+            </a>
+        </div>
     </div>
 </section>
 @section('custom-scripts')
     <script>
         app.controller ('summary', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
             ngCart.setShipping(0);
-
             angular.forEach(ngCart.getCart().items, function(value, key) {
                 angular.forEach(ngCart.getCart().items, function (value, key) {
                     $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
                         $scope.thucung = response.data;
                         if($scope.thucung.length >0 || $scope.thucung.tc_trangThai === 1){
-                             $scope.gia = $scope.thucung.tc_giaBan*(100 - $scope.thucung.giatri)/100;
+                            $scope.gia = $scope.thucung.tc_giaBan*(100 - $scope.thucung.giatri)/100;
                             // console.log($scope.gia);
                             if ($scope.thucung.km_giaTri == null){
                                 value.setPrice($scope.gia);
@@ -256,8 +263,7 @@
                                 value.setPrice($scope.thucung.tc_giaBan);
                                 value.setName($scope.thucung.tc_ten);
                             }
-
-                             // value.setData($scope.thucung.tc_giaBan);
+                            // value.setData($scope.thucung.tc_giaBan);
                         }
                         else {
                             ngCart.removeItemById(value.getId());
@@ -266,8 +272,18 @@
                 });
                 // console.log();
             });
+            $scope.lg = function () {
+                $http.get(MainURL + 'admin/list_giong').then(function (response) {
+                    $scope.lg1 = response.data;
+                });
+            };
+            $scope.lg();
+            $scope.g = function (id) {
+
+                    $http.get(MainURL + 'filter-giong/' + id).then(function (response) {
+                        $scope.listg = response.data;
+                    });
+            };
         }]);
     </script>
 @endsection
-
-

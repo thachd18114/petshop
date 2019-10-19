@@ -18,7 +18,7 @@ class KhachHangController extends Controller
         $khachhang->kh_dienThoai = $request->kh_dienThoai;
         $khachhang->kh_email = $request->kh_email;
         $khachhang->kh_taiKhoan = $request->kh_taiKhoan;
-        $khachhang->kh_matKhau = $request->kh_matKhau;
+        $khachhang->kh_matKhau = md5($request->kh_matKhau);
         $khachhang->kh_gioiTinh = $request->kh_gioiTinh;
         $khachhang->kh_ngaySinh = $request->kh_ngaySinh;
         $khachhang->save();
