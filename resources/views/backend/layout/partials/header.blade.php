@@ -31,7 +31,7 @@
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Cập nhật thông tin</a>
+                                <a href="{{route('frontend.info.account')}}" class="btn btn-default btn-flat">Cập nhật thông tin</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{route('logoutAd')}}" class="btn btn-default btn-flat">Đăng xuất</a>

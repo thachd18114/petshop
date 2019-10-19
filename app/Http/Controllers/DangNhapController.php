@@ -44,4 +44,37 @@ class DangNhapController extends Controller
             return redirect()->back()->with('error','Sai tài khoản hoặc mật khẩu!');
         }
     }
+
+    public function account() {
+        if (Session::has('tenDangNhapAD')) {
+            $tdn = Session::get('tenDangNhapAD');
+            $tk = NhanVien::where('nv_taiKhoan', $tdn)->first();
+            return view('backend.thongtin')->with('tk', $tk);
+        } else {
+            return view('backend.dangnhap');
+        }
+    }
+    public function update_acount (Request $request)
+    {
+        if (Session::has('tenDangNhapAD')) {
+            $nv_taiKhoan = Session::get('tenDangNhapAD');
+            $data = NhanVien::where('nv_taiKhoan', $nv_taiKhoan)->first();
+            $id = $data->nv_id;
+            $nv = NhanVien::find($id);
+            $nv->nv_hoTen = $request->nv_hoTen;
+            $nv->nv_email = $request->nv_email;
+            $nv->nv_ngaySinh = $request->nv_ngaySinh;
+            $nv->nv_dienThoai = $request->nv_dienThoai;
+            $nv->nv_diaChi = $request->nv_diaChi;
+            $nv->nv_gioiTinh = $request->nv_gioiTinh;
+            if ($request->nv_matKhau != ''){
+                $nv->nv_matKhau = md5($request->nv_matKhau);
+            }
+            $nv->save();
+            return redirect()->back()->with('success','Lưu thành công');
+        }
+        else {
+            return view('frontend.pages.dangnhap');
+        }
+    }
 }

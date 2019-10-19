@@ -62,24 +62,29 @@ class FrontendController extends Controller
             ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,km_ngayBatDau, km_ngayKetThuc,  loaithucung.*,max(`km_giaTri`) as giatri')
             ->first();
         // Query Lấy các hình ảnh liên quan của các Sản phẩm đã được lọc
-        $danhsachhinhanhlienquan = DB::table('hinhanh')
-            ->where('tc_id', $id)
-            ->get();
+        if($thucung) {
+            $danhsachhinhanhlienquan = DB::table('hinhanh')
+                ->where('tc_id', $id)
+                ->get();
 //        $lienquan = ThuCung::where('g_id',$thucung->g_id)->first();
-        $idgiong = $thucung->g_id;
-        $lienquan = $query = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
-            ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
-            ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=', '1')
-            ->where('tc_trangThai', '=', '1')->where('giong.g_id', '=', $idgiong)->get();
-        $binhluan = DB::table('binhluan')->join('khachhang', 'khachhang.kh_id', '=', 'binhluan.kh_id')
-            ->where('tc_id', $id)->get();
-        //dd($binhluan);
-        return view('frontend.pages.product-detail')
-            ->with('tc', $thucung)
-            ->with('lienquan', $lienquan)
-            ->with('date', $date)
-            ->with('danhsachhinhanhlienquan', $danhsachhinhanhlienquan)
-            ->with('binhluan', $binhluan);
+            $idgiong = $thucung->g_id;
+            $lienquan = $query = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+                ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
+                ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=', '1')
+                ->where('tc_trangThai', '=', '1')->where('giong.g_id', '=', $idgiong)->get();
+            $binhluan = DB::table('binhluan')->join('khachhang', 'khachhang.kh_id', '=', 'binhluan.kh_id')
+                ->where('tc_id', $id)->get();
+            //dd($binhluan);
+            return view('frontend.pages.product-detail')
+                ->with('tc', $thucung)
+                ->with('lienquan', $lienquan)
+                ->with('date', $date)
+                ->with('danhsachhinhanhlienquan', $danhsachhinhanhlienquan)
+                ->with('binhluan', $binhluan);
+        }else{
+            return view('errors.404');
+        }
+
     }
 
 

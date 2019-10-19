@@ -18,8 +18,12 @@ Route::get('/admin', function (){
     return view('backend.layout.master');
 })->name('trangchu');
 Route::get('/admin/dangnhap', function (){
-    return view('backend.dangnhap');})->name('dangnhap.ad');;
+    return view('backend.dangnhap');})->name('dangnhap.ad');
 Route::post('admin/dangnhap/checkad','DangNhapController@loginAdmin')->name('checkLoginAD');
+
+Route::get('/admin/info_account','DangNhapController@account' )->name('frontend.info.account');
+Route::post('admin/update_account','DangNhapController@update_acount')->name('frontend.update.account');
+
 Route::get('admin/dangxuat','DangXuatController@logoutAd')->name('logoutAd');
 
 Route::get('/dangnhap','DangNhapController@index')->name('dangnhap');
