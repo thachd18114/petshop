@@ -12,8 +12,8 @@
         </form>
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="">
-                <a href="#">
+            <li class="@yield('trangchu') ">
+                <a href="{{ route('trangchu') }}">
                     <i class="fas fa-tachometer-alt"></i>
                     <span> &nbsp; Trang Chủ</span>
                 </a>

@@ -13,8 +13,8 @@ class FaqController extends Controller
 {
     public function index(){
         if(Session::has('tenDangNhapAD')){
-            $id = KhachHang::where('kh_taiKhoan', Session::get('tenDangNhap'))->first();
-            $ch = CauHoi::join('khachhang', 'khachhang.kh_id', '=', 'cauhoi.kh_id')->where('cauhoi.kh_id',$id->kh_id)
+        //    $id = KhachHang::where('kh_taiKhoan', Session::get('tenDangNhap'))->first();
+            $ch = CauHoi::join('khachhang', 'khachhang.kh_id', '=', 'cauhoi.kh_id')
                 ->orderBy('ch_thoiGian', 'desc')->limit(1)
                 ->select('kh_taiKhoan','cauhoi.ch_id','khachhang.kh_id', 'ch_thoiGian', 'ch_noiDung')
                 ->get();
@@ -115,6 +115,9 @@ class FaqController extends Controller
         return view('frontend.pages.faq')
             ->with('faq', $object)
             ->with('sl', $i);
+        }
+        else{
+            return view('frontend.pages.dangnhap');
         }
     }
     public function store_ch(Request $request){

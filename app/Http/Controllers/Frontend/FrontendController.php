@@ -44,6 +44,7 @@ class FrontendController extends Controller
 
     public function productDetail(Request $request, $id)
     {
+        $tc_id =[$id];
         $date = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
         $thucung = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
             ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=',
@@ -71,7 +72,10 @@ class FrontendController extends Controller
             $lienquan = $query = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
                 ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
                 ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=', '1')
-                ->where('tc_trangThai', '=', '1')->where('giong.g_id', '=', $idgiong)->get();
+                ->where('tc_trangThai', '=', '1')
+                ->where('giong.g_id', '=', $idgiong)
+                ->whereNotIn('thucung.tc_id',$tc_id)
+                ->get();
             $binhluan = DB::table('binhluan')->join('khachhang', 'khachhang.kh_id', '=', 'binhluan.kh_id')
                 ->where('tc_id', $id)->get();
             //dd($binhluan);
@@ -162,6 +166,8 @@ class FrontendController extends Controller
         $searchByGiongMa = $request->query('searchByGiongMa');
         // dd($query);
         if ($searchByGiongMa != null) {
+            $query->orderBy('thucung.tc_giaBan',$searchByGiongMa)
+                ->get();
         }
 
         $data = $query->get();

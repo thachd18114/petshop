@@ -13,7 +13,7 @@
                 </button>
 
                 @foreach($loaithucung as $loaithucung)
-                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"  data-filter=".loai-{{$loaithucung->ltc_id}}" ng-click="g({{$loaithucung->ltc_id}})">
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="getLTC({{$loaithucung->ltc_id}})"   data-filter=".loai-{{$loaithucung->ltc_id}}" ng-click="g({{$loaithucung->ltc_id}})">
                         {{ $loaithucung->ltc_ten }}
                     </button>
                 @endforeach
@@ -81,34 +81,34 @@
                         </div>
 
                         <ul>
+{{--                            <li class="p-b-6">--}}
+{{--                                <a href="{{route('frontend.home')}}" class="filter-link stext-106 trans-04">--}}
+{{--                                    All--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                    All
-                                </a>
-                            </li>
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="{{route('frontend.home', ['searchByGiongMa'=> 'asc'])}}" class="filter-link stext-106 trans-04">
                                     Giá tăng dần
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="{{route('frontend.home', ['searchByGiongMa'=> 'desc'])}}" class="filter-link stext-106 trans-04">
                                     Giá giảm dần
                                 </a>
                             </li>
 
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    0đ - 50 $
-                                </a>
-                            </li>
+{{--                            <li class="p-b-6">--}}
+{{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
+{{--                                    0đ - 50 $--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    50$ - 400$
-                                </a>
-                            </li>
+{{--                            <li class="p-b-6">--}}
+{{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
+{{--                                    50$ - 400$--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
 {{--                            <li class="p-b-6">--}}
 {{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
@@ -116,17 +116,17 @@
 {{--                                </a>--}}
 {{--                            </li>--}}
 
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    400$ - 800$
-                                </a>
-                            </li>
+{{--                            <li class="p-b-6">--}}
+{{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
+{{--                                    400$ - 800$--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    >800$
-                                </a>
-                            </li>
+{{--                            <li class="p-b-6">--}}
+{{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
+{{--                                    >800$--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
                         </ul>
                     </div>
 
@@ -141,7 +141,7 @@
 										<i class="zmdi zmdi-circle"></i>
 									</span>
 
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="" class="filter-link stext-106 trans-04">
                                     Hàn Quốc
                                 </a>
                             </li>
@@ -184,7 +184,7 @@
                         </div>
 
                         <div class="flex-w p-t-4 m-r--5">
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="{{route('frontend.home', ['searchByGiongMa'=> 'asc'])}}" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Đực
                             </a>
 
@@ -244,8 +244,15 @@
             </a>
         </div>
     </div>
+    <div style="" id="getLTC"></div>
 </section>
 @section('custom-scripts')
+    <script>
+
+        function getLTC(id) {
+            document.getElementById("getLTC").innerHTML = id;
+        }
+    </script>
     <script>
         app.controller ('summary', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
             ngCart.setShipping(0);
@@ -283,6 +290,9 @@
                     $http.get(MainURL + 'filter-giong/' + id).then(function (response) {
                         $scope.listg = response.data;
                     });
+            };
+            $scope.getLoai = function (id) {
+                return id
             };
         }]);
     </script>

@@ -38,10 +38,10 @@
             <nav class="limiter-menu-desktop container">
                 <!-- Logo desktop -->
                 <a href="" class="logo">
-                    <img src="{{ asset('themes/cozastore/images/icons/logo-01.png') }}" alt="IMG-LOGO">
+                    <img src="{{ asset('img/logo2_1.png') }}"  height="100%"  style="margin-top: -10px"  alt="IMG-LOGO">
                 </a>
                 <!-- Menu desktop -->
-                <div class="menu-desktop">
+                <div class="menu-desktop" style="margin-left: -10px">
                     <ul class="main-menu">
                         <li class="{{ Request::is('') ? 'active-menu' : '' }}">
                             <a href="{{ route('frontend.home') }}">Trang chủ</a>

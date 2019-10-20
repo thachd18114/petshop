@@ -133,6 +133,7 @@
 <script src="{{ asset('app/lib/angular.min.js') }}"></script>
 {{--<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>--}}
 <script src="{{ asset('js/angular-datatables.min.js') }}"></script>
+<script src="{{asset('themes/adminlte/bower_components/chart.js/Chart.js')}}"></script>
 <script src="{{asset('themes/adminlte/plugins/iCheck/icheck.min.js')}}"></script>
 
 <script src="{{ asset('vendor/bootstrap-sweetalert/dist/sweetalert.min.js') }}"></script>

@@ -14,9 +14,7 @@
 Route::get('/', function () {
     return view('frontend.index');
 });
-Route::get('/admin', function (){
-    return view('backend.layout.master');
-})->name('trangchu');
+Route::get('/admin', 'ThongKeController@thongkechung')->name('trangchu');
 Route::get('/admin/dangnhap', function (){
     return view('backend.dangnhap');})->name('dangnhap.ad');
 Route::post('admin/dangnhap/checkad','DangNhapController@loginAdmin')->name('checkLoginAD');
@@ -34,10 +32,19 @@ Route::match(['GET', 'POST'],'/checkUser','DangKyController@checkUser')->name('c
 Route::post('/dangky/create','DangKyController@store')->name('dangky.store');
 
 Route::get('/dangxuat','DangXuatController@index')->name('logout');
+//<<------------------------------Thống kê-------------------------------->>
+
+Route::get('/admin/thongke_doanhthu','ThongKeController@Doanhthu')->name('doanhthu');
+Route::get('/admin/thongke_phantram','ThongKeController@phantram')->name('phantram');
 
 //----------------------------------//
 Route::get('/admin/list_loaithucung', 'LoaiThuCungController@index');
-Route::get('/admin/loaithucung', function (){return view('backend.loaithucung.index');})->name('loaithucung');
+Route::get('/admin/loaithucung', function (){
+    if(Session::has('tenDangNhapAD')){
+        return view('backend.loaithucung.index');
+    }
+    return view('backend.dangnhap');
+   })->name('loaithucung');
 Route::post('/admin/createloaithucung','LoaiThuCungController@store');
 Route::get('/admin/edit_loaithucung/{id}', 'LoaiThuCungController@edit');
 Route::post('/admin/update_loaithucung/{id}','LoaiThuCungController@update');
@@ -138,7 +145,14 @@ Route::get('/admin/delete_quyen/{id}','QuyenController@delete');
 //-------------------------------FAQ-------------------------------------//
 
 Route::get('/admin/list_faq', 'FaqController@index');
-Route::get('/admin/faq', function (){return view('backend.faq.index');})->name('faq');
+Route::get('/admin/faq', function (){
+    if(Session::has('tenDangNhapAD')){
+        return view('backend.faq.index');
+    }else{
+        return view('backend.dangnhap');
+    }
+
+})->name('faq');
 Route::get('/admin/faq/{id}', 'FaqController@getKh_id');
 Route::get('/admin/faq_info/{id}','FaqController@faq_info');
 Route::post('/admin/create_ph/', 'FaqController@store_ph');
