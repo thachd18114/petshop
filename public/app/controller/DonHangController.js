@@ -14,6 +14,12 @@ b.controller('DonHangController', function ($scope,$http,MainURL,DTOptionsBuilde
         });
     };
 
+    $scope.ttdh = function(){
+        $http.get(MainURL + 'list_ttdonhang').then(function(response){
+            $scope.listttdh = response.data;
+        });
+    };
+
     $scope.ctdonhang = function(id){
         $http.get(MainURL + 'edit_donhang/'+id).then(function(response){
             $scope.donhang = response.data;
@@ -35,6 +41,7 @@ b.controller('DonHangController', function ($scope,$http,MainURL,DTOptionsBuilde
     $scope.refreshData();
 
     $scope.detail = function(id, kh){
+
         $scope.ctdonhang(id);
         $scope.ctkhachhang(kh);
         $scope.modalTitle = "Chi tiết đơn hàng ";
@@ -63,6 +70,7 @@ b.controller('DonHangController', function ($scope,$http,MainURL,DTOptionsBuilde
                 };
                 break;
             case 'edit':
+                $scope.ttdh();
                 $scope.id = id;
                 $scope.modalTitle = "Cập nhật " + $scope.dataTitle;
                 $scope.modalButton = "Cập nhật";

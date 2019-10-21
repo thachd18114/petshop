@@ -14,7 +14,7 @@
     </div>
     <div class="container" style="padding: 20px 0px">
         <div class="" style="padding: 20px 30px">
-            <h4  style="padding-bottom: 25px">Chi tiết đơn hàng <span style="font-size: 16px;float: right;">Ngày đặt hàng: 19-03-1997</span></h4>
+            <h4  style="padding-bottom: 25px">Chi tiết đơn hàng <span style="font-size: 16px;float: right;">Ngày đặt hàng: {{$dh->dh_ngayTao}}</span></h4>
 
         </div>
         <div class="row" style="padding: 0px 20px">
@@ -66,10 +66,10 @@
                         @if($tc->giatri == null)
                             {{0}}
                             @else
-                        {{$tc->giatri*$tc->tc_giaBan}}
+                        {{$tc->giatri*$tc->tc_giaBan/100}}
                             @endif
                     </td>
-                    <td rowspan="" id="tamtinh_{{$tc->tc_id}}">{{$tc->tc_giaBan-$tc->giatri*$tc->tc_giaBan}}</td>
+                    <td rowspan="" id="tamtinh_{{$tc->tc_id}}">{{$tc->tc_giaBan-($tc->giatri*$tc->tc_giaBan/100)}}</td>
                 </tr>
                 @endforeach
                 <tr>

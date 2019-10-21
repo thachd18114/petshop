@@ -219,7 +219,7 @@
                                     <h4 id="tensp" >{{ $sp->tc_ten }}</h4>
                                 </a>
                                 <span class="stext-105 cl3" style="color: #e10c00; font-weight: bold; font-size: large">
-                                    @if($sp->giatri != null && $sp->km_ngayBatDau <= $date && $sp->km_ngayKetThuc >= $date )
+                                    @if($sp->giatri != null || $sp->km_ngayBatDau <= $date && $sp->km_ngayKetThuc >= $date )
                                         <del style="color: #878787;">$ {{ $sp->tc_giaBan }}</del> <span style="padding-left: 15px">${{ $sp->tc_giaBan* (100-$sp->giatri)/100 }}</span>
                                     @else
                                         $ {{ $sp->tc_giaBan }}

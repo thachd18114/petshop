@@ -22,8 +22,9 @@ class FrontendController extends Controller
     public function index(Request $request)
     {
         $danhsachthucung = $this->searchThuCung($request);
-//        dd($danhsachthucung);
+       // dd($danhsachthucung);
         $date = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+       // dd($date);
         $loaithucung = LoaiThuCung::all();
         return view('frontend.index')
             ->with('danhsachthucung', $danhsachthucung)
@@ -237,13 +238,15 @@ class FrontendController extends Controller
             $data = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
             $chitiet = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
                ->join('chitietdonhang','chitietdonhang.tc_id', '=', 'thucung.tc_id')
-                ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=',
-                    '1')->where('thucung.tc_id', $id)->select('thucung.*','ha_ten','g_ten')
+                ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')
+                ->where('hinhanh.ha_id', '=','1')
+//                ->where('thucung.tc_id', $id)
+//                ->select('thucung.*','ha_ten','g_ten')
                 ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
                 ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
                 ->leftjoin ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
-//                ->where('km_ngayBatDau', '<=', $data)
-//                ->where('km_ngayKetThuc', '>=',$data)
+                ->where('km_ngayBatDau', '<=', $data)
+                ->where('km_ngayKetThuc', '>=',$data)
                 ->orWhere('km_ngayBatDau' ,'=', null)
                 ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
                     'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
@@ -251,10 +254,10 @@ class FrontendController extends Controller
                ->having('chitietdonhang.dh_id', $id)
                 ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,  loaithucung.*,max(`km_giaTri`) as giatri,chitietdonhang.dh_id')
                 ->get();
-
+        //dd($chitiet);
             $tamtinh = 0;
             foreach ($chitiet as $ct){
-                $tamtinh += $ct->tc_giaBan-$ct->tc_giaBan*$ct->giatri;
+                $tamtinh += $ct->tc_giaBan-$ct->tc_giaBan*$ct->giatri/100;
             }
             return view('frontend.pages.order-detail')
                 ->with('chitiet', $chitiet)

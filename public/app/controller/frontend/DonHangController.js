@@ -139,7 +139,7 @@ app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  fu
                 .then(function () {
                     $scope.ngCart = ngCart;
                     var dataInputOrderForm_DatHang = {
-
+                        "dh_tongGia" : ngCart.totalCost(),
                         "dh_nguoiNhan": $scope.orderForm.dh_nguoiNhan.$viewValue,
                         "dh_diaChi": $scope.orderForm.dh_diaChi.$viewValue,
                         "dh_dienThoai": $scope.orderForm.dh_dienThoai.$viewValue,
@@ -151,7 +151,7 @@ app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  fu
                     var dataInputOrderForm = {
                         "donhang": dataInputOrderForm_DatHang,
                         "giohang": dataCart,
-                        // "_token": "{{ csrf_token() }}",
+                         // "_token": "{{ csrf_token() }}",
                     };
 
                     $http({
@@ -166,7 +166,7 @@ app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  fu
                         // }
                     }, function errorCallback(response) {
                         swal('Có lỗi trong quá trình thực hiện Đơn hàng!', 'Vui lòng thử lại sau vài phút.', 'error');
-                        window.location.reload();
+                        // window.location.reload();
                         console.log(response);
                     });
                 });

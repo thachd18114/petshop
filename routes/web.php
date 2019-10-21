@@ -96,6 +96,9 @@ Route::post('/admin/createdonhang','DonHangController@store');
 Route::get('/admin/edit_donhang/{id}', 'DonHangController@edit');
 Route::post('/admin/update_donhang/{id}','DonHangController@update');
 Route::get('/admin/delete_donhang/{id}','DonHangController@delete');
+//------------------------------Khách Hàng--------------------------------------//
+
+Route::get('/admin/list_ttdonhang', 'TrangThaiDonHangController@index');
 
 //------------------------------Khách Hàng--------------------------------------//
 

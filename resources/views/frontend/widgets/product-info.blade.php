@@ -117,7 +117,7 @@ function time_elapsed_string($datetime, $full = false) {
                                 </span>
                             </div>
                             <div class="size-204 respon6-next"style="padding-left: 100px">
-                                @if($tc->giatri != null && $tc->km_ngayBatDau <= $date && $tc->km_ngayKetThuc >= $date)
+                                @if($tc->giatri != null || $tc->km_ngayBatDau <= $date && $tc->km_ngayKetThuc >= $date)
                                     <del  style="color: #878787; font-size: 22px;">$ {{ $tc->tc_giaBan }}</del> <span class="mtext-106 cl2 product_price"  style="color: #d0011b; font-size: 1.875rem;font-weight: bold; padding-left: 15px">${{ $tc->tc_giaBan* (100-$tc->giatri)/100 }}</span>
                                 @else
                                     <span class="mtext-106 cl2 product_price" style="color: #d0011b; font-size: 1.875rem;font-weight: bold" >

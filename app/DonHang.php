@@ -19,4 +19,7 @@ class DonHang extends Model
     public function Httt() {
         return $this->belongsTo('App\HinhThucThanhToan', 'httt_id', 'Httt_id');
     }
+    public function Ttdh() {
+        return $this->belongsTo('App\TrangThaiDonHang', 'ttdh_id', 'ttdh_id');
+    }
 }

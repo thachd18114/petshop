@@ -43,6 +43,7 @@ class DonHangController extends Controller
             $donhang->dh_dienThoai = $request->dh_dienThoai;
             $donhang->kh_id = $request->kh_id;
             $donhang->httt_id = $request->httt_id;
+            $donhang->ttdh_id = $request->ttdh_id;
             $donhang->save();
         }
         else
