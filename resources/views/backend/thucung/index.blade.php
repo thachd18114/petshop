@@ -45,7 +45,7 @@
                     <td><% tc.ng_ten %></td>
                     <td><% tc.ncc_ten %></td>
                     <td><% tc.tc_trangThai %></td>
-                    <td> <img src="{{ asset('storage/photos') }}/<% tc.ha_ten %>" alt="IMG-PRODUCT" width="150px" height="100px"></td>
+                    <td> <img src="http://res.cloudinary.com/petshop/image/upload/<% tc.ha_ten %>.png" alt="IMG-PRODUCT" width="150px" height="100px"></td>
 
                     <td style="text-align: center">
 {{--                        <button class="btn btn-xs btn-primary btn-detail" ng-click="showDetails('details',tc.tc_id)"><i class="fa fa-eye" aria-hidden="true"></i></button>--}}

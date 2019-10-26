@@ -37,7 +37,7 @@
         <div class="wrap-menu-desktop">
             <nav class="limiter-menu-desktop container">
                 <!-- Logo desktop -->
-                <a href="" class="logo">
+                <a href="{{ route('frontend.home') }}" class="logo">
                     <img src="{{ asset('img/logo2_1.png') }}"  height="100%"  style="margin-top: -10px"  alt="IMG-LOGO">
                 </a>
                 <!-- Menu desktop -->
@@ -49,7 +49,10 @@
                         <li>
                             <a href="{{ route('frontend.product') }}">Thú cưng</a>
                         </li>
-                        <li class="label1" data-label1="hot">
+                        <li class="label1" data-label1="sale">
+                            <a href="{{ route('frontend.product.sale') }}"> Khuyến mãi</a>
+                        </li>
+                        <li >
                             <a href="shoping-cart.html">Liên hệ</a>
                         </li>
                         <li class="{{ Request::is('gioi-thieu') ? 'active-menu' : '' }}">

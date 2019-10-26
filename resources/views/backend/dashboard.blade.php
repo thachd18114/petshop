@@ -114,11 +114,11 @@
         </div>
         <div class="row">
             <!-- /.col (LEFT) -->
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <!-- LINE CHART -->
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Phần trăm số lượng thú cưng mỗi loại </h3>
+                        <h3 class="box-title">Tỷ số phần trăm loại thú cưng tồn kho </h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -128,6 +128,30 @@
                     </div>
                     <div class="box-body">
                         <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+                <!-- BAR CHART -->
+
+                <!-- /.box -->
+
+            </div>
+            <div class="col-md-6">
+                <!-- LINE CHART -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Tỷ số phần trăm giống thú cưng được mua </h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div id="chartContainer2" style="height: 300px; width: 100%;"></div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -154,6 +178,7 @@
         window.onload = function() {
             var dataPoints = [];
            var dataPoints1=[]
+            var dataPoints2=[]
             var options =  {
                 animationEnabled: true,
                 theme: "light2",
@@ -170,17 +195,19 @@
                 },
                 data: [{
                     type: "splineArea",
-                    yValueFormatString: "#,### USD",
+                    yValueFormatString: "#,### VNĐ",
                     dataPoints: dataPoints
                 }]
             };
 
             function addData(data) {
                 for (var i = 0; i < data.length; i++) {
-                    dataPoints.push({
-                        x: new Date(data[i].nam,data[i].thang),
-                        y: parseInt(data[i].tien)
-                    });
+                        dataPoints.push({
+                            x: new Date(data[i].nam,data[i].thang),
+                            y: parseInt(data[i].tien),
+                            // label: ['Thang1','Tyhang2']
+                        });
+
                 }
                 $("#chartContainer").CanvasJSChart(options);
 
@@ -202,15 +229,44 @@
             });
             function addData1(data) {
                 for (var i = 0; i < data.length; i++) {
-                    dataPoints1.push({
-                        y: data[i].soluong/ @forEach($soluong as $sl) {{$sl->soluong}} @endforeach,
-                        label: data[i].ltc_ten
-                    });
+                    if (data[i].tc_trangThai != 2) {
+                        dataPoints1.push({
+                            y: data[i].soluong * 100 / @forEach($soluong as $sl) {{$sl->soluong}} @endforeach,
+                            label: data[i].ltc_ten
+                        });
+                    }
                 }
 
                 chart.render();
             }
             $.getJSON("http://localhost/petshop/public/admin/thongke_phantram", addData1);
+
+            var chart1 = new CanvasJS.Chart("chartContainer2", {
+                animationEnabled: true,
+                title: {
+                    text: "PETSHOP"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.00\"%\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: dataPoints2
+                }]
+            });
+            function addData2   (data) {
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].tc_trangThai != 1) {
+                        dataPoints2.push({
+                            y: data[i].soluong * 100 / 1,
+                            label: data[i].g_ten
+                        });
+                    }
+                }
+
+                chart1.render();
+            }
+            $.getJSON("http://localhost/petshop/public/admin/thongke_banchay", addData2);
 
 
         }

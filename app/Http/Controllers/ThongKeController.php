@@ -17,7 +17,7 @@ class ThongKeController extends Controller
         if (\Session::has('tenDangNhapAD')){
 
             $dh = DB::select('SELECT COUNT(*) as donhang FROM `donhang` WHERE ttdh_id = 1');
-            $ltc = DB::select('SELECT COUNT(*) as loaithucung FROM `thucung`');
+            $ltc = DB::select('SELECT COUNT(*) as loaithucung FROM `loaithucung`');
             $kh = DB::select('SELECT COUNT(*) as khachhang FROM `khachhang`');
             $tc = DB::select('SELECT COUNT(*) as thucung FROM `thucung` WHERE tc_trangThai = 1');
             $soluong = DB::select('SELECT COUNT(*) as soluong FROM `thucung`');
@@ -32,12 +32,20 @@ class ThongKeController extends Controller
 
     }
     public function phantram(){
-        $data = [];
+        $tl = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+            ->rightJoin('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
+            ->groupBy('loaithucung.ltc_id','loaithucung.ltc_ten', 'tc_trangThai')
+//
+            ->selectRaw('count(thucung.tc_id) as soluong,ltc_ten, tc_trangThai')
+        ->get();
+        return response()->json($tl);
+    }
 
-        $tl = DB::select('select ltc_ten,count(thucung.tc_id) as soluong from thucung join giong on thucung.g_id = giong.g_id RIGHT JOIN loaithucung on giong.ltc_id = loaithucung.ltc_id GROUP By loaithucung.ltc_id, ltc_ten');
-//       foreach ($tl as $pt){
-//          // $data =
-//       }
+    public function phantram_ban(){
+        $tl = DB::select('select g_ten, COUNT(donhang.dh_id) as soluong, ttdh_id from loaithucung RIGHT JOIN giong on loaithucung.ltc_id = giong.g_id join thucung on giong.g_id = thucung.g_id LEFT JOIN chitietdonhang on chitietdonhang.tc_id = thucung.tc_id LEFT join donhang on donhang.dh_id = chitietdonhang.dh_id GROUP BY giong.g_id, g_ten,ttdh_id');
         return response()->json($tl);
     }
 }
+
+
+//select ltc_ten, COUNT(thucung.tc_id) from loaithucung RIGHT JOIN giong on loaithucung.ltc_id = giong.g_id join thucung on giong.g_id = thucung.g_id LEFT JOIN chitietdonhang on chitietdonhang.tc_id = thucung.tc_id LEFT join donhang on donhang.dh_id = chitietdonhang.dh_id WHERE donhang.ttdh_id=1 GROUP BY loaithucung.ltc_id,donhang.ttdh_id

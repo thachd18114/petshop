@@ -64,47 +64,55 @@ b.controller('KhuyenMaiController', function($scope,$filter,$http,MainURL,DTOpti
 
         $scope.KhuyenMai['km_ngayKetThuc'] = new Date( $scope.KhuyenMai['km_ngayKetThuc']);
         $scope.KhuyenMai['km_ngayKetThuc'] = $filter('date')($scope.KhuyenMai['km_ngayKetThuc'], "yyyy/MM/dd");
-        switch(state){
-            case 'create':
-                var url = MainURL + "createkhuyenmai";
-                var data = $.param($scope.KhuyenMai);
-                $http({
-                    method : "POST",
-                    url : url,
-                    data : data,
-                    headers : {'Content-type':'application/x-www-form-urlencoded'}
-                }).then(function(){
-                    swal({ title : "",text :"Thêm thành công!",type: "success", },function(isConfirm){
-                        $("#Modal").modal("hide");
-                        $scope.refreshData();;
-                    });
-                }).catch(function(){
-                    swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
-                        $("#Modal").modal("hide");
-                    });
-                });
-                break;
-            case 'edit' :
-                var url = MainURL + 'update_khuyenmai/' + id;
-                var data = $.param($scope.KhuyenMai);
-                $http({
-                    method : "POST",
-                    url : url,
-                    data : data,
-                    headers : {'Content-type':'application/x-www-form-urlencoded'}
-                }).then(function(){
-                    swal({ title : "",text :"Cập nhật thành công!",type: "success", },function(isConfirm){
-                        $("#Modal").modal("hide");
-                        $scope.refreshData();;
-                    });
-                }).catch(function(){
-                    swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
-                        $("#Modal").modal("hide");
-                    });
-                });
-                break;
+
+        if($scope.KhuyenMai['km_ngayBatDau'] >   $scope.KhuyenMai['km_ngayKetThuc'] ) {
+            $scope.loi = true;
         }
-    }
+        else  {
+            $scope.loi = false;
+            switch(state){
+                case 'create':
+                    var url = MainURL + "createkhuyenmai";
+                    var data = $.param($scope.KhuyenMai);
+                    $http({
+                        method : "POST",
+                        url : url,
+                        data : data,
+                        headers : {'Content-type':'application/x-www-form-urlencoded'}
+                    }).then(function(){
+                        swal({ title : "",text :"Thêm thành công!",type: "success", },function(isConfirm){
+                            $("#Modal").modal("hide");
+                            $scope.refreshData();;
+                        });
+                    }).catch(function(){
+                        swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
+                            $("#Modal").modal("hide");
+                        });
+                    });
+                    break;
+                case 'edit' :
+                    var url = MainURL + 'update_khuyenmai/' + id;
+                    var data = $.param($scope.KhuyenMai);
+                    $http({
+                        method : "POST",
+                        url : url,
+                        data : data,
+                        headers : {'Content-type':'application/x-www-form-urlencoded'}
+                    }).then(function(){
+                        swal({ title : "",text :"Cập nhật thành công!",type: "success", },function(isConfirm){
+                            $("#Modal").modal("hide");
+                            $scope.refreshData();;
+                        });
+                    }).catch(function(){
+                        swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
+                            $("#Modal").modal("hide");
+                        });
+                    });
+                    break;
+            }
+        } ;
+
+    };
 
     $scope.delConfirm = function(id) {
         swal({

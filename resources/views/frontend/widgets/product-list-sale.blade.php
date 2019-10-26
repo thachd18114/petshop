@@ -1,25 +1,25 @@
 <style>
-        .percent{
-            position: absolute;
-            top: 15px;
-            left: 25px;
-            display: flex;
-            -webkit-box-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            align-items: center;
-            padding-bottom: 4px;
-            color: rgb(255, 255, 255);
-            font-weight: 500;
-            width: 40px;
-            height: 36px;
-            background-image: url(https://frontend.tikicdn.com/_new-next/static/img/icons/product/deal-tag.png);
-            background-size: 40px 36px;
-            margin: 1px 0px 0px;
-            background-position: 0px 0px;
-            z-index: 2;
-        }
-    </style>
+    .percent{
+        position: absolute;
+        top: 15px;
+        left: 25px;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        padding-bottom: 4px;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+        width: 40px;
+        height: 36px;
+        background-image: url(https://frontend.tikicdn.com/_new-next/static/img/icons/product/deal-tag.png);
+        background-size: 40px 36px;
+        margin: 1px 0px 0px;
+        background-position: 0px 0px;
+        z-index: 2;
+    }
+</style>
 
 <section class="bg0 p-t-23 p-b-140">
     <div class="container">
@@ -78,9 +78,9 @@
                         <ul>
                             <li class="p-b-6" ng-show="!listg" >
                                 <div class="flex-w flex-l-m filter-tope-group m-tb-10 " >
-{{--                                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 " data-filter="*">--}}
-{{--                                        Tất cả giống--}}
-{{--                                    </button>--}}
+                                    {{--                                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 " data-filter="*">--}}
+                                    {{--                                        Tất cả giống--}}
+                                    {{--                                    </button>--}}
                                     <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".giong-<% lg.g_id %>" ng-repeat="lg in lg1">
                                         <% lg.g_ten %>
                                     </button>
@@ -104,11 +104,11 @@
                         </div>
 
                         <ul>
-{{--                            <li class="p-b-6">--}}
-{{--                                <a href="{{route('frontend.home')}}" class="filter-link stext-106 trans-04">--}}
-{{--                                    All--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
+                            {{--                            <li class="p-b-6">--}}
+                            {{--                                <a href="{{route('frontend.home')}}" class="filter-link stext-106 trans-04">--}}
+                            {{--                                    All--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
                             <li class="p-b-6">
                                 <a href="{{route('frontend.home', ['searchByGiongMa'=> 'asc'])}}" class="filter-link stext-106 trans-04">
                                     Giá tăng dần
@@ -121,35 +121,35 @@
                                 </a>
                             </li>
 
-{{--                            <li class="p-b-6">--}}
-{{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
-{{--                                    0đ - 50 $--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
+                            {{--                            <li class="p-b-6">--}}
+                            {{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
+                            {{--                                    0đ - 50 $--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
 
-{{--                            <li class="p-b-6">--}}
-{{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
-{{--                                    50$ - 400$--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
+                            {{--                            <li class="p-b-6">--}}
+                            {{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
+                            {{--                                    50$ - 400$--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
 
-{{--                            <li class="p-b-6">--}}
-{{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
-{{--                                    3 triệu - 7 triệu--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
+                            {{--                            <li class="p-b-6">--}}
+                            {{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
+                            {{--                                    3 triệu - 7 triệu--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
 
-{{--                            <li class="p-b-6">--}}
-{{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
-{{--                                    400$ - 800$--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
+                            {{--                            <li class="p-b-6">--}}
+                            {{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
+                            {{--                                    400$ - 800$--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
 
-{{--                            <li class="p-b-6">--}}
-{{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
-{{--                                    >800$--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
+                            {{--                            <li class="p-b-6">--}}
+                            {{--                                <a href="#" class="filter-link stext-106 trans-04">--}}
+                            {{--                                    >800$--}}
+                            {{--                                </a>--}}
+                            {{--                            </li>--}}
                         </ul>
                     </div>
 
@@ -241,14 +241,11 @@
                                 <a href="{{ route('frontend.productDetail',$sp->tc_id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                     <h4 id="tensp" >{{ $sp->tc_ten }}</h4>
                                 </a>
-                                <span class="stext-105 cl3" style="color: #e10c00; font-size: large">
+                                <span class="stext-105 cl3" style="color: #e10c00; font-weight: bold; font-size: large">
                                     @if($sp->giatri != null && strtotime($sp->km_ngayBatDau) <= strtotime($date) && strtotime($sp->km_ngayKetThuc) >= strtotime($date) )
-                                        <del style="color: #878787;">{{ number_format($sp->tc_giaBan) }} <u>đ</u></del> <span style="padding-left: 10px">{{ number_format($sp->tc_giaBan* (100-$sp->giatri)/100) }} <u>đ</u></span>
+                                        <del style="color: #878787;">{{ number_format($sp->tc_giaBan) }} <u>đ</u></del> <span style="padding-left: 10px">{{ number_format($sp->tc_giaBan* (100-$sp->giatri)/100) }}</span> <u>đ</u>
                                         <span class="percent deal">-{{$sp->giatri}}%</span>
-                                    @else
-                                         {{ number_format($sp->tc_giaBan) }}<u>đ</u>
-
-                                    @endif
+                                        @endif
                                 </span>
                             </div>
                         </div>
@@ -312,9 +309,9 @@
             $scope.lg();
             $scope.g = function (id) {
 
-                    $http.get(MainURL + 'filter-giong/' + id).then(function (response) {
-                        $scope.listg = response.data;
-                    });
+                $http.get(MainURL + 'filter-giong/' + id).then(function (response) {
+                    $scope.listg = response.data;
+                });
             };
             $scope.getLoai = function (id) {
                 return id

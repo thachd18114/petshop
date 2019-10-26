@@ -78,17 +78,17 @@ function time_elapsed_string($datetime, $full = false) {
                                     <div class="item-slick3" data-thumb="{{ asset('img/film-and-vid.jpg') }}">
                                         <div class="wrap-pic-w pos-relative">
                                             <video controls="controls" preload="metadata" style="max-width: 500px; margin-top: 70px">
-                                                <source src="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}" type="video/mp4">
+                                                <source src="http://res.cloudinary.com/petshop/video/upload/{{$hinhanh->ha_ten}}.mp4" type="video/mp4">
                                             </video>
                                         </div>
                                 @else
 
-                                    <div class="item-slick3" data-thumb="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}">
+                                    <div class="item-slick3" data-thumb="http://res.cloudinary.com/petshop/image/upload/{{$hinhanh->ha_ten}}.png">
 
                                     <div class="wrap-pic-w pos-relative">
-                                        <img src="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}" alt="IMG-PRODUCT">
+                                        <img src="http://res.cloudinary.com/petshop/image/upload/{{$hinhanh->ha_ten}}.png" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('storage/photos/' . $hinhanh->ha_ten) }}">
+                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="http://res.cloudinary.com/petshop/image/upload/{{$hinhanh->ha_ten}}.png">
                                             <i class="fa fa-expand"></i>
                                         </a>
                                     </div>
@@ -117,7 +117,7 @@ function time_elapsed_string($datetime, $full = false) {
                                 </span>
                             </div>
                             <div class="size-204 respon6-next"style="padding-left: 100px">
-                                @if($tc->giatri != null || $tc->km_ngayBatDau <= $date && $tc->km_ngayKetThuc >= $date)
+                                @if($tc->giatri != null && strtotime($tc->km_ngayBatDau) <= strtotime($date) && strtotime($tc->km_ngayKetThuc) >= strtotime($date) )
                                     <del  style="color: #878787; font-size: 22px;">$ {{ $tc->tc_giaBan }}</del> <span class="mtext-106 cl2 product_price"  style="color: #d0011b; font-size: 1.875rem;font-weight: bold; padding-left: 15px">${{ $tc->tc_giaBan* (100-$tc->giatri)/100 }}</span>
                                 @else
                                     <span class="mtext-106 cl2 product_price" style="color: #d0011b; font-size: 1.875rem;font-weight: bold" >

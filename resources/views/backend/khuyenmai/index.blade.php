@@ -74,8 +74,9 @@
                                     <div class="form-group">
                                         <label for="km_giaTri" class="col-sm-2 control-label">Phần trăm giảm</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="km_giaTri" name="km_giaTri" placeholder="Nhập pần trăm" ng-model="KhuyenMai.km_giaTri" ng-required="true">
+                                            <input type="text"  class="form-control" id="km_giaTri" name="km_giaTri" placeholder="Nhập pần trăm" ng-model="KhuyenMai.km_giaTri" ng-pattern="/^[0-9]*$/" ng-required="true">
                                             <span class="error" ng-show="frmKhuyenMai.km_giaTri.$error.required">Vui lòng nhập giá trị!</span>
+                                            <span class="error" ng-show="frmKhuyenMai.km_giaTri.$error.pattern">Chỉ được nhập số</span>
                                         </div>
                                     </div>
 
@@ -91,6 +92,7 @@
                                         <div class="col-sm-10">
                                             <input type="date"  class="form-control"  id="km_ngayKetThuc" name="km_ngayKetThuc" ng-model="KhuyenMai.km_ngayKetThuc" ng-required="true">
                                             <span class="error" ng-show="frmKhuyenMai.km_ngayKetThuc.$error.required">Vui lòng nhập ngày kết thúc</span>
+                                            <span class="error" ng-show="loi === true">Ngày kết thúc phải lớn hơn ngày bắt đầu</span>
                                         </div>
                                     </div>
                                     <div class="form-group">

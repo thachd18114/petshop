@@ -36,7 +36,7 @@ Route::get('/dangxuat','DangXuatController@index')->name('logout');
 
 Route::get('/admin/thongke_doanhthu','ThongKeController@Doanhthu')->name('doanhthu');
 Route::get('/admin/thongke_phantram','ThongKeController@phantram')->name('phantram');
-
+Route::get('/admin/thongke_banchay','ThongKeController@phantram_ban')->name('banchay');
 //----------------------------------//
 Route::get('/admin/list_loaithucung', 'LoaiThuCungController@index');
 Route::get('/admin/loaithucung', function (){
@@ -166,6 +166,7 @@ Route::post('/admin/create_ph/', 'FaqController@store_ph');
 Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
 Route::get('/filter-giong/{id}', 'Frontend\FrontendController@filter_giong');
 Route::get('/thu-cung','Frontend\FrontendController@product' )->name('frontend.product');
+Route::get('/thu-cung-khuyenmai','Frontend\FrontendController@product_sale' )->name('frontend.product.sale');
 Route::get('/thu-cung/{id}', 'Frontend\FrontendController@productDetail')->name('frontend.productDetail');
 Route::post('/binhluan/{id}', 'BinhLuanController@store')->name('binhluan');
 

@@ -66,6 +66,8 @@ app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  fu
         // console.log();
     });
     var tien = ngCart.totalCost();
+    var tienusd = Math.round(tien/23000*100)/100;
+   console.log(tienusd);
     var dataCart = ngCart.getCart().items;
     var diachi = $('#dh_diaChi').val();
     var nguoinhan = $('#dh_nguoiNhan').val();
@@ -103,10 +105,10 @@ app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  fu
             return actions.payment.create({
                 transactions: [{
                     amount: {
-                        total: tien,
+                        total: tienusd,
                         currency: 'USD',
                         details: {
-                            subtotal: tien,
+                            subtotal: tienusd,
                         }
                     },
                     description: 'The payment transaction description.',
@@ -120,7 +122,7 @@ app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  fu
                             {
                                 name: 'Thanh toán Paypal từ PETSHOP',
                                 quantity: '1',
-                                price: tien,
+                                price: tienusd,
                                 currency: 'USD'
                             },
                         ],

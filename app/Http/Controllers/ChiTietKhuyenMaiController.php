@@ -25,9 +25,14 @@ class ChiTietKhuyenMaiController extends Controller
         foreach ($ctkm as $ct) {
             $data[] = $ct->tc_id;
         }
-        $ds_thucung = \DB::table('thucung')->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')
+        $ds_thucung = \DB::table('thucung')
+            ->join('hinhanh','hinhanh.tc_id','=', 'thucung.tc_id')
+            ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
+            ->leftjoin ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
             ->where('hinhanh.ha_id' ,'=', '1')
+            ->whereNull('km_giaTri')
             ->whereNotIn('thucung.tc_id', $data )
+            ->select('thucung.*', 'hinhanh.*')
             ->get();
         return response()->json($ds_thucung);
     }

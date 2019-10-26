@@ -7,6 +7,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Storage;
+use Cloudder;
 class ThuCungController extends Controller
 {
     public function index () {
@@ -52,13 +53,25 @@ class ThuCungController extends Controller
             // duyệt từng ảnh và thực hiện lưu
             foreach ($request->ha_ten as $index => $file) {
                 $name = $id . '_' . $index . '_' . $file->getClientOriginalName();
-                $file->storeAs('public/photos', $name);
+                if( (substr($name, strlen($name)- 3) == 'mp4')) {
+                    $video_name = $file->getRealPath();
 
+                    Cloudder::upload($video_name,$name,array("resource_type" => "video"));
+                }
+                else{
+                    $image_name = $file->getRealPath();
+                    Cloudder::upload($image_name,$name);
+//                    list($width, $height) = getimagesize($image_name);
+//                    $image_url= Cloudder::show($name, ["width" => $width, "height"=>$height]);
+                }
+
+
+//                $image_url= Cloudder::show($name, null);
                 // Tạo đối tưọng HinhAnh
                 $hinhAnh = new HinhAnh();
                 $hinhAnh->tc_id = $id;
                 $hinhAnh->ha_id = ($index + 1);
-                $hinhAnh->ha_ten = $name;
+                $hinhAnh->ha_ten =  $name;
                 $hinhAnh->save();
             }
             return response(["error" => false, "message" => compact('hinhAnh')], 200);
@@ -143,12 +156,13 @@ class ThuCungController extends Controller
             foreach($ha1 as $hinhanh)
             {
                 // Xóa hình cũ để tránh rác
-                Storage::delete('public/photos/' . $hinhanh->ha_ten);
+                Cloudder::destroyImage($hinhanh->ha_ten);
             }
             $ha = HinhAnh::where('tc_id',$id)->delete();
             foreach ($request->ha_ten as $index => $file) {
                 $name = $id.'_'.$index.'_'.$file->getClientOriginalName();
-                $file->storeAs('public/photos', $name);
+                $image_name = $file->getRealPath();
+                Cloudder::upload($image_name,$name);
                 // Tạo đối tưọng HinhAnh
                 $hinhAnh = new HinhAnh();
                 $hinhAnh->tc_id = $id;
