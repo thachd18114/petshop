@@ -43,13 +43,13 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop" style="margin-left: -10px">
                     <ul class="main-menu">
-                        <li class="{{ Request::is('') ? 'active-menu' : '' }}">
+                        <li class="@yield('home') ">
                             <a href="{{ route('frontend.home') }}">Trang chủ</a>
                         </li>
-                        <li>
+                        <li class="@yield('product')">
                             <a href="{{ route('frontend.product') }}">Thú cưng</a>
                         </li>
-                        <li class="label1" data-label1="sale">
+                        <li class="label1 @yield('product-sale')" data-label1="sale">
                             <a href="{{ route('frontend.product.sale') }}"> Khuyến mãi</a>
                         </li>
                         <li >

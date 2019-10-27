@@ -110,6 +110,8 @@
                                         <div class="col-sm-10">
                                             <input type="date"  class="form-control"  id="tc_ngaySinh" name="tc_ngaySinh" ng-model="ThuCung.tc_ngaySinh" ng-required="true">
                                             <span class="error" ng-show="frmThuCung.tc_ngaySinh.$error.required">Vui lòng nhập ngày sinh thú cưng!</span>
+                                            <span class="error" ng-show="loi === true">Ngày sinh không đúng so với sô tuổi!</span>
+
                                         </div>
                                     </div>
                                     <div class="form-group">

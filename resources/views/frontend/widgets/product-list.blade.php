@@ -62,8 +62,9 @@
                     <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
                         <i class="zmdi zmdi-search"></i>
                     </button>
-
-                    <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+                    <form method="get" action="{{route('frontend.product')}}">
+                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="searchByGiongMa" placeholder="Search">
+                    </form>
                 </div>
             </div>
 
@@ -110,13 +111,13 @@
 {{--                                </a>--}}
 {{--                            </li>--}}
                             <li class="p-b-6">
-                                <a href="{{route('frontend.home', ['searchByGiongMa'=> 'asc'])}}" class="filter-link stext-106 trans-04">
+                                <a href="{{route('frontend.product', ['filter'=> 'asc'])}}" class="filter-link stext-106 trans-04">
                                     Giá tăng dần
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="{{route('frontend.home', ['searchByGiongMa'=> 'desc'])}}" class="filter-link stext-106 trans-04">
+                                <a href="{{route('frontend.product', ['filter'=> 'desc'])}}" class="filter-link stext-106 trans-04">
                                     Giá giảm dần
                                 </a>
                             </li>
@@ -160,43 +161,29 @@
 
                         <ul>
                             <li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #222;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-                                <a href="" class="filter-link stext-106 trans-04">
-                                    Hàn Quốc
+                                <a href="{{route('frontend.product', ['priceBg'=> 0, 'priceEnd' => 1000000])}}" class="filter-link stext-106 trans-04">
+                                    0đ - 1 triệu
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                    Nhật Bản
+                                <a href="{{route('frontend.product', ['priceBg'=> 1000000, 'priceEnd' => 5000000])}}" class="filter-link stext-106 trans-04">
+                                    1 triệu - 5 triệu
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Pháp
+                                <a href="{{route('frontend.product', ['priceBg'=> 5000000, 'priceEnd' => 10000000])}}" class="filter-link stext-106 trans-04">
+                                    5 triệu - 10 triệu
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Việt Nam
+                                <a href="{{route('frontend.product', ['priceBg'=> 10000000, 'priceEnd' => 5000000000])}}" class="filter-link stext-106 trans-04">
+                                    > 10 triệu
                                 </a>
+                            </li>
+
                             </li>
                         </ul>
                     </div>
@@ -207,11 +194,11 @@
                         </div>
 
                         <div class="flex-w p-t-4 m-r--5">
-                            <a href="{{route('frontend.home', ['searchByGiongMa'=> 'asc'])}}" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="{{route('frontend.product', ['gender'=> 1])}}" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Đực
                             </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                            <a href="{{route('frontend.product', ['gender'=> 2])}}" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
                                 Cái
                             </a>
                         </div>
@@ -222,7 +209,7 @@
 
         <div class="row isotope-grid">
             @foreach($data as $index=>$sp)
-                <div class=" col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item loai-{{$sp->ltc_id}} giong-{{$sp->g_id}}">
+                <div class=" col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item loai-{{$sp->ltc_id}} giong-{{$sp->g_id}}" >
                     <!-- Block2 -->
                     <div class="block2 ">
                         <div class="block2-pic hov-img0">
@@ -239,7 +226,7 @@
                         <div class="block2-txt flex-w flex-t p-t-14">
                             <div class="block2-txt-child1 flex-col-l ">
                                 <a href="{{ route('frontend.productDetail',$sp->tc_id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    <h4 id="tensp" >{{ $sp->tc_ten }}</h4>
+                                    <h4 id="tensp" >{{ $sp->tc_ten }} @if($hot == $sp->g_id) <i style="padding-left: 25px" class="label1"data-label1="HOT" ></i>@endif</h4>
                                 </a>
                                 <span class="stext-105 cl3" style="color: #e10c00; font-size: large">
                                     @if($sp->giatri != null && strtotime($sp->km_ngayBatDau) <= strtotime($date) && strtotime($sp->km_ngayKetThuc) >= strtotime($date) )
@@ -264,9 +251,7 @@
 
         <!-- Load more -->
         <div class="flex-c-m flex-w w-full p-t-45">
-            <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                Load More
-            </a>
+            {{ $data->links() }}
         </div>
     </div>
     <div style="" id="getLTC"></div>

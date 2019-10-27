@@ -167,6 +167,9 @@ Route::get('/', 'Frontend\FrontendController@index')->name('frontend.home');
 Route::get('/filter-giong/{id}', 'Frontend\FrontendController@filter_giong');
 Route::get('/thu-cung','Frontend\FrontendController@product' )->name('frontend.product');
 Route::get('/thu-cung-khuyenmai','Frontend\FrontendController@product_sale' )->name('frontend.product.sale');
+
+Route::get('/thu-cung-khuyenmai/giong/{id}','Frontend\FrontendController@product_sale' )->name('frontend.product.sale.giong');
+
 Route::get('/thu-cung/{id}', 'Frontend\FrontendController@productDetail')->name('frontend.productDetail');
 Route::post('/binhluan/{id}', 'BinhLuanController@store')->name('binhluan');
 
@@ -187,5 +190,6 @@ Route::get('/order-info/{id}', 'Frontend\FrontendController@order_info')->name('
 Route::get('/faq', 'FaqController@ftfaq_info')->name('frontend.faq');
 
 Route::GET('/question/', 'FaqController@store_ch')->name('question');
+
 
 

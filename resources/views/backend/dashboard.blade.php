@@ -142,7 +142,7 @@
                 <!-- LINE CHART -->
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Tỷ số phần trăm giống thú cưng được mua </h3>
+                        <h3 class="box-title">Tỷ số phần trăm giống thú cưng được đặt mua </h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -179,40 +179,57 @@
             var dataPoints = [];
            var dataPoints1=[]
             var dataPoints2=[]
-            var options =  {
+            // var options =  {
+            //     animationEnabled: true,
+            //     theme: "light2",
+            //     title: {
+            //         text: "Doanh thu theo tháng"
+            //     },
+            //     axisX: {
+            //         valueFormatString: "MM-YYYY",
+            //     },
+            //     axisY: {
+            //         title: "USD",
+            //         titleFontSize: 24,
+            //         includeZero: false
+            //     },
+            //     data: [{
+            //         type: "splineArea",
+            //         yValueFormatString: "#,### VNĐ",
+            //         dataPoints: dataPoints
+            //     }]
+            // };
+            //
+            var chart_dt = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
-                theme: "light2",
-                title: {
+                dataPointWidth: 40,
+                theme: "light2", // "light1", "light2", "dark1", "dark2"
+                title:{
                     text: "Doanh thu theo tháng"
                 },
-                axisX: {
-                    valueFormatString: "MM-YYYY",
-                },
                 axisY: {
-                    title: "USD",
-                    titleFontSize: 24,
-                    includeZero: false
+                    title: "Reserves(MMbbl)"
                 },
                 data: [{
-                    type: "splineArea",
-                    yValueFormatString: "#,### VNĐ",
+                    type: "column",
+                    // showInLegend: true,
+                    legendMarkerColor: "grey",
+                    // legendText: ,
                     dataPoints: dataPoints
                 }]
-            };
-
+            });
             function addData(data) {
                 for (var i = 0; i < data.length; i++) {
                         dataPoints.push({
-                            x: new Date(data[i].nam,data[i].thang),
+                            label: data[i].thang+"-"+data[i].nam,
                             y: parseInt(data[i].tien),
-                            // label: ['Thang1','Tyhang2']
                         });
 
                 }
-                $("#chartContainer").CanvasJSChart(options);
-
+                chart_dt.render();
             }
             $.getJSON("http://localhost/petshop/public/admin/thongke_doanhthu", addData);
+
 
             var chart = new CanvasJS.Chart("chartContainer1", {
                 animationEnabled: true,
@@ -256,9 +273,10 @@
             });
             function addData2   (data) {
                 for (var i = 0; i < data.length; i++) {
-                    if (data[i].tc_trangThai != 1) {
+                    if (data[i].ttdh_id != 1) {
+                        // alert('ok');
                         dataPoints2.push({
-                            y: data[i].soluong * 100 / 1,
+                            y: data[i].soluong * 100 /  @forEach($soluong_dh as $sl) {{$sl->soluong}} @endforeach,
                             label: data[i].g_ten
                         });
                     }

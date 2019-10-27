@@ -10,6 +10,9 @@
 @endsection
 {{-- Thay thế nội dung vào Placeholder `main-content` của view `frontend.layouts.master` --}}
 @section('main-content')
+@section('product')
+    active-menu
+@endsection
     @include('frontend.widgets.product-list',[$data = $danhsachthucung])
 @endsection
 {{-- Thay thế nội dung vào Placeholder `custom-scripts` của view `frontend.layouts.master` --}}

@@ -9,6 +9,9 @@
 @endsection
 {{-- Thay thế nội dung vào Placeholder `main-content` của view `frontend.layouts.master` --}}
 @section('main-content')
+    @section('home')
+        active-menu
+        @endsection
     <!-- Slider -->
     @include('frontend.widgets.homepage-slider')
     <!-- Banner -->

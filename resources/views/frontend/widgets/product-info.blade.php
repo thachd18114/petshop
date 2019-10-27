@@ -118,10 +118,10 @@ function time_elapsed_string($datetime, $full = false) {
                             </div>
                             <div class="size-204 respon6-next"style="padding-left: 100px">
                                 @if($tc->giatri != null && strtotime($tc->km_ngayBatDau) <= strtotime($date) && strtotime($tc->km_ngayKetThuc) >= strtotime($date) )
-                                    <del  style="color: #878787; font-size: 22px;">$ {{ $tc->tc_giaBan }}</del> <span class="mtext-106 cl2 product_price"  style="color: #d0011b; font-size: 1.875rem;font-weight: bold; padding-left: 15px">${{ $tc->tc_giaBan* (100-$tc->giatri)/100 }}</span>
+                                    <del  style="color: #878787; font-size: 18px;">{{ number_format($tc->tc_giaBan) }}  <u>đ</u></del> <span class="mtext-106 cl2 product_price"  style="color: #d0011b; font-size: 24px;font-weight: bold; padding-left: 15px">{{ number_format($tc->tc_giaBan* (100-$tc->giatri)/100) }}  <u>đ</u></span>
                                 @else
                                     <span class="mtext-106 cl2 product_price" style="color: #d0011b; font-size: 1.875rem;font-weight: bold" >
-                                       $ {{$tc->tc_giaBan}}
+                                        {{number_format($tc->tc_giaBan)}}  <u>đ</u>
                                 </span>
 
                                 @endif
@@ -228,10 +228,10 @@ function time_elapsed_string($datetime, $full = false) {
                     <div class="flex-w flex-r-m p-b-10 p-t-33" id="addtocard">
                         <div class="size-204 flex-w flex-m respon6-next">
                             @if($tc->giatri != null)
-                                <ngcart-addtocart class="js-addcart-detail" template-url="{{ asset('vendor/ngCart/template/ngCart/addtocart.html') }}" id="{{ $tc->tc_id }}" name="{{ $tc->tc_ten }}" price="{{ $tc->tc_giaBan* (100-$tc->giatri)/100  }}" quantity="1" data="{ sp_hinh_url: '{{ asset("storage/photos/" . $tc->ha_ten) }}'}">Thêm vào giỏ hàng</ngcart-addtocart>
+                                <ngcart-addtocart class="js-addcart-detail" template-url="{{ asset('vendor/ngCart/template/ngCart/addtocart.html') }}" id="{{ $tc->tc_id }}" name="{{ $tc->tc_ten }}" price="{{ $tc->tc_giaBan* (100-$tc->giatri)/100  }}" quantity="1" data="{ sp_hinh_url: 'http://res.cloudinary.com/petshop/image/upload/{{$tc->ha_ten}}.png'}">Thêm vào giỏ hàng</ngcart-addtocart>
 
                             @else
-                                <ngcart-addtocart class="js-addcart-detail" template-url="{{ asset('vendor/ngCart/template/ngCart/addtocart.html') }}" id="{{ $tc->tc_id }}" name="{{ $tc->tc_ten }}" price="{{ $tc->tc_giaBan }}" quantity="1" data="{ sp_hinh_url: '{{ asset("storage/photos/" . $tc->ha_ten) }}'}">Thêm vào giỏ hàng</ngcart-addtocart>
+                                <ngcart-addtocart class="js-addcart-detail" template-url="{{ asset('vendor/ngCart/template/ngCart/addtocart.html') }}" id="{{ $tc->tc_id }}" name="{{ $tc->tc_ten }}" price="{{ $tc->tc_giaBan }}" quantity="1" data="{ sp_hinh_url: 'http://res.cloudinary.com/petshop/image/upload/{{$tc->ha_ten}}.png'}">Thêm vào giỏ hàng</ngcart-addtocart>
 
                             @endif
                         </div>

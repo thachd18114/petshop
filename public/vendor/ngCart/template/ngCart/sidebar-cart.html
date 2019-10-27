@@ -15,7 +15,7 @@
                 </a>
 
                 <span class="header-cart-item-info">
-                    <% item.getQuantity() | number %> x <% item.getPrice() | currency %>
+                    <% item.getQuantity() | number %> x <% item.getPrice() | currency:"":0 %> VNĐ
                 </span>
 
                 <span ng-click="ngCart.removeItemById(item.getId())"
@@ -27,13 +27,13 @@
 
 <div class="w-full">
     <div class="header-cart-total w-full p-tb-40" ng-show="ngCart.getTax()">
-        Thuế (<% ngCart.getTaxRate() %>%): <% ngCart.getTax() | currency %>
+        Thuế (<% ngCart.getTaxRate() %>%): <% ngCart.getTax() | currency:"":0 %> VNĐ
     </div>
     <div class="header-cart-total w-full p-tb-40" ng-show="ngCart.getShipping()">
-        Shipping: <% ngCart.getShipping() | currency %>
+        Shipping: <% ngCart.getShipping() | currency:"":0 %> VNĐ
     </div>
     <div class="header-cart-total w-full p-tb-40">
-        Tổng thành tiền: <% ngCart.totalCost() |  currency:"":0 %> VND
+        Tổng thành tiền: <% ngCart.totalCost() |  currency:"":0 %> VNĐ
     </div>
 
     <div class="header-cart-buttons flex-w w-full">

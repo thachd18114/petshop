@@ -134,6 +134,7 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
         $scope.ThuCung['tc_ngaySinh'] = new Date( $scope.ThuCung['tc_ngaySinh']);
         $scope.ThuCung['tc_ngaySinh'] = $filter('date')($scope.ThuCung['tc_ngaySinh'], "yyyy/MM/dd");
         // console.log($scope.ThuCung['tc_ngaySinh']);
+        $scope.tuoi = $scope.ThuCung['tc_tuoi'];
 
         switch(state){
             case 'create':
@@ -146,16 +147,16 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
                         data: data,
                         headers: {'Content-type': 'application/x-www-form-urlencoded'}
                     }).then(function () {
-                        swal({title: "", text: "Thêm thành công!", type: "success",}, function (isConfirm) {
-                            $("#ha_ten").fileinput('clear');
-                            $("#Modal").modal("hide");
-                            $scope.refreshData();
-                        });
+                        // swal({title: "", text: "Thêm thành công!", type: "success",}, function (isConfirm) {
+                        //     $("#ha_ten").fileinput('clear');
+                        //     $("#Modal").modal("hide");
+                        //     $scope.refreshData();
+                        // });
                     }).catch(function () {
-                        swal({title: "", text: "Có lỗi xảy ra!", type: "error",}, function (isConfirm) {
-                            $("#ha_ten").fileinput('clear');
-                            $("#Modal").modal("hide");
-                        });
+                        // swal({title: "", text: "Có lỗi xảy ra!", type: "error",}, function (isConfirm) {
+                        //     $("#ha_ten").fileinput('clear');
+                        //     $("#Modal").modal("hide");
+                        // });
                     });
                 }
                 break;

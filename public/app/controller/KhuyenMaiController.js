@@ -101,7 +101,7 @@ b.controller('KhuyenMaiController', function($scope,$filter,$http,MainURL,DTOpti
                     }).then(function(){
                         swal({ title : "",text :"Cập nhật thành công!",type: "success", },function(isConfirm){
                             $("#Modal").modal("hide");
-                            $scope.refreshData();;
+                            $scope.refreshData();
                         });
                     }).catch(function(){
                         swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
