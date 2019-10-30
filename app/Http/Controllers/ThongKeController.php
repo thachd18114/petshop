@@ -22,10 +22,16 @@ class ThongKeController extends Controller
             $tc = DB::select('SELECT COUNT(*) as thucung FROM `thucung` WHERE tc_trangThai = 1');
             $soluong = DB::select('SELECT COUNT(*) as soluong FROM `thucung`');
             $soluong_dh = DB::select('SELECT COUNT(*) as soluong FROM `donhang`');
+            $soluong_loai = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+                ->rightJoin('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
+                    ->groupBy('loaithucung.ltc_id','loaithucung.ltc_ten', 'tc_trangThai')
+                ->selectRaw('count(thucung.tc_id) as soluong,ltc_ten, tc_trangThai')
+                ->get();
             return view('backend.dashboard')
                 ->with('loaithucung', $ltc)
                 ->with('khachhang', $kh)
                 ->with('thucung', $tc)
+                ->with('soluong_loai', $soluong_loai)
                 ->with('soluong', $soluong)
                 ->with('soluong_dh', $soluong_dh)
                 ->with('donhang', $dh);

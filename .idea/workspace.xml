@@ -3,24 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="459a3452-75c5-47bd-b976-86605b7f341c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/FrontendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/FrontendController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DonHangController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DonHangController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ThongKeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ThongKeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/controller/KhuyenMaiController.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/controller/KhuyenMaiController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/app/controller/ThuCungController.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/app/controller/ThuCungController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/ngCart/template/ngCart/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/ngCart/template/ngCart/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/ngCart/template/ngCart/sidebar-cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/ngCart/template/ngCart/sidebar-cart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/backend/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/layout/partials/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layout/partials/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/thucung/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/thucung/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/errors/404.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/errors/404.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/partials/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/partials/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/pages/product-detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/pages/product-detail.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/pages/product-sale.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/pages/product-sale.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/pages/product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/pages/product.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/widgets/product-info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/widgets/product-info.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/widgets/product-list-sale.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/widgets/product-list-sale.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/widgets/product-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/widgets/product-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/donhang/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/donhang/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/widgets/order-info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/widgets/order-info.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3264">
-              <caret line="192" selection-start-line="192" selection-end-line="192" />
+            <state relative-caret-position="538">
+              <caret line="194" column="12" lean-forward="true" selection-start-line="194" selection-start-column="12" selection-end-line="194" selection-end-column="12" />
               <folding>
                 <element signature="e#7#389#0#PHP" expanded="true" />
               </folding>
@@ -63,11 +50,41 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/backend/dashboard.blade.php">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/app/controller/DonHangController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="223" column="64" selection-start-line="223" selection-start-column="64" selection-end-line="223" selection-end-column="64" />
+            <state relative-caret-position="816">
+              <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DonHangController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="13" column="85" selection-start-line="13" selection-start-column="85" selection-end-line="13" selection-end-column="85" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/backend/donhang/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="46" column="50" lean-forward="true" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Frontend/FrontendController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="674">
+              <caret line="404" lean-forward="true" selection-start-line="404" selection-end-line="404" />
+              <folding>
+                <element signature="e#49#66#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -162,14 +179,11 @@
         <option value="$PROJECT_DIR$/resources/views/backend/layout/partials/sidebar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/layout/master.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/FaqController.php" />
-        <option value="$PROJECT_DIR$/resources/views/frontend/widgets/order-info.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/donhang/chitietdonhang.blade.php" />
         <option value="$PROJECT_DIR$/app/TrangThaiDonHang.php" />
         <option value="$PROJECT_DIR$/app/DonHang.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/TrangThaiDonHangController.php" />
-        <option value="$PROJECT_DIR$/resources/views/backend/donhang/index.blade.php" />
         <option value="$PROJECT_DIR$/public/app/controller/DonHangController.js" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/DonHangController.php" />
         <option value="$PROJECT_DIR$/public/themes/adminlte/bower_components/inputmask/dist/inputmask/inputmask.numeric.extensions.js" />
         <option value="$PROJECT_DIR$/public/themes/adminlte/bower_components/inputmask/dist/jquery.inputmask.bundle.js" />
         <option value="$PROJECT_DIR$/public/vendor/ngCart/template/ngCart/summary.html" />
@@ -179,16 +193,13 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/ThuCungController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ChiTietKhuyenMaiController.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/khuyenmai/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ThongKeController.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/pages/product.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/layouts/partials/header.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/pages/product-sale.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/pages/product-detail.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/widgets/product-list-sale.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/frontend/widgets/product-list.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Frontend/FrontendController.php" />
         <option value="$PROJECT_DIR$/public/app/controller/KhuyenMaiController.js" />
         <option value="$PROJECT_DIR$/resources/views/backend/thucung/index.blade.php" />
         <option value="$PROJECT_DIR$/public/app/controller/ThuCungController.js" />
@@ -197,7 +208,13 @@
         <option value="$PROJECT_DIR$/resources/views/frontend/widgets/product-info.blade.php" />
         <option value="$PROJECT_DIR$/public/vendor/ngCart/template/ngCart/sidebar-cart.html" />
         <option value="$PROJECT_DIR$/public/vendor/ngCart/template/ngCart/cart.html" />
+        <option value="$PROJECT_DIR$/resources/views/frontend/widgets/order-info.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ThongKeController.php" />
         <option value="$PROJECT_DIR$/resources/views/backend/dashboard.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/DonHangController.php" />
+        <option value="$PROJECT_DIR$/resources/views/backend/donhang/index.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Frontend/FrontendController.php" />
       </list>
     </option>
   </component>
@@ -308,6 +325,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -315,47 +333,10 @@
               <item name="petshop" type="b2602c69:ProjectViewProjectNode" />
               <item name="petshop" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="petshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="petshop" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="petshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="petshop" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="petshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="petshop" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="ngCart" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="petshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="petshop" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="petshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="petshop" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="petshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="petshop" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -369,11 +350,11 @@
     <property name="settings.editor.splitter.proportion" value="0.22529644" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\petshop\public\js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\petshop\public\app\controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\petshop\public\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -475,7 +456,9 @@
       <workItem from="1571999177054" duration="4059000" />
       <workItem from="1572085800644" duration="17379000" />
       <workItem from="1572149883481" duration="19646000" />
-      <workItem from="1572188090646" duration="6962000" />
+      <workItem from="1572188090646" duration="7006000" />
+      <workItem from="1572249368164" duration="597000" />
+      <workItem from="1572422344906" duration="7001000" />
     </task>
     <task id="LOCAL-00001" summary="9/5/2019--fronend">
       <created>1567682256552</created>
@@ -617,17 +600,23 @@
       <option name="project" value="LOCAL" />
       <updated>1572104610064</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="27/10/2019--thong ke-km">
+      <created>1572195130794</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1572195130794</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="727687000" />
+    <option name="totallyTimeSpent" value="735329000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27231467" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26172465" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -734,23 +723,10 @@
     <MESSAGE value="20/10/2019--tk_admin" />
     <MESSAGE value="20/10/2019--thong ke" />
     <MESSAGE value="20/10/2019--thong ke-km" />
-    <option name="LAST_COMMIT_MESSAGE" value="20/10/2019--thong ke-km" />
+    <MESSAGE value="27/10/2019--thong ke-km" />
+    <option name="LAST_COMMIT_MESSAGE" value="27/10/2019--thong ke-km" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Giong.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" column="5" lean-forward="true" selection-start-line="15" selection-start-column="3" selection-end-line="17" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/LoaiThuCung.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="5" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="17" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuyenController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -770,24 +746,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/trangthaidonhang/index.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DonHangController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/backend/donhang/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="109" column="53" selection-start-line="109" selection-start-column="53" selection-end-line="109" selection-end-column="53" />
-          <folding>
-            <element signature="e#6933#6952#0#HTML" expanded="true" />
-            <element signature="e#12392#12409#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/vendor/ngCart/dist/ngCart.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -858,13 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/frontend/widgets/order-info.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="68" column="56" selection-start-line="68" selection-start-column="56" selection-end-line="68" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/app/controller/frontend/DonHangController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2142">
@@ -899,23 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/controller/DonHangController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ThongKeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="53" column="20" selection-start-line="46" selection-start-column="8" selection-end-line="53" selection-end-column="20" />
-          <folding>
-            <element signature="e#40#56#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -971,30 +905,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Frontend/FrontendController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="238" column="9" selection-start-line="238" selection-start-column="9" selection-end-line="238" selection-end-column="9" />
-          <folding>
-            <element signature="e#49#66#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/backend/khuyenmai/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="94" selection-start-line="94" selection-end-line="95" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/app/controller/KhuyenMaiController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="103" column="49" lean-forward="true" selection-start-line="103" selection-start-column="49" selection-end-line="103" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/app/controller/ThuCungController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1026,16 +936,6 @@
     <entry file="file://$PROJECT_DIR$/public/vendor/ngCart/template/ngCart/addtocart.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/frontend/widgets/product-info.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="242" column="48" lean-forward="true" selection-start-line="242" selection-start-column="48" selection-end-line="242" selection-end-column="48" />
-          <folding>
-            <element signature="e#5353#5430#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/frontend/layouts/partials/header.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
@@ -1050,13 +950,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="49" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/frontend/widgets/product-list.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="215" column="75" selection-start-line="215" selection-start-column="32" selection-end-line="215" selection-end-column="75" />
         </state>
       </provider>
     </entry>
@@ -1077,20 +970,108 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/controller/KhuyenMaiController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="61" column="89" lean-forward="true" selection-start-line="61" selection-start-column="89" selection-end-line="61" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/frontend/widgets/product-info.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="186" lean-forward="true" selection-start-line="185" selection-start-column="31" selection-end-line="186" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/frontend/widgets/product-list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="234" column="41" lean-forward="true" selection-start-line="231" selection-start-column="35" selection-end-line="234" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/frontend/widgets/order-info.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="65" column="68" lean-forward="true" selection-start-line="65" selection-start-column="68" selection-end-line="65" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/dashboard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="146" column="37" selection-start-line="146" selection-start-column="37" selection-end-line="146" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ThongKeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="27" column="82" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="82" />
+          <folding>
+            <element signature="e#40#56#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/controller/DonHangController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/khuyenmai/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="94" selection-start-line="94" selection-end-line="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/khachhang/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-510" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DonHangController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="13" column="85" selection-start-line="13" selection-start-column="85" selection-end-line="13" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/donhang/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="46" column="50" lean-forward="true" selection-start-line="46" selection-start-column="50" selection-end-line="46" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3264">
-          <caret line="192" selection-start-line="192" selection-end-line="192" />
+        <state relative-caret-position="538">
+          <caret line="194" column="12" lean-forward="true" selection-start-line="194" selection-start-column="12" selection-end-line="194" selection-end-column="12" />
           <folding>
             <element signature="e#7#389#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/backend/dashboard.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Frontend/FrontendController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="223" column="64" selection-start-line="223" selection-start-column="64" selection-end-line="223" selection-end-column="64" />
+        <state relative-caret-position="674">
+          <caret line="404" lean-forward="true" selection-start-line="404" selection-end-line="404" />
+          <folding>
+            <element signature="e#49#66#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

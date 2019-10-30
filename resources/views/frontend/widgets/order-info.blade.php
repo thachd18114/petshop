@@ -57,16 +57,18 @@
                 </thead>
                 @foreach($data as $tc)
                 <tr>
-                    <td width="250px" rowspan=""><img src="{{asset('storage/photos/' . $tc->ha_ten)}}" width="100%"></td>
+                    <td width="250px" rowspan=""><img src="http://res.cloudinary.com/petshop/image/upload/{{$tc->ha_ten}}.png" width="100%"></td>
                     <td><p>{{$tc->tc_ten}}</p>
                         Giống: {{$tc->g_ten}}
                     </td>
                     <td rowspan="">{{$tc->tc_giaBan}}$</td>
                     <td rowspan="">
-                        @if($tc->giatri == null)
+                        @if($tc->giatri != null && strtotime($tc->km_ngayBatDau) <= strtotime($date) && strtotime($tc->km_ngayKetThuc) >= strtotime($date) )
+                            {{$tc->giatri*$tc->tc_giaBan/100}}
+                        @else
+
                             {{0}}
-                            @else
-                        {{$tc->giatri*$tc->tc_giaBan/100}}
+
                             @endif
                     </td>
                     <td rowspan="" id="tamtinh_{{$tc->tc_id}}">{{$tc->tc_giaBan-($tc->giatri*$tc->tc_giaBan/100)}}</td>

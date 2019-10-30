@@ -191,5 +191,7 @@ Route::get('/faq', 'FaqController@ftfaq_info')->name('frontend.faq');
 
 Route::GET('/question/', 'FaqController@store_ch')->name('question');
 
+//-------------------------------------------API----------------------------------------------//
+Route::get('/list_binhluan/{id}', 'Frontend\FrontendController@list_binhluan')->name('list.binhluan');
 
 

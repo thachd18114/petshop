@@ -118,7 +118,7 @@
                 <!-- LINE CHART -->
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Tỷ số phần trăm loại thú cưng tồn kho </h3>
+                        <h3 class="box-title">Số lượng từng loại thú cưng tồn kho </h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -127,7 +127,26 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+                       <table class="table  ">
+                           <thead>
+                           <tr>
+                               <th>
+                                   Loại
+                               </th>
+                               <th>
+                                   Số lượng
+                               </th>
+                           </tr>
+                           </thead>
+                           @foreach($soluong_loai as $sl)
+                               @if($sl->tc_trangThai !=2)
+                          <tr>
+                              <td>{{$sl->ltc_ten}}</td>
+                              <td>{{$sl->soluong}}</td>
+                          </tr>
+                               @endif
+                               @endforeach
+                       </table>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -231,32 +250,32 @@
             $.getJSON("http://localhost/petshop/public/admin/thongke_doanhthu", addData);
 
 
-            var chart = new CanvasJS.Chart("chartContainer1", {
-                animationEnabled: true,
-                title: {
-                    text: "PETSHOP"
-                },
-                data: [{
-                    type: "pie",
-                    startAngle: 240,
-                    yValueFormatString: "##0.00\"%\"",
-                    indexLabel: "{label} {y}",
-                    dataPoints: dataPoints1
-                }]
-            });
-            function addData1(data) {
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].tc_trangThai != 2) {
-                        dataPoints1.push({
-                            y: data[i].soluong * 100 / @forEach($soluong as $sl) {{$sl->soluong}} @endforeach,
-                            label: data[i].ltc_ten
-                        });
-                    }
-                }
+            // var chart = new CanvasJS.Chart("chartContainer1", {
+            //     animationEnabled: true,
+            //     title: {
+            //         text: "PETSHOP"
+            //     },
+            //     data: [{
+            //         type: "pie",
+            //         startAngle: 240,
+            //         yValueFormatString: "##0.00\"%\"",
+            //         indexLabel: "{label} {y}",
+            //         dataPoints: dataPoints1
+            //     }]
+            // });
+            {{--function addData1(data) {--}}
+            {{--    for (var i = 0; i < data.length; i++) {--}}
+            {{--        if (data[i].tc_trangThai != 2) {--}}
+            {{--            dataPoints1.push({--}}
+            {{--                y: data[i].soluong * 100 / @forEach($soluong as $sl) {{$sl->soluong}} @endforeach,--}}
+            {{--                label: data[i].ltc_ten--}}
+            {{--            });--}}
+            {{--        }--}}
+            {{--    }--}}
 
-                chart.render();
-            }
-            $.getJSON("http://localhost/petshop/public/admin/thongke_phantram", addData1);
+            {{--    chart.render();--}}
+            {{--}--}}
+            // $.getJSON("http://localhost/petshop/public/admin/thongke_phantram", addData1);
 
             var chart1 = new CanvasJS.Chart("chartContainer2", {
                 animationEnabled: true,

@@ -43,9 +43,9 @@
                     <td><% dh.dh_diaChi %> </td>
                     <td><% dh.dh_dienThoai %></td>
                     <td><% dh.httt_ten %> </td>
-                    <td><% dh.kh_id %></td>
+                    <td><% dh.kh_hoTen %></td>
                     <td>$ <% dh.dh_tongGia %></td>
-                    <td><% dh.ttdh_id %></td>
+                    <td><% dh.ttdh_ten %></td>
                     <td style="text-align: center">
                         <button class="btn btn-social-icon btn bg-orange" style="width: 22px; height: 22px;"  ng-click="detail(dh.dh_id, dh.kh_id)"><i class="fas fa-info" style="font-size: 12px;margin-top: -6px"></i></button> &nbsp;
 

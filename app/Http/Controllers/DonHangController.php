@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 class DonHangController extends Controller
 {
     public function index () {
-        $ds_donhang = DonHang::join('hinhthucthanhtoan','hinhthucthanhtoan.httt_id','=', 'donhang.httt_id')->get();
+        $ds_donhang = DonHang::join('hinhthucthanhtoan','hinhthucthanhtoan.httt_id','=', 'donhang.httt_id')
+            ->join('khachhang', 'khachhang.kh_id', '=', 'donhang.kh_id')
+            ->join('trangthaidonhang', 'trangthaidonhang.ttdh_id', 'donhang.ttdh_id')
+            ->get();
         return response()->json($ds_donhang);
     }
     public function chitietdonhang ($id)
