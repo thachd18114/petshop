@@ -27,14 +27,14 @@ class FrontendController extends Controller
         $date = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
 //        dd($hot);
         $hot = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
-            ->leftJoin('chitietdonhang','chitietdonhang.tc_id', '=',  'thucung.tc_id')
+            ->leftJoin('chitietdonhang', 'chitietdonhang.tc_id', '=', 'thucung.tc_id')
             ->leftJoin('donhang', 'donhang.dh_id', '=', 'chitietdonhang.dh_id')
             ->groupBy('giong.g_id')
             ->selectRaw('count(donhang.dh_id) as soluong,giong.g_id as id')
             ->orderBy('soluong', 'desc')
             ->limit(1)
             ->get();
-        foreach ($hot as $hot1){
+        foreach ($hot as $hot1) {
             $id = $hot1->id;
         }
         $loaithucung = LoaiThuCung::all();
@@ -48,16 +48,15 @@ class FrontendController extends Controller
     public function product(Request $request)
     {
         $hot = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
-            ->leftJoin('chitietdonhang','chitietdonhang.tc_id', '=',  'thucung.tc_id')
+            ->leftJoin('chitietdonhang', 'chitietdonhang.tc_id', '=', 'thucung.tc_id')
             ->leftJoin('donhang', 'donhang.dh_id', '=', 'chitietdonhang.dh_id')
-
             ->groupBy('giong.g_id')
 //            ->Having('ttdh_id','=', 2)
             ->selectRaw('count(donhang.dh_id) as soluong,giong.g_id as id')
             ->orderBy('soluong', 'desc')
             ->limit(1)
             ->get();
-        foreach ($hot as $hot1){
+        foreach ($hot as $hot1) {
             $id = $hot1->id;
         }
         $date = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
@@ -73,9 +72,8 @@ class FrontendController extends Controller
     public function product_sale(Request $request)
     {
         $hot = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
-            ->leftJoin('chitietdonhang','chitietdonhang.tc_id', '=',  'thucung.tc_id')
+            ->leftJoin('chitietdonhang', 'chitietdonhang.tc_id', '=', 'thucung.tc_id')
             ->leftJoin('donhang', 'donhang.dh_id', '=', 'chitietdonhang.dh_id')
-
             ->groupBy('giong.g_id')
 //            ->Having('ttdh_id','=', 2)
             ->selectRaw('count(donhang.dh_id) as soluong,giong.g_id as id')
@@ -83,7 +81,7 @@ class FrontendController extends Controller
             ->limit(1)
             ->get();
 //        dd($hot);
-        foreach ($hot as $hot1){
+        foreach ($hot as $hot1) {
             $id = $hot1->id;
         }
         $date = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
@@ -99,22 +97,24 @@ class FrontendController extends Controller
 
     public function productDetail(Request $request, $id)
     {
-        $tc_id =[$id];
+        $tc_id = [$id];
         $date = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
         $thucung = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
             ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=',
-                '1')->where('thucung.tc_id', $id)->select('thucung.*','ha_ten','g_ten')
+                '1')->where('thucung.tc_id', $id)->select('thucung.*', 'ha_ten', 'g_ten')
             ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
             ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
-            ->leftjoin ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
-            ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
-                'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
-                'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten','km_ngayBatDau','km_ngayKetThuc', 'loaithucung.ltc_id','loaithucung.ltc_ten')
-                ->having('thucung.tc_id',$id)
+            ->leftjoin('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
+            ->groupBy('thucung.tc_id', 'thucung.tc_ten', 'thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
+                'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id', 'g_id', 'g_ten',
+                'thucung.tc_gioiTinh', 'thucung.tc_canNang',
+                'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'km_ngayBatDau', 'km_ngayKetThuc',
+                'loaithucung.ltc_id', 'loaithucung.ltc_ten')
+            ->having('thucung.tc_id', $id)
             ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,km_ngayBatDau, km_ngayKetThuc,  loaithucung.*,max(`km_giaTri`) as giatri')
             ->first();
 
-        if($thucung) {
+        if ($thucung) {
             $danhsachhinhanhlienquan = DB::table('hinhanh')
                 ->where('tc_id', $id)
                 ->get();
@@ -125,7 +125,7 @@ class FrontendController extends Controller
                 ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=', '1')
                 ->where('tc_trangThai', '=', '1')
                 ->where('giong.g_id', '=', $idgiong)
-                ->whereNotIn('thucung.tc_id',$tc_id)
+                ->whereNotIn('thucung.tc_id', $tc_id)
                 ->get();
             $binhluan = DB::table('binhluan')->join('khachhang', 'khachhang.kh_id', '=', 'binhluan.kh_id')
                 ->where('tc_id', $id)->get();
@@ -136,7 +136,7 @@ class FrontendController extends Controller
                 ->with('date', $date)
                 ->with('danhsachhinhanhlienquan', $danhsachhinhanhlienquan)
                 ->with('binhluan', $binhluan);
-        }else{
+        } else {
             return view('errors.404');
         }
 
@@ -204,12 +204,13 @@ class FrontendController extends Controller
             ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
             ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')
             ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
-            ->leftjoin ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
-            ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
-                'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','thucung.g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
-                'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id','ha_ten','hinhanh.ha_id', 'loaithucung.ltc_id','loaithucung.ltc_ten','km_ngayBatDau','km_ngayKetThuc')
-
-            ->Having('tc_trangThai', '=',1 )
+            ->leftjoin('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
+            ->groupBy('thucung.tc_id', 'thucung.tc_ten', 'thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
+                'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id', 'thucung.g_id', 'g_ten',
+                'thucung.tc_gioiTinh', 'thucung.tc_canNang',
+                'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'hinhanh.ha_id', 'loaithucung.ltc_id',
+                'loaithucung.ltc_ten', 'km_ngayBatDau', 'km_ngayKetThuc')
+            ->Having('tc_trangThai', '=', 1)
             ->Having('hinhanh.ha_id', '=', 1)
 //
             ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten, hinhanh.ha_id , loaithucung.*,max(`km_giaTri`) as giatri, km_ngayBatDau,km_ngayKetThuc');
@@ -221,20 +222,20 @@ class FrontendController extends Controller
         $gender = $request->query('gender');
         // dd($query);
         if ($searchByGiongMa != null) {
-            $query->Having('giong.g_ten','like','%'.$searchByGiongMa.'%')
+            $query->Having('giong.g_ten', 'like', '%' . $searchByGiongMa . '%')
                 ->get();
         }
-        if ($filter != null){
+        if ($filter != null) {
             $query->orderBy('tc_giaBan', $filter)
                 ->get();
         }
-        if ($priceBg != null ||$priceEnd != null){
-            $query->Having('tc_giaBan','>=',$priceBg)
-                ->Having('tc_giaBan','<',$priceEnd)
+        if ($priceBg != null || $priceEnd != null) {
+            $query->Having('tc_giaBan', '>=', $priceBg)
+                ->Having('tc_giaBan', '<', $priceEnd)
                 ->get();
         }
-        if ($gender != null){
-            $query->Having('tc_gioiTinh','=',$gender)
+        if ($gender != null) {
+            $query->Having('tc_gioiTinh', '=', $gender)
                 ->get();
         }
 
@@ -249,14 +250,16 @@ class FrontendController extends Controller
             ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
             ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')
             ->Join('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
-            ->join ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
-
-            ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
-                'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','thucung.g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
-                'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten','hinhanh.ha_id', 'loaithucung.ltc_id','loaithucung.ltc_ten','km_ngayBatDau','km_ngayKetThuc')
-
-            ->Having('tc_trangThai', '=',1 )
+            ->join('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
+            ->groupBy('thucung.tc_id', 'thucung.tc_ten', 'thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
+                'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id', 'thucung.g_id', 'g_ten',
+                'thucung.tc_gioiTinh', 'thucung.tc_canNang',
+                'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'hinhanh.ha_id', 'loaithucung.ltc_id',
+                'loaithucung.ltc_ten', 'km_ngayBatDau', 'km_ngayKetThuc')
+            ->Having('tc_trangThai', '=', 1)
             ->Having('hinhanh.ha_id', '=', 1)
+            ->Having('km_ngayBatDau', '<=', $date)
+            ->Having('km_ngayKetThuc', '>=', $date)
             ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten, hinhanh.ha_id , loaithucung.*,max(`km_giaTri`) as giatri, km_ngayBatDau,km_ngayKetThuc');
         // Kiểm tra điều kiện `searchByLoaiMa`
         $searchByGiongMa = $request->query('searchByGiongMa');
@@ -266,20 +269,20 @@ class FrontendController extends Controller
         $gender = $request->query('gender');
         // dd($query);
         if ($searchByGiongMa != null) {
-            $query->Having('giong.g_ten','like','%'.$searchByGiongMa.'%')
+            $query->Having('giong.g_ten', 'like', '%' . $searchByGiongMa . '%')
                 ->get();
         }
-        if ($filter != null){
+        if ($filter != null) {
             $query->orderBy('tc_giaBan', $filter)
                 ->get();
         }
-        if ($priceBg != null ||$priceEnd != null){
-            $query->Having('tc_giaBan','>=',$priceBg)
-                 ->Having('tc_giaBan','<',$priceEnd)
+        if ($priceBg != null || $priceEnd != null) {
+            $query->Having('tc_giaBan', '>=', $priceBg)
+                ->Having('tc_giaBan', '<', $priceEnd)
                 ->get();
         }
-        if ($gender != null){
-            $query->Having('tc_gioiTinh','=',$gender)
+        if ($gender != null) {
+            $query->Having('tc_gioiTinh', '=', $gender)
                 ->get();
         }
 
@@ -299,7 +302,7 @@ class FrontendController extends Controller
 
     }
 
-    public function update_acount (Request $request)
+    public function update_acount(Request $request)
     {
         if (Session::has('tenDangNhap')) {
             $kh_taiKhoan = Session::get('tenDangNhap');
@@ -312,16 +315,16 @@ class FrontendController extends Controller
             $kh->kh_dienThoai = $request->kh_dienThoai;
             $kh->kh_diaChi = $request->kh_diaChi;
             $kh->kh_gioiTinh = $request->kh_gioiTinh;
-            if ($request->kh_matKhau != ''){
+            if ($request->kh_matKhau != '') {
                 $kh->kh_matKhau = md5($request->kh_matKhau);
             }
             $kh->save();
-            return redirect()->back()->with('success','Lưu thành công');
-        }
-        else {
+            return redirect()->back()->with('success', 'Lưu thành công');
+        } else {
             return view('frontend.pages.dangnhap');
         }
     }
+
     public function list_order()
     {
         if (Session::has('tenDangNhap')) {
@@ -330,13 +333,12 @@ class FrontendController extends Controller
             $ds_donhang = DonHang::join('hinhthucthanhtoan', 'hinhthucthanhtoan.httt_id', '=', 'donhang.httt_id')
                 ->join('trangthaidonhang', 'trangthaidonhang.ttdh_id', '=', 'donhang.ttdh_id')
                 ->where('kh_id', $kh->kh_id)
-                ->orderBy('dh_ngayTao','desc')
+                ->orderBy('dh_ngayTao', 'desc')
                 ->get();
 
             return view('frontend.pages.order')
                 ->with('ds_donhang', $ds_donhang);
-        }
-        else {
+        } else {
             return view('frontend.pages.dangnhap');
         }
     }
@@ -345,38 +347,38 @@ class FrontendController extends Controller
     {
         if (Session::has('tenDangNhap')) {
             $donhang = DonHang::join('khachhang', 'khachhang.kh_id', '=', 'donhang.kh_id')
-                ->join('hinhthucthanhtoan', 'hinhthucthanhtoan.httt_id', '=', 'donhang.httt_id')->where('dh_id', $id)->first();
+                ->join('hinhthucthanhtoan', 'hinhthucthanhtoan.httt_id', '=', 'donhang.httt_id')->where('dh_id',
+                    $id)->first();
 
-            $data = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+            $date = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
             $chitiet = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
-               ->join('chitietdonhang','chitietdonhang.tc_id', '=', 'thucung.tc_id')
+                ->join('chitietdonhang', 'chitietdonhang.tc_id', '=', 'thucung.tc_id')
                 ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')
-                ->where('hinhanh.ha_id', '=','1')
-//                ->where('thucung.tc_id', $id)
-//                ->select('thucung.*','ha_ten','g_ten')
+                ->where('hinhanh.ha_id', '=', '1')
                 ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
                 ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
-                ->leftjoin ('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
-                ->where('km_ngayBatDau', '<=', $data)
-                ->where('km_ngayKetThuc', '>=',$data)
-                ->orWhere('km_ngayBatDau' ,'=', null)
-                ->groupBy('thucung.tc_id', 'thucung.tc_ten','thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
-                    'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id','g_id', 'g_ten', 'thucung.tc_gioiTinh', 'thucung.tc_canNang',
-                    'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'loaithucung.ltc_id','loaithucung.ltc_ten','chitietdonhang.dh_id')
-               ->having('chitietdonhang.dh_id', $id)
-                ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,  loaithucung.*,max(`km_giaTri`) as giatri,chitietdonhang.dh_id')
+                ->leftjoin('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
+                ->orWhere('km_ngayBatDau', '=', null)
+                ->groupBy('thucung.tc_id', 'thucung.tc_ten', 'thucung.tc_giaBan', 'thucung.tc_ngaySinh',
+                    'thucung.tc_tuoi',
+                    'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id', 'g_id', 'g_ten',
+                    'thucung.tc_gioiTinh', 'thucung.tc_canNang',
+                    'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'loaithucung.ltc_id',
+                    'loaithucung.ltc_ten', 'chitietdonhang.dh_id', 'km_ngayBatDau', 'km_ngayKetThuc')
+                ->having('chitietdonhang.dh_id', $id)
+                ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,  loaithucung.*,max(`km_giaTri`) as giatri,chitietdonhang.dh_id,km_ngayBatDau,km_ngayKetThuc')
                 ->get();
-        //dd($chitiet);
+            //dd($chitiet);
             $tamtinh = 0;
-            foreach ($chitiet as $ct){
-                $tamtinh += $ct->tc_giaBan-$ct->tc_giaBan*$ct->giatri/100;
+            foreach ($chitiet as $ct) {
+                $tamtinh += $ct->tc_giaBan - $ct->tc_giaBan * $ct->giatri / 100;
             }
             return view('frontend.pages.order-detail')
                 ->with('chitiet', $chitiet)
                 ->with('donhang', $donhang)
+                ->with('date', $date)
                 ->with('tamtinh', $tamtinh);
-        }
-        else {
+        } else {
             return view('frontend.pages.dangnhap');
         }
     }
@@ -393,4 +395,10 @@ class FrontendController extends Controller
 
     }
 
+//----------------------------------------------API------------------------------------------------------//
+    public function list_binhluan($id){
+        $binhluan = DB::table('binhluan')->join('khachhang', 'khachhang.kh_id', '=', 'binhluan.kh_id')
+            ->where('tc_id', $id)->get();
+        return response()->json($binhluan);
+    }
 }
