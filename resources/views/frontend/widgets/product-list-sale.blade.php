@@ -177,7 +177,7 @@
                     <div class="block2 ">
                         <div class="block2-pic hov-img0">
                             @if(substr($sp->ha_ten, strlen($sp->ha_ten)- 3) == 'mp4')
-                                <img src="{{ asset('img/film-and-vid.jpg') }}" alt="IMG-PRODUCT">
+                                <img src="{{ asset('img/video.png') }}" alt="IMG-PRODUCT">
                             @else
 
                                 <img src="http://res.cloudinary.com/petshop/image/upload/{{$sp->ha_ten}}.png" alt="IMG-PRODUCT" width="100%" height="180px">

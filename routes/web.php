@@ -211,4 +211,7 @@ Route::GET('/question/', 'FaqController@store_ch')->name('question');
 //-------------------------------------------API----------------------------------------------//
 Route::get('/list_binhluan/{id}', 'Frontend\FrontendController@list_binhluan')->name('list.binhluan');
 
+Route::get('/lienhe', function (){
 
+        return view('frontend.pages.contact');
+})->name('lienhe');

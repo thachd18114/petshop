@@ -33,11 +33,11 @@
                 <td>{{$dh->httt_ten}}</td>
                 <td>{{$dh->dh_tongGia}}</td>
                 <td>{{$dh->ttdh_ten}}</td>
-                @if($dh->ttdh_id ==1)
-                    <td><a href="{{route('frontend.order.info', ['id'=> $dh->dh_id])}}">Chi tiết</a> &nbsp&nbsp&nbsp <button  onclick="xoa()" id="detele" >Hủy</button>&nbsp</td>
-                @else
+{{--                @if($dh->ttdh_id ==1)--}}
+{{--                    <td><a href="{{route('frontend.order.info', ['id'=> $dh->dh_id])}}">Chi tiết</a> &nbsp&nbsp&nbsp <button  onclick="xoa()" id="detele" >Hủy</button>&nbsp</td>--}}
+{{--                @else--}}
                     <td><a href="{{route('frontend.order.info', ['id'=> $dh->dh_id])}}">Chi tiết</a></td>
-                @endif
+{{--                @endif--}}
             </tr>
 
         @endforeach

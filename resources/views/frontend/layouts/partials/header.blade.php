@@ -52,12 +52,12 @@
                         <li class="label1 @yield('product-sale')" data-label1="sale">
                             <a href="{{ route('frontend.product.sale') }}"> Khuyến mãi</a>
                         </li>
-                        <li >
-                            <a href="shoping-cart.html">Liên hệ</a>
+                        <li class="@yield('lienhe')">
+                            <a href="{{route('lienhe')}}">Liên hệ</a>
                         </li>
-                        <li class="{{ Request::is('gioi-thieu') ? 'active-menu' : '' }}">
-                            <a href="">Giới thiệu</a>
-                        </li>
+{{--                        <li class="{{ Request::is('gioi-thieu') ? 'active-menu' : '' }}">--}}
+{{--                            <a href="">Giới thiệu</a>--}}
+{{--                        </li>--}}
 
                     </ul>
                 </div>

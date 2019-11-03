@@ -155,14 +155,23 @@ class ThuCungController extends Controller
             $ha1 = HinhAnh::where('tc_id',$id)->get();
             foreach($ha1 as $hinhanh)
             {
+
                 // Xóa hình cũ để tránh rác
                 Cloudder::destroyImage($hinhanh->ha_ten);
             }
             $ha = HinhAnh::where('tc_id',$id)->delete();
             foreach ($request->ha_ten as $index => $file) {
                 $name = $id.'_'.$index.'_'.$file->getClientOriginalName();
-                $image_name = $file->getRealPath();
-                Cloudder::upload($image_name,$name);
+                if( (substr($name, strlen($name)- 3) == 'mp4')) {
+                    $video_name = $file->getRealPath();
+
+                    Cloudder::upload($video_name,$name,array("resource_type" => "video"));
+                }
+                else {
+                    $image_name = $file->getRealPath();
+                    Cloudder::upload($image_name,$name);
+                }
+
                 // Tạo đối tưọng HinhAnh
                 $hinhAnh = new HinhAnh();
                 $hinhAnh->tc_id = $id;
@@ -172,6 +181,8 @@ class ThuCungController extends Controller
             }
             return response(["error"=>false, "message"=>compact('hinhanh')], 200);
         }
+
+
     }
     public function delete($id){
         $thucung = ThuCung::findOrfail($id);

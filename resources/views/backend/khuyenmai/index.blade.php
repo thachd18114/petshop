@@ -95,20 +95,20 @@
                                             <span class="error" ng-show="loi === true">Ngày kết thúc phải lớn hơn ngày bắt đầu</span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="km_trangThai" class="col-sm-2 control-label">Trạng Thái</label>
-                                        <div class="col-sm-10">
-                                            <label>
-                                                <input  type="radio"  name="km_trangThai"  ng-value="1" ng-model="KhuyenMai.km_trangThai" >
-                                                &nbsp;&nbsp;Kích hoạt
-                                            </label>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <label>
-                                                <input  type="radio" name="km_trangThai"  ng-value="2" ng-model="KhuyenMai.km_trangThai"  >
-                                                &nbsp;Khóa
-                                            </label>
-                                        </div>
-                                    </div>
+{{--                                    <div class="form-group">--}}
+{{--                                        <label for="km_trangThai" class="col-sm-2 control-label">Trạng Thái</label>--}}
+{{--                                        <div class="col-sm-10">--}}
+{{--                                            <label>--}}
+{{--                                                <input  type="radio"  name="km_trangThai"  ng-value="1" ng-model="KhuyenMai.km_trangThai" >--}}
+{{--                                                &nbsp;&nbsp;Kích hoạt--}}
+{{--                                            </label>--}}
+{{--                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                                            <label>--}}
+{{--                                                <input  type="radio" name="km_trangThai"  ng-value="2" ng-model="KhuyenMai.km_trangThai"  >--}}
+{{--                                                &nbsp;Khóa--}}
+{{--                                            </label>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
                                 </div>
                             </form>

@@ -239,7 +239,7 @@ class FrontendController extends Controller
                 ->get();
         }
 
-        $data = $query->paginate(7);
+        $data = $query->paginate(16);
         return $data;
     }
 
@@ -358,7 +358,7 @@ class FrontendController extends Controller
                 ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
                 ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
                 ->leftjoin('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
-                ->orWhere('km_ngayBatDau', '=', null)
+
                 ->groupBy('thucung.tc_id', 'thucung.tc_ten', 'thucung.tc_giaBan', 'thucung.tc_ngaySinh',
                     'thucung.tc_tuoi',
                     'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id', 'g_id', 'g_ten',
@@ -366,6 +366,7 @@ class FrontendController extends Controller
                     'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'loaithucung.ltc_id',
                     'loaithucung.ltc_ten', 'chitietdonhang.dh_id', 'km_ngayBatDau', 'km_ngayKetThuc')
                 ->having('chitietdonhang.dh_id', $id)
+
                 ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,  loaithucung.*,max(`km_giaTri`) as giatri,chitietdonhang.dh_id,km_ngayBatDau,km_ngayKetThuc')
                 ->get();
             //dd($chitiet);

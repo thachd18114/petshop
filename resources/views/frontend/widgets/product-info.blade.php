@@ -75,10 +75,10 @@ function time_elapsed_string($datetime, $full = false) {
                         <div class="slick3 gallery-lb">
                             @foreach($danhsachhinhanhlienquan as $hinhanh)
                                 @if(substr($hinhanh->ha_ten, strlen($hinhanh->ha_ten)- 3) == 'mp4')
-                                    <div class="item-slick3" data-thumb="{{ asset('img/film-and-vid.jpg') }}">
+                                    <div class="item-slick3" data-thumb="{{ asset('img/video.png') }}">
                                         <div class="wrap-pic-w pos-relative">
-                                            <video controls="controls" preload="metadata" style="max-width: 500px; margin-top: 70px">
-                                                <source src="http://res.cloudinary.com/petshop/video/upload/{{$hinhanh->ha_ten}}.mp4" type="video/mp4">
+                                            <video controls="controls" preload="metadata" style="max-width: 500px;width: 100%">
+                                                <source style="width: 100%" src="http://res.cloudinary.com/petshop/video/upload/{{$hinhanh->ha_ten}}.mp4" type="video/mp4">
                                             </video>
                                         </div>
                                 @else
@@ -338,10 +338,10 @@ function time_elapsed_string($datetime, $full = false) {
                         <div class="block2">
                             <div class="block2-pic hov-img0">
                                 @if(substr($lq->ha_ten, strlen($lq->ha_ten)- 3) == 'mp4')
-                                    <img src="{{ asset('img/film-and-vid.jpg') }}" alt="IMG-PRODUCT">
+                                    <img src="{{ asset('img/video.png') }}" alt="IMG-PRODUCT">
                                 @else
 
-                                    <img src="{{ asset('storage/photos/' . $lq->ha_ten) }}" alt="IMG-PRODUCT" width="100%" height="180px">
+                                    <img src="http://res.cloudinary.com/petshop/image/upload/{{$lq->ha_ten}}.png" alt="IMG-PRODUCT" width="100%" height="180px">
                                 @endif
                                 <a href="{{ route('frontend.productDetail',$lq->tc_id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                     Chi tiết

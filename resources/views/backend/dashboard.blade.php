@@ -127,7 +127,7 @@
                         </div>
                     </div>
                     <div class="box-body">
-                       <table class="table  ">
+                       <table class="table">
                            <thead>
                            <tr>
                                <th>
