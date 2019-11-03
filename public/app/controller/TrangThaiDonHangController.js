@@ -1,10 +1,10 @@
-b.controller('LoaiThuCungController', function($scope,$http,MainURL,DTOptionsBuilder, DTColumnBuilder) {
+b.controller('TrangThaiDonHangController', function($scope,$http,MainURL,DTOptionsBuilder, DTColumnBuilder) {
     $scope.isLoaded = true;
-    $scope.dataTitle = "Loại Thú Cưng";
+    $scope.dataTitle = "Trạng Thái Đơn Hàng";
 
     $scope.refreshData = function(){
         $scope.isLoading = true;
-        $http.get(MainURL + 'list_loaithucung').then(function(response){
+        $http.get(MainURL + 'list_ttdonhang').then(function(response){
             $scope.memberList = response.data;
             $scope.isLoading = false;
         });
@@ -17,16 +17,16 @@ b.controller('LoaiThuCungController', function($scope,$http,MainURL,DTOptionsBui
             case 'create':
                 $scope.modalTitle = "Thêm " + $scope.dataTitle;
                 $scope.modalButton = "Thêm";
-                $scope.LoaiThuCung ={
-                    ltc_ten : "",
+                $scope.TrangThaiDonHang ={
+                    ttdh_ten : "",
                 }
                 break;
             case 'edit':
                 $scope.id = id;
                 $scope.modalTitle = "Cập nhật " + $scope.dataTitle;
                 $scope.modalButton = "Cập nhật";
-                $http.get(MainURL + 'edit_loaithucung/'+id).then(function(response){
-                    $scope.LoaiThuCung = response.data;
+                $http.get(MainURL + 'edit_ttdonhang/'+id).then(function(response){
+                    $scope.TrangThaiDonHang = response.data;
                 });
 
 
@@ -37,8 +37,8 @@ b.controller('LoaiThuCungController', function($scope,$http,MainURL,DTOptionsBui
     $scope.save = function (state,id){
         switch(state){
             case 'create':
-                var url = MainURL + "createloaithucung";
-                var data = $.param($scope.LoaiThuCung);
+                var url = MainURL + "createttdonhang";
+                var data = $.param($scope.TrangThaiDonHang);
                 $http({
                     method : "POST",
                     url : url,
@@ -56,8 +56,8 @@ b.controller('LoaiThuCungController', function($scope,$http,MainURL,DTOptionsBui
                 });
                 break;
             case 'edit' :
-                var url = MainURL + 'update_loaithucung/' + id;
-                var data = $.param($scope.LoaiThuCung);
+                var url = MainURL + 'update_ttdonhang/' + id;
+                var data = $.param($scope.TrangThaiDonHang);
                 $http({
                     method : "POST",
                     url : url,
@@ -90,15 +90,15 @@ b.controller('LoaiThuCungController', function($scope,$http,MainURL,DTOptionsBui
             },
             function(isConfirm) {
                 if (isConfirm) {
-                    $http.get(MainURL+'delete_loaithucung/'+id).then(function(response){
-                       if(!response.data['error']) {
-                           swal("", "Xóa thành công!", "success")
-                           $scope.refreshData();
-                       }
-                       else {
-                               swal("",response.data['error'], "error");
-                               $scope.refreshData();
-                       }
+                    $http.get(MainURL+'delete_ttdonhang/'+id).then(function(response){
+                        if(!response.data['error']) {
+                            swal("", "Xóa thành công!", "success")
+                            $scope.refreshData();
+                        }
+                        else {
+                            swal("",response.data['error'], "error");
+                            $scope.refreshData();
+                        }
                     })
 
                 }

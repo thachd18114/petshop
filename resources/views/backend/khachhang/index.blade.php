@@ -21,7 +21,7 @@
             <table  id="example1" dt-options="dtOptions" dt-columns="dtColumns" datatable="ng" class="table table-bordered table-striped dataTable">
                 <thead ng-show="!isLoading">
                 <tr>
-                    <th style="width: 5%">ID</th>
+                    <th style="width: 5%">STT</th>
                     <th>Tên</th>
                     <th>Giới tính</th>
                     <th>Email</th>
@@ -37,7 +37,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="kh in memberList">
-                    <td><% kh.kh_id %> </td>
+                    <td><% $index+1 %> </td>
                     <td><% kh.kh_hoTen %></td>
                     <td><% kh.kh_gioiTinh %> </td>
                     <td><% kh.kh_email %></td>
@@ -63,30 +63,36 @@
                             <h4 class="modal-title"><% modalTitle %></h4>
                         </div>
                         <div class="modal-body">
-                            <form name="frmDonHang" class="form-horizontal">
+                            <form name="frmKhachHang" class="form-horizontal">
                                 <div class="container-fluid">
                                     <div class="form-group">
                                         <label for="kh_taiKhoan" class="col-sm-2 control-label">Tên đăng nhập</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="kh_taiKhoan" name="kh_taiKhoan" placeholder="Tên đăng nhập" ng-model="KhachHang.kh_taiKhoan">
+                                            <input type="text"  class="form-control" id="kh_taiKhoan" name="kh_taiKhoan" placeholder="Tên đăng nhập" ng-model="KhachHang.kh_taiKhoan" ng-required="true">
+                                            <span class="error" ng-show="frmKhachHang.kh_taiKhoan.$error.required">Vui lòng nhập tên tài khoản!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="kh_matKhau" class="col-sm-2 control-label">Mật khẩu</label>
                                         <div class="col-sm-10">
-                                            <input type="password"  class="form-control" id="kh_matKhau" name="kh_matKhau" placeholder="Mật khẩu" ng-model="KhachHang.kh_matKhau">
+                                            <input type="password"  class="form-control" id="kh_matKhau" name="kh_matKhau" placeholder="Mật khẩu" ng-model="KhachHang.kh_matKhau" ng-required="true">
+                                            <span class="error" ng-show="frmKhachHang.kh_matKhau.$error.required" ng-if="state=='create'">Vui lòng nhập mật khẩu!</span>
+
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="kh_matKhau1" class="col-sm-2 control-label">Nhập lại mật khẩu</label>
                                         <div class="col-sm-10">
-                                            <input type="password"  class="form-control" id="kh_matKhau1" name="kh_matKhau1" placeholder="Nhập lại mật khẩu" ng-model="KhachHang.kh_matKhau1">
+                                            <input type="password"  class="form-control" id="kh_matKhau1" name="kh_matKhau1" placeholder="Nhập lại mật khẩu" ng-model="KhachHang.kh_matKhau1" ng-required="true">
+                                            <span class="error" ng-show="frmKhachHang.kh_matKhau1.$error.required" ng-if="state=='create'">Vui lòng nhập lại mật khẩu!</span>
+                                            <span ng-if="KhachHang.kh_matKhau1 != KhachHang.kh_matKhau && !frmKhachHang.kh_matKhau1.$error.required " class="error">Mật khẩu phải giống nhau!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="kh_hoTen" class="col-sm-2 control-label">Họ tên</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="kh_hoTen" name="kh_hoTen" placeholder="Nhập họ tên" ng-model="KhachHang.kh_hoTen">
+                                            <input type="text"  class="form-control" id="kh_hoTen" name="kh_hoTen" placeholder="Nhập họ tên" ng-model="KhachHang.kh_hoTen" ng-required="true">
+                                            <span class="error" ng-show="frmKhachHang.kh_hoTen.$error.required">Vui lòng nhập họ tên khách hàng!</span>
                                         </div>
                                     </div>
 
@@ -94,12 +100,12 @@
                                         <label for="kh_gioiTinh" class="col-sm-2 control-label">Giới tính </label>
                                         <div class="col-sm-10">
                                             <label>
-                                                <input  type="radio"  name="kh_gioiTinh"  ng-value="1" ng-model="KhachHang.kh_gioiTinh" class="">
+                                                <input  type="radio"  name="kh_gioiTinh"  ng-value="1" ng-model="KhachHang.kh_gioiTinh" >
                                                 &nbsp;&nbsp;Nam
                                             </label>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <label>
-                                                <input  type="radio" name="kh_gioiTinh"  ng-value="2" ng-model="KhachHang.kh_gioiTinh"  class="" >
+                                                <input  type="radio" name="kh_gioiTinh"  ng-value="2" ng-model="KhachHang.kh_gioiTinh"  >
                                                 &nbsp;&nbsp;Nữ
                                             </label>
                                             </label>
@@ -108,25 +114,29 @@
                                     <div class="form-group">
                                         <label for="kh_ngaySinh" class="col-sm-2 control-label">Ngày sinh</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="kh_ngaySinh" name="kh_ngaySinh" placeholder="Nhập lại mật khẩu" ng-model="KhachHang.kh_ngaySinh">
+                                            <input type="text"  class="form-control" id="kh_ngaySinh" name="kh_ngaySinh" placeholder="Nhập lại mật khẩu" ng-model="KhachHang.kh_ngaySinh" ng-required="true">
+                                            <span class="error" ng-show="frmKhachHang.kh_ngaySinh.$error.required">Vui lòng nhập ngày sinh!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="kh_email" class="col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="kh_email" name="kh_email" placeholder="Nhập email" ng-model="KhachHang.kh_email">
+                                            <input type="text"  class="form-control" id="kh_email" name="kh_email" placeholder="Nhập email" ng-model="KhachHang.kh_email" ng-required="true">
+                                            <span class="error" ng-show="frmKhachHang.kh_email.$error.required">Vui lòng nhập email!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="kh_diaChi" class="col-sm-2 control-label"> Địa chỉ</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="kh_diaChi" name="kh_diaChi" placeholder="Nhập địa chỉ" ng-model="KhachHang.kh_diaChi">
+                                            <input type="text"  class="form-control" id="kh_diaChi" name="kh_diaChi" placeholder="Nhập địa chỉ" ng-model="KhachHang.kh_diaChi" ng-required="true">
+                                            <span class="error" ng-show="frmKhachHang.kh_diaChi.$error.required">Vui lòng nhậpđịa chỉ!</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="kh_dienThoai" class="col-sm-2 control-label"> Điện thoại</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="kh_dienThoai" name="kh_dienThoai" placeholder="Số điện thoại" ng-model="KhachHang.kh_dienThoai">
+                                            <input type="text"  class="form-control" id="kh_dienThoai" name="kh_dienThoai" placeholder="Số điện thoại" ng-model="KhachHang.kh_dienThoai" ng-required="true">
+                                            <span class="error" ng-show="frmKhachHang.kh_dienThoai.$error.required">Vui lòng nhập số điện thoại!</span>
                                         </div>
                                     </div>
 

@@ -34,21 +34,38 @@ class KhachHangController extends Controller
 
         if($khachhang)
         {
-            $khachhang->dh_nguoiNhan = $request->dh_nguoiNhan;
-            $khachhang->dh_diaChi = $request->dh_diaChi;
-            $khachhang->dh_dienThoai = $request->dh_dienThoai;
-            $khachhang->kh_id = $request->kh_id;
-            $khachhang->httt_id = $request->httt_id;
-            $khachhang->save();
-        }
-        else
-        {
-            return response(["error" => true]);
+            if($request->kh_matKhau == ''){
+
+                $khachhang->kh_taiKhoan = $request->kh_taiKhoan;
+                $khachhang->kh_hoTen = $request->kh_hoTen;
+                $khachhang->kh_gioiTinh = $request->kh_gioiTinh;
+                $khachhang->kh_ngaySinh = $request->kh_ngaySinh;
+                $khachhang->kh_email = $request->kh_email;
+                $khachhang->kh_diaChi = $request->kh_diaChi;
+                $khachhang->kh_dienThoai = $request->kh_dienThoai;
+                $khachhang->save();
+            }else {
+                $khachhang->kh_taiKhoan = $request->kh_taiKhoan;
+                $khachhang->kh_matKhau = md5($request->kh_matKhau);
+                $khachhang->kh_hoTen = $request->kh_hoTen;
+                $khachhang->kh_gioiTinh = $request->kh_gioiTinh;
+                $khachhang->kh_ngaySinh = $request->kh_ngaySinh;
+                $khachhang->kh_email = $request->kh_email;
+                $khachhang->kh_diaChi = $request->kh_diaChi;
+                $khachhang->kh_dienThoai = $request->kh_dienThoai;
+                $khachhang->save();
+            }
+
         }
     }
 
     public function delete($id){
-        $khachhang = KhachHang::findOrfail($id);
-        $khachhang->delete();
+        if (\Session::get('quyen') ==1) {
+            $khachhang = KhachHang::findOrfail($id);
+            $khachhang->delete();
+        }
+        else {
+            return response(["error" => 'Bạn không có quyền xóa']);
+        }
     }
 }

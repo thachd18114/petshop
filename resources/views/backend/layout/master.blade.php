@@ -102,8 +102,8 @@
 <script src="{{asset('themes/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('themes/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 <!-- Morris.js charts -->
-<script src="{{asset('themrs/adminlte/bower_components/raphael/raphael.min.js')}}"></script>
-<script src="{{asset('themes/adminlte/bower_components/morris.js/morris.min.js')}}"></script>
+{{--<script src="{{asset('themrs/adminlte/bower_components/raphael/raphael.min.js')}}"></script>--}}
+{{--<script src="{{asset('themes/adminlte/bower_components/morris.js/morris.min.js')}}"></script>--}}
 <!-- Sparkline -->
 <script src="{{asset('themes/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js')}}"></script>
 <!-- jvectormap -->

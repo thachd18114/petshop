@@ -75,8 +75,8 @@
                     <span>&nbsp; Khuyến mãi</span>
                 </a>
             </li>
-            <li class="treeview">
-                <a href="#">
+            <li class="@yield('ttdh')">
+                <a href="{{route('ttdonhang')}}">
                     <i class="fas fa-file-import"></i>
                     <span>&nbsp;Trạng thái đơn hàng</span>
                 </a>
@@ -87,10 +87,10 @@
                     <span>&nbsp;Quyền</span>
                 </a>
             </li>
-            <li class="">
-                <a href="#">
+            <li class="@yield('nhanvien')">
+                <a href="{{route('nhanvien')}}">
                     <i class="fas fa-user-clock"></i>
-                    <span>&nbsp;Nhan Vien</span>
+                    <span>&nbsp;Nhân viên</span>
                 </a>
             </li>
             <li class="@yield('faq')">

@@ -227,7 +227,7 @@
                     text: "Doanh thu theo tháng"
                 },
                 axisY: {
-                    title: "Reserves(MMbbl)"
+                    title: "VNĐ"
                 },
                 data: [{
                     type: "column",

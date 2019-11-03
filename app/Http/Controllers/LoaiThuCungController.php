@@ -36,9 +36,15 @@ class LoaiThuCungController extends Controller
         }
     }
 
-    public function delete($id){
-        $loaithucung = LoaiThuCung::findOrfail($id);
-        $loaithucung->delete();
+    public function delete($id)
+    {
+        if (\Session::get('quyen') ==1) {
+            $loaithucung = LoaiThuCung::findOrfail($id);
+            $loaithucung->delete();
+        }
+        else {
+            return response(["error" => 'Bạn không có quyền xóa']);
+        }
     }
 
 

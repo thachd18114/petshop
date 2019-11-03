@@ -18,6 +18,7 @@ b.controller('KhachHangController', function ($scope,$http,MainURL,DTOptionsBuil
                 $scope.modalButton = "Thêm";
                 $scope.KhachHang ={
                     kh_hoTen :"",
+                    kh_gioiTinh : 1,
                     kh_taiKhoan : "",
                     kh_matKhau : "",
                     kh_diaChi : "",
@@ -32,6 +33,7 @@ b.controller('KhachHangController', function ($scope,$http,MainURL,DTOptionsBuil
                 $scope.modalButton = "Cập nhật";
                 $http.get(MainURL + 'edit_khachhang/'+id).then(function(response){
                     $scope.KhachHang = response.data;
+                    $scope.KhachHang['kh_matKhau'] = "";
                 });
         }
         $("#Modal").modal('show');
@@ -93,14 +95,16 @@ b.controller('KhachHangController', function ($scope,$http,MainURL,DTOptionsBuil
             },
             function(isConfirm) {
                 if (isConfirm) {
-                    $http.get(MainURL+'delete_donhang/'+id).then(function(){
-                        swal("", "Xóa thành công!", "success")
-                        $scope.refreshData();
-                    }).catch(function(){
-                        swal("",'Có lỗi xảy ra!', "error");
-                        $scope.refreshData();
-                    });
-
+                    $http.get(MainURL+'delete_khachhang/'+id).then(function(response){
+                        if(!response.data['error']) {
+                            swal("", "Xóa thành công!", "success")
+                            $scope.refreshData();
+                        }
+                        else {
+                            swal("",response.data['error'], "error");
+                            $scope.refreshData();
+                        }
+                    })
                 }
             });
     };

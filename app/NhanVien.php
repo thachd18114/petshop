@@ -13,7 +13,7 @@ class NhanVien extends Model
 
     protected $primaryKey   = 'nv_id';
 
-    protected $dates        = ['nv_ngaySinh'];
+//    protected $dates        = ['nv_ngaySinh'];
     protected $dateFormat   = 'Y-m-d H:i:s';
 
     public function Quyen() {

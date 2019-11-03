@@ -109,6 +109,15 @@ Route::get('/admin/edit_khachhang/{id}', 'KhachHangController@edit');
 Route::post('/admin/update_khachhang/{id}','KhachHangController@update');
 Route::get('/admin/delete_khachhang/{id}','KhachHangController@delete');
 
+//------------------------------Nhân Viên--------------------------------------//
+
+Route::get('/admin/list_nhanvien', 'NhanVienController@index');
+Route::get('/admin/nhanvien', function (){return view('backend.nhanvien.index');})->name('nhanvien');
+Route::post('/admin/createnhanvien','NhanVienController@store');
+Route::get('/admin/edit_nhanvien/{id}', 'NhanVienController@edit');
+Route::post('/admin/update_nhanvien/{id}','NhanVienController@update');
+Route::get('/admin/delete_nhanvien/{id}','NhanVienController@delete');
+
 //-------------------------------Khuyến Mãi-------------------------------------//
 
 Route::get('/admin/list_khuyenmai', 'KhuyenMaiController@index');
@@ -144,6 +153,14 @@ Route::post('/admin/createquyen','QuyenController@store');
 Route::get('/admin/edit_quyen/{id}', 'QuyenController@edit');
 Route::post('/admin/update_quyen/{id}','QuyenController@update');
 Route::get('/admin/delete_quyen/{id}','QuyenController@delete');
+//-------------------------------trạng thái đơn hàng-------------------------------------//
+
+Route::get('/admin/list_ttdonhang', 'TrangThaiDonHangController@index');
+Route::get('/admin/ttdonhang', function (){return view('backend.trangthaidonhang.index');})->name('ttdonhang');
+Route::post('/admin/createttdonhang','TrangThaiDonHangController@store');
+Route::get('/admin/edit_ttdonhang/{id}', 'TrangThaiDonHangController@edit');
+Route::post('/admin/update_ttdonhang/{id}','TrangThaiDonHangController@update');
+Route::get('/admin/delete_ttdonhang/{id}','TrangThaiDonHangController@delete');
 
 //-------------------------------FAQ-------------------------------------//
 
