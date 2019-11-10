@@ -36,9 +36,15 @@ class NguonGocController extends Controller
         }
     }
 
-    public function delete($id){
-        $nguongoc = NguonGoc::findOrfail($id);
-        $nguongoc->delete();
+    public function delete($id)
+    {
+        if (\Session::get('quyen') == 1) {
+            $nguongoc = NguonGoc::findOrfail($id);
+            $nguongoc->delete();
+        }
+        else {
+            return response(["error" => 'Bạn không có quyền xóa']);
+        }
     }
 
 }

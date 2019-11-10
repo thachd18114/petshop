@@ -179,13 +179,18 @@ class ThuCungController extends Controller
                 $hinhAnh->ha_ten = $name;
                 $hinhAnh->save();
             }
-            return response(["error"=>false, "message"=>compact('hinhanh')], 200);
+//            return response(["error"=>false, "message"=>compact('hinhanh')], 200);
         }
 
 
     }
     public function delete($id){
-        $thucung = ThuCung::findOrfail($id);
-        $thucung->delete();
+        if (\Session::get('quyen') ==1) {
+            $thucung = ThuCung::findOrfail($id);
+            $thucung->delete();
+        }
+        else {
+            return response(["error" => 'Bạn không có quyền xóa']);
+        }
     }
 }

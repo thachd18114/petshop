@@ -194,6 +194,8 @@ Route::get('/gio-hang', 'Frontend\FrontendController@cart')->name('frontend.cart
 
 Route::post('/dat-hang', 'Frontend\FrontendController@order')->name('frontend.order');
 
+Route::get('/laytigia', 'Frontend\FrontendController@laytigia')->name('frontend.tigia');
+
 Route::get('/chooes-checkout', 'Frontend\FrontendController@choosecheckout')->name('frontend.choosecheckout');
 
 Route::get('/account-info', 'Frontend\FrontendController@account')->name('frontend.account');

@@ -161,7 +161,7 @@
                 <!-- LINE CHART -->
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Tỷ số phần trăm giống thú cưng được đặt mua </h3>
+                        <h3 class="box-title">Số lượng từng giống thú cưng được đặt mua </h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -170,7 +170,26 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    Loại
+                                </th>
+                                <th>
+                                    Số lượng
+                                </th>
+                            </tr>
+                            </thead>
+                            @foreach($slban as $sl)
+
+                                    <tr>
+                                        <td>{{$sl->g_ten}}</td>
+                                        <td>{{$sl->soluong}}</td>
+                                    </tr>
+
+                            @endforeach
+                        </table>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -277,33 +296,33 @@
             {{--}--}}
             // $.getJSON("http://localhost/petshop/public/admin/thongke_phantram", addData1);
 
-            var chart1 = new CanvasJS.Chart("chartContainer2", {
-                animationEnabled: true,
-                title: {
-                    text: "PETSHOP"
-                },
-                data: [{
-                    type: "pie",
-                    startAngle: 240,
-                    yValueFormatString: "##0.00\"%\"",
-                    indexLabel: "{label} {y}",
-                    dataPoints: dataPoints2
-                }]
-            });
-            function addData2   (data) {
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].ttdh_id != 1) {
-                        // alert('ok');
-                        dataPoints2.push({
-                            y: data[i].soluong * 100 /  @forEach($soluong_dh as $sl) {{$sl->soluong}} @endforeach,
-                            label: data[i].g_ten
-                        });
-                    }
-                }
-
-                chart1.render();
-            }
-            $.getJSON("http://localhost/petshop/public/admin/thongke_banchay", addData2);
+            // var chart1 = new CanvasJS.Chart("chartContainer2", {
+            //     animationEnabled: true,
+            //     title: {
+            //         text: "PETSHOP"
+            //     },
+            //     data: [{
+            //         type: "pie",
+            //         startAngle: 240,
+            //         yValueFormatString: "##0.00\"%\"",
+            //         indexLabel: "{label} {y}",
+            //         dataPoints: dataPoints2
+            //     }]
+            // });
+            // function addData2   (data) {
+            //     for (var i = 0; i < data.length; i++) {
+            //         if (data[i].ttdh_id != 1) {
+            //             // alert('ok');
+            //             dataPoints2.push({
+            //                 y: data[i].soluong * 100 ,
+            //                 label: data[i].g_ten
+            //             });
+            //         }
+            //     }
+            //
+            //     chart1.render();
+            // }
+            // $.getJSON("http://localhost/petshop/public/admin/thongke_banchay", addData2);
 
 
         }

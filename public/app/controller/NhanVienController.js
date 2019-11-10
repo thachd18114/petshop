@@ -50,7 +50,10 @@ b.controller('NhanVienController', function ($scope,$http,$filter,MainURL,DTOpti
                 $scope.modalButton = "Cập nhật";
                 $http.get(MainURL + 'edit_nhanvien/'+id).then(function(response){
                     $scope.NhanVien = response.data;
-                    $scope.NhanVien['kh_matKhau'] = "";
+                    $scope.NhanVien['nv_matKhau'] = "";
+                    $scope.NhanVien['nv_ngaySinh'] = new Date( $scope.NhanVien['nv_ngaySinh']);
+                     $('#nv_ngaySinh').val($scope.NhanVien['nv_ngaySinh']);
+
                 });
         }
         $("#Modal").modal('show');
@@ -88,15 +91,15 @@ b.controller('NhanVienController', function ($scope,$http,$filter,MainURL,DTOpti
                     url : url,
                     data : data,
                     headers : {'Content-type':'application/x-www-form-urlencoded'}
-                }).then(function(){
-                    swal({ title : "",text :"Cập nhật thành công!",type: "success", },function(isConfirm){
-                        $("#Modal").modal("hide");
-                        $scope.refreshData();;
-                    });
-                }).catch(function(){
-                    swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
-                        $("#Modal").modal("hide");
-                    });
+                }).then(function(response){
+                    if(!response.data['error']) {
+                        swal("", "Cập nhật thành công!", "success")
+                        $scope.refreshData();
+                    }
+                    else {
+                        swal("",response.data['error'], "error");
+                        $scope.refreshData();
+                    }
                 });
                 break;
         }

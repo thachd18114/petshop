@@ -36,8 +36,14 @@ class NhaCungCapController extends Controller
         }
     }
 
-    public function delete($id){
-        $nhacungcap = NhaCungCap::findOrfail($id);
-        $nhacungcap->delete();
+    public function delete($id)
+    {
+        if (\Session::get('quyen') == 1) {
+            $nhacungcap = NhaCungCap::findOrfail($id);
+            $nhacungcap->delete();
+        }
+        else {
+            return response(["error" => 'Bạn không có quyền xóa']);
+        }
     }
 }

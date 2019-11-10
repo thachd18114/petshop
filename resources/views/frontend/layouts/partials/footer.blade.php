@@ -3,22 +3,12 @@
         <div class="row">
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    Loại thú cưng
+                   PETSHOP
                 </h4>
                 <ul>
                     <li class="p-b-10">
                         <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Chó
-                        </a>
-                    </li>
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Mèo
-                        </a>
-                    </li>
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Chim
+                          Khuyến mãi
                         </a>
                     </li>
                 </ul>
@@ -30,7 +20,7 @@
                 <ul>
                     <li class="p-b-10">
                         <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            FAQs
+                           Help & FAQs
                         </a>
                     </li>
                 </ul>
@@ -40,61 +30,29 @@
                     Liên hệ
                 </h4>
                 <p class="stext-107 cl7 size-201">
-                    Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                    Ấp 12, X. Vĩnh Viễn, Huyện Long Mỹ, Hậu Giang
                 </p>
-                <div class="p-t-27">
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                        <i class="fa fa-instagram"></i>
-                    </a>
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                        <i class="fa fa-pinterest-p"></i>
-                    </a>
-                </div>
+
+                <p class="stext-107 cl7 size-201">
+                    0353-050-131
+                </p>
             </div>
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
-                    Newsletter
+                    Thanh toán
                 </h4>
-                <form>
-                    <div class="wrap-input1 w-full p-b-4">
-                        <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
-                        <div class="focus-input1 trans-04"></div>
-                    </div>
-                    <div class="p-t-18">
-                        <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-                            Subscribe
-                        </button>
-                    </div>
-                </form>
+                <div class="stext-107 cl7 size-201">
+{{--                    <a href="" class="m-all-1">--}}
+                        <img src="{{ asset('themes/cozastore/images/icons/icon-pay-01.png') }}" alt="ICON-PAY">
+{{--                    </a>--}}
+
+                </div>
             </div>
         </div>
         <div class="p-t-40">
-            <div class="flex-c-m flex-w p-b-18">
-                <a href="#" class="m-all-1">
-                    <img src="{{ asset('themes/cozastore/images/icons/icon-pay-01.png') }}" alt="ICON-PAY">
-                </a>
-                <a href="#" class="m-all-1">
-                    <img src="{{ asset('themes/cozastore/images/icons/icon-pay-02.png') }}" alt="ICON-PAY">
-                </a>
-                <a href="#" class="m-all-1">
-                    <img src="{{ asset('themes/cozastore/images/icons/icon-pay-03.png') }}" alt="ICON-PAY">
-                </a>
-                <a href="#" class="m-all-1">
-                    <img src="{{ asset('themes/cozastore/images/icons/icon-pay-04.png') }}" alt="ICON-PAY">
-                </a>
-                <a href="#" class="m-all-1">
-                    <img src="{{ asset('themes/cozastore/images/icons/icon-pay-05.png') }}" alt="ICON-PAY">
-                </a>
-            </div>
             <p class="stext-107 cl6 txt-center">
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>
-                    document.write(new Date().getFullYear());
-                </script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>document.write(new Date().getFullYear());
+                </script><i class="fa fa-heart-o" aria-hidden="true"></i>  <a href="{{route('frontend.home')}}" target="_blank">Petshop</a>
             </p>
         </div>
     </div>

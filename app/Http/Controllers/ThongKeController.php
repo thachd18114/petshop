@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ThongKeController extends Controller
 {
     public function Doanhthu() {
-        $dt =  DB::select('SELECT year(dh_ngayTao) as nam, MONTH(dh_ngayTao) as thang,sum(dh_tongGia) as tien FROM donhang GROUP by nam asc, thang asc');
+        $dt =  DB::select('SELECT year(dh_ngayTao) as nam, MONTH(dh_ngayTao) as thang,sum(dh_tongGia) as tien FROM donhang WHERE ttdh_id = 3 GROUP by nam , thang order by nam');
    return response()->json($dt);
     }
 
@@ -27,12 +27,24 @@ class ThongKeController extends Controller
                     ->groupBy('loaithucung.ltc_id','loaithucung.ltc_ten', 'tc_trangThai')
                 ->selectRaw('count(thucung.tc_id) as soluong,ltc_ten, tc_trangThai')
                 ->get();
+            $tl = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+                ->leftJoin('chitietdonhang','chitietdonhang.tc_id', '=',  'thucung.tc_id')
+                ->leftJoin('donhang', 'donhang.dh_id', '=', 'chitietdonhang.dh_id')
+                ->where('ttdh_id','=', '3')
+//                ->orWhere('ttdh_id', '=', null)
+                ->groupBy('giong.g_id', 'g_ten')
+//            ->Having('ttdh_id','=', 3)
+                ->selectRaw('count(donhang.dh_id) as soluong,g_ten')
+                ->orderBy('soluong', 'desc')
+                ->get();
+//            dd($tl);
             return view('backend.dashboard')
                 ->with('loaithucung', $ltc)
                 ->with('khachhang', $kh)
                 ->with('thucung', $tc)
                 ->with('soluong_loai', $soluong_loai)
                 ->with('soluong', $soluong)
+                ->with('slban', $tl)
                 ->with('soluong_dh', $soluong_dh)
                 ->with('donhang', $dh);
         }

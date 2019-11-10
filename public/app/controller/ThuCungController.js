@@ -136,9 +136,9 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
         // console.log($scope.ThuCung['tc_ngaySinh']);
         $scope.tuoi = $scope.ThuCung['tc_tuoi'];
 
-        switch(state){
+        switch(state) {
             case 'create':
-                if($("#ha_ten").val() != "") {
+                if ($("#ha_ten").val() != "") {
                     var url = MainURL + "createthucung";
                     var data = $.param($scope.ThuCung);
                     $http({
@@ -161,56 +161,55 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
                 }
                 break;
             case 'edit' :
-                var url = MainURL + 'update_thucung/' + id;
-                var data = $.param($scope.ThuCung);
-                $http({
-                    method : "POST",
-                    url : url,
-                    data : data,
-                    headers : {'Content-type':'application/x-www-form-urlencoded'}
-                }).then(function(){
-                    swal({ title : "",text :"Cập nhật thành công!",type: "success", },function(isConfirm){
-                        $("#ha_ten").fileinput('clear');
-                        $("#Modal").modal("hide");
-                        $scope.refreshData();
-                    });
-                }).catch(function(){
-                    swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
-                        $("#ha_ten").fileinput('clear');
-                        $("#Modal").modal("hide");
-                    });
-                });
 
-                break;
-        }
+                    var url = MainURL + 'update_thucung/' + id;
+                    var data = $.param($scope.ThuCung);
+                    $http({
+                        method: "POST",
+                        url: url,
+                        data: data,
+                        headers: {'Content-type': 'application/x-www-form-urlencoded'}
+                    }).then(function () {
+                        swal({title: "", text: "Cập nhật thành công!", type: "success",}, function (isConfirm) {
+                            $("#ha_ten").fileinput('clear');
+                            $("#Modal").modal("hide");
+                            $scope.refreshData();
+                        });
+                    }).catch(function () {
+                        swal({title: "", text: "Có lỗi xảy ra!", type: "error",}, function (isConfirm) {
+                            $("#ha_ten").fileinput('clear');
+                            $("#Modal").modal("hide");
+                        });
+                    });
+
+                    break;
+                }
     };
     $("#frmThuCung").on("submit", function(event){
-        switch($scope.state){
+        switch($scope.state) {
             case "create":
 
-                if($("#ha_ten").val() != ""){
+                if ($("#ha_ten").val() != "") {
                     $.ajax({
                         url: MainURL + 'createthucung/hinhanh',
                         method: "POST",
-                        data:new FormData(this),
+                        data: new FormData(this),
                         dataType: 'JSON',
                         contentType: false,
                         cache: false,
                         processData: false,
-                        success: function(response)
-                        {
-                            console.log(response.message);
-                            swal({ title : "",text :"Thêm thành công!",type: "success", },function(isConfirm){
+                        success: function (response) {
+                            // console.log(response.message);
+                            swal({title: "", text: "Thêm thành công!", type: "success",}, function (isConfirm) {
                                 $("#Modal").modal("hide");
                                 $scope.refreshData();
                                 $("#ha_ten").fileinput('clear');
                             });
 
                         },
-                        error: function(response)
-                        {
-                            console.log(response)
-                            swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
+                        error: function (response) {
+                            // console.log(response)
+                            swal({title: "", text: "Có lỗi xảy ra!", type: "error",}, function (isConfirm) {
                                 $("#Modal").modal("hide");
                                 // $("#ha_ten").fileinput('clear');
                             });
@@ -220,36 +219,35 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
 
                 break;
             case "edit":
-                console.log($scope.id);
-                $.ajax({
-                    url: MainURL + 'update_thucung/hinhanh/'+$scope.id,
-                    method: "POST",
-                    data:new FormData(this),
-                    dataType: 'JSON',
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    success: function(response)
-                    {
-                        if(response.message)
-                            swal({ title : "",text :"Cập nhật thành công!",type: "success", },function(isConfirm){
+                if ($("#ha_ten").val() != "") {
+                    $.ajax({
+                        url: MainURL + 'update_thucung/hinhanh/' + $scope.id,
+                        method: "POST",
+                        data: new FormData(this),
+                        dataType: 'JSON',
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (response) {
+                            // if(response.message)
+                            swal({title: "", text: "Cập nhật thành công123!", type: "success",}, function (isConfirm) {
                                 $("#Modal").modal("hide");
                                 $scope.refreshData();
-                                console.log(response);
+                                //   console.log(response);
                                 $("#ha_ten").fileinput('clear');
                             });
-                    },
-                    error: function(response)
-                    {
-                        swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
-                            $("Modal").modal("hide");
-                            console.log(response);
-                            $("#ha_ten").fileinput('clear');
-                        });
-                    }
+                        },
+                        error: function (response) {
+                            swal({title: "", text: "Có lỗi xảy ra123!", type: "error",}, function (isConfirm) {
+                                $("Modal").modal("hide");
+                                //  console.log(response);
+                                $("#ha_ten").fileinput('clear');
+                            });
+                        }
 
-                });
-                break;
+                    });
+                    break;
+                }
         }
 
     });
@@ -267,14 +265,16 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
             },
             function(isConfirm) {
                 if (isConfirm) {
-                    $http.get(MainURL+'delete_thucung/'+id).then(function(){
-                        swal("", "Xóa thành công!", "success")
-                        $scope.refreshData();
-                    }).catch(function(){
-                        swal("",'Có lỗi xảy ra!', "error");
-                        $scope.refreshData();
-                    });
-
+                    $http.get(MainURL+'delete_thucung/'+id).then(function(response){
+                        if(!response.data['error']) {
+                            swal("", "Xóa thành công!", "success")
+                            $scope.refreshData();
+                        }
+                        else {
+                            swal("",response.data['error'], "error");
+                            $scope.refreshData();
+                        }
+                    })
                 }
             });
     };

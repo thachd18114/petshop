@@ -23,21 +23,28 @@ class QuyenController extends Controller
     }
 
     public function update(Request $request,$id){
-        $quyen  = Quyen::findOrfail($id);
+        if (\Session::get('quyen') ==1) {
+            $quyen = Quyen::findOrfail($id);
 
-        if($quyen)
-        {
-            $quyen->q_ten = $request->q_ten;
-            $quyen->save();
+            if ($quyen) {
+                $quyen->q_ten = $request->q_ten;
+                $quyen->save();
+            } else {
+                return response(["error" => true]);
+            }
         }
-        else
-        {
-            return response(["error" => true]);
+        else {
+            return response(["error" => 'Bạn không có quyền']);
         }
     }
 
     public function delete($id){
-        $quyen = Quyen::findOrfail($id);
-        $quyen->delete();
+        if (\Session::get('quyen') ==1) {
+            $quyen = Quyen::findOrfail($id);
+            $quyen->delete();
+        }
+        else {
+            return response(["error" => 'Bạn không có quyền xóa']);
+        }
     }
 }

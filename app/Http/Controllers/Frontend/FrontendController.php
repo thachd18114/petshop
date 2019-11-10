@@ -29,11 +29,13 @@ class FrontendController extends Controller
         $hot = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
             ->leftJoin('chitietdonhang', 'chitietdonhang.tc_id', '=', 'thucung.tc_id')
             ->leftJoin('donhang', 'donhang.dh_id', '=', 'chitietdonhang.dh_id')
+            ->where('ttdh_id','=', '3')
             ->groupBy('giong.g_id')
             ->selectRaw('count(donhang.dh_id) as soluong,giong.g_id as id')
             ->orderBy('soluong', 'desc')
             ->limit(1)
             ->get();
+//        dd($hot);
         foreach ($hot as $hot1) {
             $id = $hot1->id;
         }
@@ -395,6 +397,17 @@ class FrontendController extends Controller
         }
 
     }
+    public function laytigia() {
+        $url = "https://www.vietcombank.com.vn/exchangerates/ExrateXML.aspx";
+        $xml = file_get_contents($url);
+        $data = simplexml_load_string($xml);
+        $thoi_gian_cap_nhat = $data->DateTime;
+        $ty_gia = $data->Exrate;
+        foreach($ty_gia as $ngoai_te) {
+            $gia_chuyen_khoan = $ngoai_te['Transfer'];
+        }
+        return response()->json($gia_chuyen_khoan);
+}
 
 //----------------------------------------------API------------------------------------------------------//
     public function list_binhluan($id){

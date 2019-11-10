@@ -94,12 +94,15 @@ b.controller('GiongController', function ($scope,$http,MainURL,DTOptionsBuilder,
             },
             function(isConfirm) {
                 if (isConfirm) {
-                    $http.get(MainURL+'delete_giong/'+id).then(function(){
-                        swal("", "Xóa thành công!", "success")
-                        $scope.refreshData();
-                    }).catch(function(){
-                        swal("",'Có lỗi xảy ra!', "error");
-                        $scope.refreshData();
+                    $http.get(MainURL+'delete_giong/'+id).then(function(response){
+                        if(!response.data['error']) {
+                            swal("", "Xóa thành công!", "success")
+                            $scope.refreshData();
+                        }
+                        else {
+                            swal("",response.data['error'], "error");
+                            $scope.refreshData();
+                        }
                     });
 
                 }

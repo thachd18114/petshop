@@ -1,5 +1,26 @@
 app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  function($scope, $http, ngCart,MainURL) {
     ngCart.setShipping(0);
+    angular.forEach(ngCart.getCart().items, function (value, key) {
+        $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
+            $scope.thucung = response.data;
+            if($scope.thucung.length >0 || $scope.thucung.tc_trangThai === 1){
+                $scope.gia = $scope.thucung.tc_giaBan*(100 - $scope.thucung.giatri)/100;
+                // console.log($scope.gia);
+                if ($scope.thucung.km_giaTri == null){
+                    value.setPrice($scope.gia);
+                    value.setName($scope.thucung.tc_ten);
+                } else {
+                    value.setPrice($scope.thucung.tc_giaBan);
+                    value.setName($scope.thucung.tc_ten);
+                }
+
+                // value.setData($scope.thucung.tc_giaBan);
+            }else {
+                ngCart.removeItemById(value.getId());
+            }
+        });
+    });
+    $scope.loi = false;
     $scope.modal = function() {
         if($('#httt_id').val() == '2') {
             // debugger;
@@ -31,43 +52,30 @@ app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  fu
                 // if (response.data.redirectUrl) {
                 //     location.href = response.data.redirectUrl;
                 // }
+                // window.location="http://localhost/petshop/public/thu-cung";
             }, function errorCallback(response) {
                 swal('Có lỗi trong quá trình thực hiện Đơn hàng!', 'Vui lòng thử lại sau vài phút.', 'error');
                 // window.location.reload();
                 console.log(response);
             });
         }
-        else {
+        else   if($('#httt_id').val() == '1') {
             $("#myModal").modal('show');
+
+        }else {
+            $scope.loi = true;
         }
 
     };
-    angular.forEach(ngCart.getCart().items, function(value, key) {
-        angular.forEach(ngCart.getCart().items, function (value, key) {
-            $http.get(MainURL + 'admin/detail_thucung/' + value.getId()).then(function (response) {
-                $scope.thucung = response.data;
-                if($scope.thucung.length >0 || $scope.thucung.tc_trangThai === 1){
-                    $scope.gia = $scope.thucung.tc_giaBan*(100 - $scope.thucung.giatri)/100;
-                    // console.log($scope.gia);
-                    if ($scope.thucung.km_giaTri == null){
-                        value.setPrice($scope.gia);
-                        value.setName($scope.thucung.tc_ten);
-                    } else {
-                        value.setPrice($scope.thucung.tc_giaBan);
-                        value.setName($scope.thucung.tc_ten);
-                    }
 
-                    // value.setData($scope.thucung.tc_giaBan);
-                }else {
-                    ngCart.removeItemById(value.getId());
-                }
-            });
-        });
-        // console.log();
-    });
+    $scope.laytigia = function(){
+        $http.get(MainURL + 'laytigia').then(function(response){
+            $scope.tigia = response.data;
+             $scope.gia = $scope.tigia[0];
+            console.log($scope.gia);
     var tien = ngCart.totalCost();
-    var tienusd = Math.round(tien/23000*100)/100;
-   console.log(tienusd);
+    var tienusd = Math.round(tien/ $scope.gia *100)/100;
+
     var dataCart = ngCart.getCart().items;
     var diachi = $('#dh_diaChi').val();
     var nguoinhan = $('#dh_nguoiNhan').val();
@@ -166,6 +174,7 @@ app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  fu
                         // if (response.data.redirectUrl) {
                         //     location.href = response.data.redirectUrl;
                         // }
+                        // window.location="http://localhost/petshop/public/thu-cung";
                     }, function errorCallback(response) {
                         swal('Có lỗi trong quá trình thực hiện Đơn hàng!', 'Vui lòng thử lại sau vài phút.', 'error');
                         // window.location.reload();
@@ -174,5 +183,7 @@ app.controller ('DonHangController', ['$scope', '$http', 'ngCart','MainURL',  fu
                 });
         }
     }, '#paypal-button');
-    console.log(item);
+        });
+    };
+    $scope.laytigia();
 }]);

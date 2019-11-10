@@ -38,7 +38,7 @@
                         </span>
 
                             <p class="stext-115 cl6  p-t-18">
-                                130 Xô Viết Nghệ Tỉnh, Phường An Hội, Quận Ninh Kiều, TP Cần Thơ
+                                Ấp 12, X. Vĩnh Viễn, Huyện Long Mỹ, Hậu Giang
                             </p>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         </span>
 
                             <p class="stext-115 cl1 size-213 p-t-18">
-                                0915-659-223
+                               0353-050-131
                             </p>
                         </div>
                     </div>

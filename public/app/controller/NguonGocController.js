@@ -90,12 +90,15 @@ b.controller('NguonGocController', function($scope,$http,MainURL,DTOptionsBuilde
             },
             function(isConfirm) {
                 if (isConfirm) {
-                    $http.get(MainURL+'delete_nguongoc/'+id).then(function(){
-                        swal("", "Xóa thành công!", "success")
-                        $scope.refreshData();
-                    }).catch(function(){
-                        swal("",'Có lỗi xảy ra!', "error");
-                        $scope.refreshData();
+                    $http.get(MainURL+'delete_nguongoc/'+id).then(function(response){
+                        if(!response.data['error']) {
+                            swal("", "Xóa thành công!", "success")
+                            $scope.refreshData();
+                        }
+                        else {
+                            swal("",response.data['error'], "error");
+                            $scope.refreshData();
+                        }
                     });
 
                 }

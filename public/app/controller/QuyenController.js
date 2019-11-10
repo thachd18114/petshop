@@ -63,15 +63,15 @@ b.controller('QuyenController', function($scope,$http,MainURL,DTOptionsBuilder, 
                     url : url,
                     data : data,
                     headers : {'Content-type':'application/x-www-form-urlencoded'}
-                }).then(function(){
-                    swal({ title : "",text :"Cập nhật thành công!",type: "success", },function(isConfirm){
-                        $("#Modal").modal("hide");
-                        $scope.refreshData();;
-                    });
-                }).catch(function(){
-                    swal({ title : "",text :"Có lỗi xảy ra!",type: "error", },function(isConfirm){
-                        $("#Modal").modal("hide");
-                    });
+                }).then(function(response){
+                    if(!response.data['error']) {
+                        swal("", "Cập nhật thành công!", "success")
+                        $scope.refreshData();
+                    }
+                    else {
+                        swal("",response.data['error'], "error");
+                        $scope.refreshData();
+                    }
                 });
                 break;
         }
@@ -90,13 +90,16 @@ b.controller('QuyenController', function($scope,$http,MainURL,DTOptionsBuilder, 
             },
             function(isConfirm) {
                 if (isConfirm) {
-                    $http.get(MainURL+'delete_quyen/'+id).then(function(){
-                        swal("", "Xóa thành công!", "success")
-                        $scope.refreshData();
-                    }).catch(function(){
-                        swal("",'Có lỗi xảy ra!', "error");
-                        $scope.refreshData();
-                    });
+                    $http.get(MainURL+'delete_quyen/'+id).then(function(response){
+                        if(!response.data['error']) {
+                            swal("", "Xóa thành công!", "success")
+                            $scope.refreshData();
+                        }
+                        else {
+                            swal("",response.data['error'], "error");
+                            $scope.refreshData();
+                        }
+                    })
 
                 }
             });
