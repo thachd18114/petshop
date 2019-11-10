@@ -217,3 +217,7 @@ Route::get('/lienhe', function (){
 
         return view('frontend.pages.contact');
 })->name('lienhe');
+
+Route::get('/thu-cung-api','Frontend\FrontendController@product_api' )->name('frontend.product.api');
+
+Route::get('/thu-cung-api/{id}', 'Frontend\FrontendController@productDetail_api')->name('frontend.productDetail.api');

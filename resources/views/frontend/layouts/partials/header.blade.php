@@ -55,10 +55,6 @@
                         <li class="@yield('lienhe')">
                             <a href="{{route('lienhe')}}">Liên hệ</a>
                         </li>
-{{--                        <li class="{{ Request::is('gioi-thieu') ? 'active-menu' : '' }}">--}}
-{{--                            <a href="">Giới thiệu</a>--}}
-{{--                        </li>--}}
-
                     </ul>
                 </div>
                 <!-- Icon header -->
@@ -77,11 +73,13 @@
             <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
                 <img src="{{ asset('themes/cozastore/images/icons/icon-close2.png') }}" alt="CLOSE">
             </button>
-            <form class="wrap-search-header flex-w p-l-15">
+            <form class="wrap-search-header flex-w p-l-15" method="get" action="{{route('frontend.product')}}">
                 <button class="flex-c-m trans-04">
                     <i class="zmdi zmdi-search"></i>
                 </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
+
+                    <input class="plh3" type="text" name="searchByGiongMa" placeholder="Search...">
+
             </form>
         </div>
     </div>

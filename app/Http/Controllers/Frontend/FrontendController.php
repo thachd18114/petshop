@@ -410,9 +410,76 @@ class FrontendController extends Controller
 }
 
 //----------------------------------------------API------------------------------------------------------//
+//----------------------------------------------API------------------------------------------------------//
+//----------------------------------------------API------------------------------------------------------//
+//----------------------------------------------API------------------------------------------------------//
     public function list_binhluan($id){
         $binhluan = DB::table('binhluan')->join('khachhang', 'khachhang.kh_id', '=', 'binhluan.kh_id')
             ->where('tc_id', $id)->get();
         return response()->json($binhluan);
+    }
+
+    public function product_api(Request $request)
+    {
+        $hot = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+            ->leftJoin('chitietdonhang', 'chitietdonhang.tc_id', '=', 'thucung.tc_id')
+            ->leftJoin('donhang', 'donhang.dh_id', '=', 'chitietdonhang.dh_id')
+            ->groupBy('giong.g_id')
+//            ->Having('ttdh_id','=', 2)
+            ->selectRaw('count(donhang.dh_id) as soluong,giong.g_id as id')
+            ->orderBy('soluong', 'desc')
+            ->limit(1)
+            ->get();
+        foreach ($hot as $hot1) {
+            $id = $hot1->id;
+        }
+        $date = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $danhsachthucung = $this->searchThuCung($request);
+        $loaithucung = LoaiThuCung::all();
+        return response()->json(compact('danhsachthucung','id','date'));
+    }
+
+
+    public function productDetail_api(Request $request, $id)
+    {
+        $tc_id = [$id];
+        $date = now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        $thucung = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+            ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=',
+                '1')->where('thucung.tc_id', $id)->select('thucung.*', 'ha_ten', 'g_ten')
+            ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
+            ->leftJoin('chitietkhuyenmai', 'thucung.tc_id', '=', 'chitietkhuyenmai.tc_id')
+            ->leftjoin('khuyenmai', 'khuyenmai.km_id', '=', 'chitietkhuyenmai.km_id')
+            ->groupBy('thucung.tc_id', 'thucung.tc_ten', 'thucung.tc_giaBan', 'thucung.tc_ngaySinh', 'thucung.tc_tuoi',
+                'thucung.tc_trangThai', 'thucung.tc_trangThaiTiemChung', 'ng_id', 'g_id', 'g_ten',
+                'thucung.tc_gioiTinh', 'thucung.tc_canNang',
+                'thucung.tc_moTa', 'thucung.tc_mauSac', 'ncc_id', 'ha_ten', 'km_ngayBatDau', 'km_ngayKetThuc',
+                'loaithucung.ltc_id', 'loaithucung.ltc_ten')
+            ->having('thucung.tc_id', $id)
+            ->selectRaw('thucung.*, giong.g_ten, hinhanh.ha_ten,km_ngayBatDau, km_ngayKetThuc,  loaithucung.*,max(`km_giaTri`) as giatri')
+            ->first();
+
+        if ($thucung) {
+            $danhsachhinhanhlienquan = DB::table('hinhanh')
+                ->where('tc_id', $id)
+                ->get();
+
+            $idgiong = $thucung->g_id;
+            $lienquan = $query = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
+                ->join('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')
+                ->join('hinhanh', 'hinhanh.tc_id', '=', 'thucung.tc_id')->where('hinhanh.ha_id', '=', '1')
+                ->where('tc_trangThai', '=', '1')
+                ->where('giong.g_id', '=', $idgiong)
+                ->whereNotIn('thucung.tc_id', $tc_id)
+                ->get();
+            $binhluan = DB::table('binhluan')->join('khachhang', 'khachhang.kh_id', '=', 'binhluan.kh_id')
+                ->where('tc_id', $id)->get();
+
+            return response()->json(compact('thucung','danhsachhinhanhlienquan','date','lienquan','binhluan'));
+
+        } else {
+            return view('errors.404');
+        }
+
     }
 }

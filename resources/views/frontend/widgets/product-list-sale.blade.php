@@ -192,9 +192,9 @@
                                 <a href="{{ route('frontend.productDetail',$sp->tc_id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                     <h4 id="tensp" >{{ $sp->tc_ten }} @if($hot == $sp->g_id) <i style="padding-left: 25px" class="label1"data-label1="HOT" ></i>@endif</h4>
                                 </a>
-                                <span class="stext-105 cl3" style="color: #e10c00; font-weight: bold; font-size: large">
+                                <span class=" cl3" style="color: #e10c00; font-size: large">
                                     @if($sp->giatri != null && strtotime($sp->km_ngayBatDau) <= strtotime($date) && strtotime($sp->km_ngayKetThuc) >= strtotime($date) )
-                                        <del style="color: #878787;">{{ number_format($sp->tc_giaBan) }} <u>đ</u></del> <span style="padding-left: 10px">{{ number_format($sp->tc_giaBan* (100-$sp->giatri)/100) }}</span> <u>đ</u>
+                                        <del style="color: #878787;">{{ number_format($sp->tc_giaBan) }}<u>đ</u></del> <span style="padding-left: 5px;font-weight: bold">{{ number_format($sp->tc_giaBan* (100-$sp->giatri)/100) }}</span> <u>đ</u>
                                         <span class="percent deal">-{{$sp->giatri}}%</span>
                                         @endif
                                 </span>
