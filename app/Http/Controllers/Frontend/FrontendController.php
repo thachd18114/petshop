@@ -374,7 +374,13 @@ class FrontendController extends Controller
             //dd($chitiet);
             $tamtinh = 0;
             foreach ($chitiet as $ct) {
-                $tamtinh += $ct->tc_giaBan - $ct->tc_giaBan * $ct->giatri / 100;
+                if($ct->giatri != null && strtotime($ct->km_ngayBatDau) <= strtotime($date) && strtotime($ct->km_ngayKetThuc) >= strtotime($date) || strtotime($ct->km_ngayKetThuc) < strtotime($date)){
+                    $tamtinh += $ct->tc_giaBan - $ct->tc_giaBan * $ct->giatri / 100;
+                }
+                else{
+                    $tamtinh += $ct->tc_giaBan;
+                }
+
             }
             return view('frontend.pages.order-detail')
                 ->with('chitiet', $chitiet)

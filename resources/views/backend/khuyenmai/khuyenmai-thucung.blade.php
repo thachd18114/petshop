@@ -91,7 +91,7 @@
                                             <td><% tc.tc_gioiTinh %></td>
                                             <td><% tc.tc_trangThai %></td>
                                             <td >
-                                                <img src="{{ asset('storage/photos') }}/<% tc.ha_ten %>" alt="IMG-PRODUCT" width="150px" height="100px">
+                                                <img src="http://res.cloudinary.com/petshop/image/upload/<% tc.ha_ten %>.png" alt="IMG-PRODUCT" width="150px" height="100px">
                                             </td>
 
                                         </tr>

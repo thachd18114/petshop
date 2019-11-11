@@ -61,17 +61,19 @@
                     <td><p>{{$tc->tc_ten}}</p>
                         Giống: {{$tc->g_ten}}
                     </td>
-                    <td rowspan="">{{$tc->tc_giaBan}}$</td>
-                    <td rowspan="">
-                        @if($tc->giatri != null && strtotime($tc->km_ngayBatDau) <= strtotime($date) && strtotime($tc->km_ngayKetThuc) >= strtotime($date) )
-                            {{$tc->giatri*$tc->tc_giaBan/100}}
+                    <td rowspan="">{{$tc->tc_giaBan}} &nbsp;VNĐ</td>
+
+                        @if($tc->giatri != null && strtotime($tc->km_ngayBatDau) <= strtotime($date) && strtotime($tc->km_ngayKetThuc) >= strtotime($date) || strtotime($tc->km_ngayKetThuc) < strtotime($date)  )
+                        <td rowspan="">
+                            {{$tc->giatri*$tc->tc_giaBan/100}} &nbsp;VNĐ
+                        </td>
+                        <td rowspan="" id="tamtinh_{{$tc->tc_id}}">{{$tc->tc_giaBan-($tc->giatri*$tc->tc_giaBan/100)}}&nbsp;VNĐ</td>
                         @else
-
+                        <td rowspan="">
                             {{0}}
-
+                        </td>
+                        <td rowspan="" id="tamtinh_{{$tc->tc_id}}">{{$tc->tc_giaBan}}&nbsp;VNĐ</td>
                             @endif
-                    </td>
-                    <td rowspan="" id="tamtinh_{{$tc->tc_id}}">{{$tc->tc_giaBan-($tc->giatri*$tc->tc_giaBan/100)}}</td>
                 </tr>
                 @endforeach
                 <tr>
@@ -82,10 +84,10 @@
                         Phí vận chuyển: <br>
                         Tổng cộng:
                     </td>
-                    <td style="text-align: right;padding-right: 30px" width="12%">
-                        {{$tam}} $<br>
-                         0$<br>
-                         <p style="color: red;font-size: 20px">{{$tam}} $</p>
+                    <td style="text-align: right;padding-right: 30px" width="20%">
+                        {{$tam}} VNĐ<br>
+                         0VNĐ<br>
+                         <p style="color: red;font-size: 20px">{{$tam}} VNĐ</p>
                     </td>
                 </tr>
             </table>

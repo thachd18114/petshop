@@ -161,7 +161,27 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
                 }
                 break;
             case 'edit' :
-
+                if ($("#ha_ten").val() != "") {
+                    var url = MainURL + 'update_thucung/' + id;
+                    var data = $.param($scope.ThuCung);
+                    $http({
+                        method: "POST",
+                        url: url,
+                        data: data,
+                        headers: {'Content-type': 'application/x-www-form-urlencoded'}
+                    }).then(function () {
+                        // swal({title: "", text: "Cập nhật thành công!", type: "success",}, function (isConfirm) {
+                        //     $("#ha_ten").fileinput('clear');
+                        //     $("#Modal").modal("hide");
+                        //     $scope.refreshData();
+                        // });
+                    }).catch(function () {
+                        // swal({title: "", text: "Có lỗi xảy ra!", type: "error",}, function (isConfirm) {
+                        //     $("#ha_ten").fileinput('clear');
+                        //     $("#Modal").modal("hide");
+                        // });
+                    });
+                }else {
                     var url = MainURL + 'update_thucung/' + id;
                     var data = $.param($scope.ThuCung);
                     $http({
@@ -181,7 +201,7 @@ b.controller('ThuCungController', function ($scope,$filter,$http,MainURL,DTOptio
                             $("#Modal").modal("hide");
                         });
                     });
-
+                }
                     break;
                 }
     };

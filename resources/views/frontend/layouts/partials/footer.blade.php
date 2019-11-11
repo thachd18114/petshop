@@ -7,7 +7,7 @@
                 </h4>
                 <ul>
                     <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                        <a href="{{route('frontend.product.sale')}}" class="stext-107 cl7 hov-cl1 trans-04">
                           Khuyến mãi
                         </a>
                     </li>
@@ -19,7 +19,7 @@
                 </h4>
                 <ul>
                     <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                        <a href="{{route('frontend.faq')}}" class="stext-107 cl7 hov-cl1 trans-04">
                            Help & FAQs
                         </a>
                     </li>

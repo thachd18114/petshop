@@ -20,7 +20,7 @@ class ThongKeController extends Controller
             $ltc = DB::select('SELECT COUNT(*) as loaithucung FROM `loaithucung`');
             $kh = DB::select('SELECT COUNT(*) as khachhang FROM `khachhang`');
             $tc = DB::select('SELECT COUNT(*) as thucung FROM `thucung` WHERE tc_trangThai = 1');
-            $soluong = DB::select('SELECT COUNT(*) as soluong FROM `thucung`');
+            $soluong = DB::select('SELECT COUNT(*) as soluong FROM `thucung` WHERE tc_trangThai = 1');
             $soluong_dh = DB::select('SELECT COUNT(*) as soluong FROM `donhang`');
             $soluong_loai = DB::table('thucung')->join('giong', 'giong.g_id', '=', 'thucung.g_id')
                 ->rightJoin('loaithucung', 'loaithucung.ltc_id', '=', 'giong.ltc_id')

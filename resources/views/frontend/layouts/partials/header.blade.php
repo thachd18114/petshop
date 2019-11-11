@@ -4,8 +4,8 @@
         <!-- Topbar -->
         <div class="top-bar" id="top-bar">
             <div class="content-topbar flex-sb-m h-full container">
-                <div class="left-top-bar">
-
+                <div class="left-top-bar" >
+{{--                    Miễn phí vận chuyển trên toàn quốc--}}
                 </div>
                 <div class="right-top-bar flex-w h-full">
                     <a href="{{route('frontend.faq')}}"  class="flex-c-m trans-04 p-lr-25">
@@ -25,11 +25,11 @@
                            Đăng nhập
                         </a>
                     @endif
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    <a style="color: white"  class="flex-c-m trans-04 p-lr-25">
                         VN
                     </a>
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        USD
+                    <a  style="color: white" class="flex-c-m trans-04 p-lr-25">
+                        VNĐ
                     </a>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 @extends('backend.layout.master')
 
 @section('title')
-    Trang quản trị hệ thống
+    Trang thống kê
 @endsection
 @section('trangchu')
     active
@@ -54,7 +54,7 @@
                         @endforeach
 
 
-                        <p>Thú cưng</p>
+                        <p>Tồn kho</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-dove"></i>

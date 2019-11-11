@@ -32,6 +32,7 @@ class ChiTietKhuyenMaiController extends Controller
             ->where('hinhanh.ha_id' ,'=', '1')
             ->whereNull('km_giaTri')
             ->whereNotIn('thucung.tc_id', $data )
+            ->where('thucung.tc_trangThai', '=', 1)
             ->select('thucung.*', 'hinhanh.*')
             ->get();
         return response()->json($ds_thucung);

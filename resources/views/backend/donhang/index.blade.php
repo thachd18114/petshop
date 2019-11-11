@@ -72,26 +72,26 @@
                                     <div class="form-group">
                                         <label for="dh_nguoiNhan" class="col-sm-2 control-label">Người nhận</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="dh_nguoiNhan" name="dh_nguoiNhan" placeholder="Người nhận" ng-model="DonHang.dh_nguoiNhan">
+                                            <input type="text"  class="form-control" id="dh_nguoiNhan" name="dh_nguoiNhan" readonly placeholder="Người nhận" ng-model="DonHang.dh_nguoiNhan">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="dh_diaChi" class="col-sm-2 control-label">Địa chỉ</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="dh_diaChi" name="dh_diaChi" placeholder="Địa chỉ" ng-model="DonHang.dh_diaChi">
+                                            <input type="text"  class="form-control" id="dh_diaChi" name="dh_diaChi" readonly placeholder="Địa chỉ" ng-model="DonHang.dh_diaChi">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="dh_dienThoai" class="col-sm-2 control-label">Điện thoại</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  class="form-control" id="dh_dienThoai" name="dh_dienThoai" placeholder="Điện thoại" ng-model="DonHang.dh_dienThoai">
+                                            <input type="text"  class="form-control" id="dh_dienThoai" name="dh_dienThoai" readonly placeholder="Điện thoại" ng-model="DonHang.dh_dienThoai">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="g_id" class="col-sm-2 control-label">Hình thức thanh toán</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control select2" style="width: 100%"  ng-model="DonHang.httt_id">
+                                            <select class="form-control select2" style="width: 100%"  ng-model="DonHang.httt_id" disabled="true">
                                                 <option value="0" ng-value="0">Chọn cách thanh toán</option>
                                                 <option ng-repeat="tt in listhttt " value="<% tt.httt_id %>" ng-value="<% tt.httt_id %>"><% tt.httt_ten %></option>
                                             </select>
@@ -100,7 +100,7 @@
                                     <div class="form-group">
                                         <label for="g_id" class="col-sm-2 control-label">Khách hàng </label>
                                         <div class="col-sm-10">
-                                            <select class="form-control select2" style="width: 100%"  ng-model="DonHang.kh_id">
+                                            <select class="form-control select2" style="width: 100%"  ng-model="DonHang.kh_id" disabled="true">
                                                 <option value="0" ng-value="0">Khách hàng</option>
                                                 <option ng-repeat="kh in listkhachhang " value="<% kh.kh_id %>" ng-value="<% kh.kh_id %>"><% kh.kh_hoTen %></option>
                                             </select>
@@ -189,15 +189,22 @@
                                                 <th>Thú Cưng</th>
                                                 <th>Giống</th>
                                                 <th>Giá</th>
+                                                <th>Giảm giá</th>
+                                                <th>Tạm tính</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr ng-repeat="ct in chitiet">
+                                            <tr ng-repeat="ct in chitiet['chitiet']">
                                                 <td><% ct.tc_id %></td>
                                                 <td><% ct.tc_ten %></td>
-
                                                 <td><% ct.g_ten %></td>
-                                                <td><% ct.tc_giaBan %></td>
+                                                <td ><% ct.tc_giaBan |currency:"":0%> VNĐ</td>
+                                                <td ng-show="ct.giatri != null && ct.km_ngayBatDau <= chitiet['date'] && ct.km_ngayKetThuc >=chitiet['date'] || ct.km_ngayKetThuc < chitiet['date']">
+                                                    <% ct.tc_giaBan*ct.giatri/100 |currency:"":0 %> VNĐ
+                                                </td>
+                                                <td ng-show="ct.giatri === null || ct.km_ngayBatDau > chitiet['date'] ">0 VNĐ</td>
+                                                <td ng-show="ct.giatri != null && ct.km_ngayBatDau <= chitiet['date'] && ct.km_ngayKetThuc >=chitiet['date'] || ct.km_ngayKetThuc < chitiet['date']" ><% ct.tc_giaBan-ct.tc_giaBan*ct.giatri/100| currency:"":0%> VNĐ</td>
+                                                <td ng-show="ct.giatri === null || ct.km_ngayBatDau > chitiet['date'] "><% ct.tc_giaBan| currency:"":0%> VNĐ</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -210,49 +217,34 @@
                                     <!-- accepted payments column -->
                                     <div class="col-xs-6">
                                         <p class="lead">Hình thức thanh toán:</p>
-                                        <img src="{{asset('themes/adminlte/img/credit/paypal2.png')}}" alt="Paypal">
-
+                                        <img ng-show="donhang.httt_id ===1" src="{{asset('themes/adminlte/img/credit/paypal2.png')}}" alt="Paypal">
+                                        <span ng-show="donhang.httt_id ===2">Thanh toán khi nhận hàng</span>
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-xs-6">
-{{--                                            <p class="lead">Amount Due 2/22/2014</p>--}}
+
 
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <tr  >
-                                                    <th style="width:50%">Tổng giá:</th>
-                                                    <td><% donhang.dh_tongGia%> $</td>
+                                                    <th style="width:50%">Tạm tính:</th>
+                                                    <td><% chitiet['tamtinh'] |currency:"":0%> VNĐ</td>
                                                 </tr>
-{{--                                                <tr>--}}
-{{--                                                    <th>Tax (9.3%)</th>--}}
-{{--                                                    <td>0</td>--}}
-{{--                                                </tr>--}}
+
                                                 <tr>
-                                                    <th>Shipping:</th>
-                                                    <td>0</td>
+                                                    <th>Phí vận chuyển:</th>
+                                                    <td>0 VNĐ</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Total:</th>
-                                                    <td><% donhang.dh_tongGia%> $</td>
+                                                    <th>Tổng cộng:</th>
+                                                    <td><% chitiet['tamtinh'] |currency:"":0%> VNĐ</td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
                                     <!-- /.col -->
                                 </div>
-                                <!-- /.row -->
 
-                                <!-- this row will not appear when printing -->
-{{--                                <div class="row no-print">--}}
-{{--                                    <div class="col-xs-12">--}}
-{{--                                        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>--}}
-{{--                                        <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment--}}
-{{--                                        </button>--}}
-{{--                                        <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">--}}
-{{--                                            <i class="fa fa-download"></i> Generate PDF--}}
-{{--                                        </button>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
                             </section>
                         </div>
                         <div class="modal-footer">
